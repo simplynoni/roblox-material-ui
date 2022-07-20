@@ -1,0 +1,22 @@
+{
+	"name": "roleplay-game",
+	"globIgnorePaths": [
+		"**/package.json",
+		"**/tsconfig.json"
+	],
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"TS": {
+				"$path": "out"
+			},
+			"rbxts_include": {
+				"$path": "include",
+				"node_modules": {
+					"$path": "node_modules/@rbxts"
+				}
+			}
+		}
+	}
+}

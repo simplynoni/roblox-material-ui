@@ -1,5 +1,5 @@
 {
-	"name": "roleplay-game",
+	"name": "roblox-material-ui",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"

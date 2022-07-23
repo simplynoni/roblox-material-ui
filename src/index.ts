@@ -29,6 +29,8 @@ export { default as Slider } from './Slider';
 export { default as SliderTile } from './SliderTile';
 export { default as Switch } from './Switch';
 export { default as SwitchTile } from './SwitchTile';
+export { default as MockThemeController } from './Theme/MockTheme';
+export { default as ThemeController } from './Theme/Theme';
 export { default as ThemeContext } from './Theme/ThemeContext';
 export { default as Topbar } from './Topbar';
 export { default as UIBase } from './UIBase';

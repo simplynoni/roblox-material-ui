@@ -2,7 +2,7 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
-import { Theme } from '.';
+import { Theme } from './Constants';
 import Icon from './Icon';
 import { Px24 } from './Icons';
 import RoundedFrame from './RoundedFrame';

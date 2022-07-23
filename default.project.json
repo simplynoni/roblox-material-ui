@@ -1,5 +1,5 @@
 {
-	"name": "roblox-material-ui",
+	"name": "material-ui",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"

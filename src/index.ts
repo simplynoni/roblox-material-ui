@@ -16,19 +16,19 @@ export const ThemeColors = {
 
 export const DefaultThemeColor = ThemeColors.Orange;
 
-export * as Buttons from 'Buttons';
-export { default as ColorTile } from 'ColorTile';
-export { default as Icon } from 'Icon';
-export { default as IconButton } from 'IconButton';
-export { Px24 } from 'Icons';
-export { default as Scheme } from 'material-color';
-export { default as RoundedFrame } from 'RoundedFrame';
-export { default as SectionTitle } from 'SectionTitle';
-export * as Shadow from 'Shadow';
-export { default as Slider } from 'Slider';
-export { default as SliderTile } from 'SliderTile';
-export { default as Switch } from 'Switch';
-export { default as SwitchTile } from 'SwitchTile';
-export { default as ThemeContext } from 'Theme/ThemeContext';
-export { default as Topbar } from 'Topbar';
-export { default as UIBase } from 'UIBase';
+export * as Buttons from './Buttons';
+export { default as ColorTile } from './ColorTile';
+export { default as Icon } from './Icon';
+export { default as IconButton } from './IconButton';
+export { Px24 } from './Icons';
+export { default as Scheme } from './material-color';
+export { default as RoundedFrame } from './RoundedFrame';
+export { default as SectionTitle } from './SectionTitle';
+export * as Shadow from './Shadow';
+export { default as Slider } from './Slider';
+export { default as SliderTile } from './SliderTile';
+export { default as Switch } from './Switch';
+export { default as SwitchTile } from './SwitchTile';
+export { default as ThemeContext } from './Theme/ThemeContext';
+export { default as Topbar } from './Topbar';
+export { default as UIBase } from './UIBase';

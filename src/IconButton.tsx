@@ -13,6 +13,7 @@ interface IconButtonProps {
 	ZIndex?: number;
 	LayoutOrder?: number;
 	Icon: Px24;
+	IconColor?: Color3;
 	Pressed: () => void;
 }
 
@@ -95,7 +96,7 @@ export default class IconButton extends Roact.Component<IconButtonProps, IconBut
 								Size={UDim2.fromScale(0.75, 0.75)}
 								Icon={this.props.Icon}
 								IconSize='24p'
-								IconColor={theme.Colors.onBackground}
+								IconColor={this.props.IconColor || theme.Colors.onBackground}
 							/>
 							<RoundedFrame
 								Key='StateLayer'

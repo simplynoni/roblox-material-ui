@@ -1,6 +1,5 @@
-// import Log, { Logger } from '@rbxts/log';
 import Roact from '@rbxts/roact';
-import { DefaultThemeColor, Theme } from '..';
+import { DefaultThemeColor, Theme } from '../Constants';
 import Scheme from '../material-color';
 import ThemeContext from './ThemeContext';
 

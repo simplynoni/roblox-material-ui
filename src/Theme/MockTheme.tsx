@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Theme, ThemeColors } from '..';
+import { Theme, ThemeColors } from '../Constants';
 import Scheme from '../material-color';
 import ThemeContext from './ThemeContext';
 

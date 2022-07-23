@@ -7,7 +7,7 @@ export { Px24 } from './Icons';
 export { default as Scheme } from './material-color';
 export { default as RoundedFrame } from './RoundedFrame';
 export { default as SectionTitle } from './SectionTitle';
-export * as Shadow from './Shadow';
+export { default as Shadow } from './Shadow';
 export { default as Slider } from './Slider';
 export { default as SliderTile } from './SliderTile';
 export { default as Switch } from './Switch';

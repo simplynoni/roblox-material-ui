@@ -40,7 +40,18 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 	constructor(props: UIBaseProps) {
 		super(props);
 
-		this.positionMotor = new GroupMotor({ X: props.Position.X.Scale, Y: props.Position.Y.Scale });
+		this.positionMotor = new GroupMotor(
+			this.props.Closed
+				? {
+						X: this.props.CustomClosePosition
+							? this.props.CustomClosePosition.X
+							: this.props.Position.X.Scale >= 0.5
+							? this.props.Position.X.Scale + 0.2
+							: this.props.Position.X.Scale - 0.2,
+						Y: props.Position.Y.Scale,
+				  }
+				: { X: props.Position.X.Scale, Y: props.Position.Y.Scale },
+		);
 
 		const [positionBinding, setPositionBinding] = Roact.createBinding(this.positionMotor.getValue());
 		this.positionBinding = positionBinding;

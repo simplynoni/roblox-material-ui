@@ -3,6 +3,21 @@ export enum Theme {
 	Dark = 'Dark',
 }
 
+export enum ColorScheme {
+	Primary = 'Primary',
+	Secondary = 'Secondary',
+	Tertiary = 'Tertiary',
+	Error = 'Error',
+}
+
+// Theres probably a better way to do this but whatever
+export enum LowerCaseColorScheme {
+	Primary = 'primary',
+	Secondary = 'secondary',
+	Tertiary = 'tertiary',
+	Error = 'error',
+}
+
 export const ThemeColors = {
 	Red: { Color: Color3.fromHex('#ff2b2b'), Order: 1 },
 	Orange: { Color: Color3.fromHex('#ff802b'), Order: 2 },

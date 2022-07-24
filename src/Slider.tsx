@@ -3,10 +3,7 @@ import RoundedFrame from './RoundedFrame';
 import ThemeContext from './Theme/ThemeContext';
 
 import { SingleMotor, Spring } from '@rbxts/flipper';
-import { Players } from '@rbxts/services';
-
-const localPlayer = Players.LocalPlayer;
-const mouse = localPlayer.GetMouse();
+import { UserInputService } from '@rbxts/services';
 
 interface SliderProps {
 	Value: number;
@@ -91,7 +88,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 											});
 
 										while (dragging) {
-											const mousePos = mouse.X;
+											const mousePos = UserInputService.GetMouseLocation().X;
 											const pos = slider.AbsolutePosition.X;
 											const size = slider.AbsoluteSize.X;
 											let relative = math.clamp((mousePos - pos) / size, 0, 1);
@@ -129,7 +126,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 
 										if (!slider) return;
 
-										const mousePos = mouse.X;
+										const mousePos = UserInputService.GetMouseLocation().X;
 										const pos = slider.AbsolutePosition.X;
 										const size = slider.AbsoluteSize.X;
 										let relative = math.clamp((mousePos - pos) / size, 0, 1);

@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
-import IconButton from 'IconButton';
-import { Px24 } from 'Icons';
-import MockThemeController from 'Theme/MockTheme';
-import ThemeContext from 'Theme/ThemeContext';
+import IconButton from '../IconButton';
+import { Px24 } from '../Icons';
+import MockThemeController from '../Theme/MockTheme';
+import ThemeContext from '../Theme/ThemeContext';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

@@ -1,7 +1,7 @@
 import Roact from '@rbxts/roact';
-import SectionTitle from 'SectionTitle';
-import MockThemeController from 'Theme/MockTheme';
-import UIBase from 'UIBase';
+import SectionTitle from '../SectionTitle';
+import MockThemeController from '../Theme/MockTheme';
+import UIBase from '../UIBase';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

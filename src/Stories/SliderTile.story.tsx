@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from 'Icons';
-import SliderTile from 'SliderTile';
-import MockThemeController from 'Theme/MockTheme';
-import UIBase from 'UIBase';
+import { Px24 } from '../Icons';
+import SliderTile from '../SliderTile';
+import MockThemeController from '../Theme/MockTheme';
+import UIBase from '../UIBase';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

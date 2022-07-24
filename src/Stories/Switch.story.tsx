@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
-import Switch from 'Switch';
-import MockThemeController from 'Theme/MockTheme';
+import Switch from '../Switch';
+import MockThemeController from '../Theme/MockTheme';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
-import Slider from 'Slider';
-import MockThemeController from 'Theme/MockTheme';
+import Slider from '../Slider';
+import MockThemeController from '../Theme/MockTheme';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

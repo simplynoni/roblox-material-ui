@@ -1,7 +1,7 @@
 import Roact from '@rbxts/roact';
-import RoundedFrame from 'RoundedFrame';
-import MockThemeController from 'Theme/MockTheme';
-import ThemeContext from 'Theme/ThemeContext';
+import RoundedFrame from '../RoundedFrame';
+import MockThemeController from '../Theme/MockTheme';
+import ThemeContext from '../Theme/ThemeContext';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

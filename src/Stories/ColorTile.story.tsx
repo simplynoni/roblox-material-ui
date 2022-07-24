@@ -1,9 +1,9 @@
 import Roact from '@rbxts/roact';
-import ColorTile from 'ColorTile';
-import { Px24 } from 'Icons';
-import MockThemeController from 'Theme/MockTheme';
-import ThemeContext from 'Theme/ThemeContext';
-import UIBase from 'UIBase';
+import ColorTile from '../ColorTile';
+import { Px24 } from '../Icons';
+import MockThemeController from '../Theme/MockTheme';
+import ThemeContext from '../Theme/ThemeContext';
+import UIBase from '../UIBase';
 import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {

@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from 'Icons';
-import MockThemeController from 'Theme/MockTheme';
-import Topbar from 'Topbar';
-import UIBase from 'UIBase';
+import { Px24 } from '../Icons';
+import MockThemeController from '../Theme/MockTheme';
+import Topbar from '../Topbar';
+import UIBase from '../UIBase';
 import StoryTheme from './StoryTheme';
 
 class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {

@@ -1,4 +1,4 @@
-import { Theme, ThemeColors } from 'Constants';
+import { Theme, ThemeColors } from '../Constants';
 
 const StoryTheme = {
 	Theme: Theme.Dark,

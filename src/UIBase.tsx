@@ -23,7 +23,6 @@ interface UIBaseProps {
 
 interface UIBaseState {
 	Closed: boolean;
-	Visible: boolean;
 }
 
 const defaults = {
@@ -67,7 +66,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 
 		this.setState({
 			Closed: this.props.Closed ?? false,
-			Visible: !this.props.Closed ?? true,
 		});
 	}
 
@@ -98,7 +96,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 							})}
 							Size={this.props.Size}
 							BackgroundTransparency={1}
-							Visible={this.state.Visible}
 						>
 							<Shadow
 								Elevation={5}
@@ -144,7 +141,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 		if (closed === false) {
 			this.setState({
 				Closed: closed,
-				Visible: !closed,
 			});
 
 			this.positionMotor.setGoal({
@@ -157,13 +153,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 			});
 
 			this.fadeMotor.setGoal(new Linear(1, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
-
-			const onComplete = this.positionMotor.onComplete(() => {
-				maid.DoCleaning();
-			});
-
-			// i think im using this right, idk
-			maid.GiveTask(() => onComplete.disconnect());
 		} else {
 			this.setState({
 				Closed: closed,
@@ -185,16 +174,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 			});
 
 			this.fadeMotor.setGoal(new Linear(0, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
-
-			const onComplete = this.positionMotor.onComplete(() => {
-				this.setState({
-					Visible: !closed,
-				});
-
-				maid.DoCleaning();
-			});
-
-			maid.GiveTask(() => onComplete.disconnect());
 		}
 	}
 

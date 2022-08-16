@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import ColorTile from '../ColorTile';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import MockThemeController from '../Theme/MockTheme';
 import ThemeContext from '../Theme/ThemeContext';
 import UIBase from '../UIBase';
@@ -29,10 +29,10 @@ export = function (frame: GuiObject) {
 								<ColorTile
 									Title='Color'
 									Description='Description'
-									Icon={Px24.Palette}
+									Icon={Icons.Palette}
 									Color={theme.Colors.error}
 								/>
-								<ColorTile Title='Color' Icon={Px24.Palette} Color={theme.Colors.primaryContainer} />
+								<ColorTile Title='Color' Icon={Icons.Palette} Color={theme.Colors.primaryContainer} />
 							</>
 						);
 					}}

@@ -3,7 +3,7 @@ export { default as ColorTile } from './ColorTile';
 export { DefaultThemeColor, Theme, ThemeColors } from './Constants';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
-export { Px24 } from './Icons';
+export { Icons } from './Icons';
 export { default as Scheme } from './material-color';
 export { default as RoundedFrame } from './RoundedFrame';
 export { default as SectionTitle } from './SectionTitle';

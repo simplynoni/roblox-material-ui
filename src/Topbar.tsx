@@ -1,7 +1,7 @@
 import Roact from '@rbxts/roact';
 
 import IconButton from './IconButton';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 import ThemeContext from './Theme/ThemeContext';
 
 interface TopbarProps {
@@ -9,7 +9,7 @@ interface TopbarProps {
 	Height?: UDim;
 	CloseFunction?: () => void;
 	LeadingIcon?: {
-		Icon: Px24;
+		Icon: Icons;
 		Function: () => void;
 	};
 }
@@ -23,7 +23,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 						<IconButton
 							Size={UDim2.fromScale(0, 1)}
 							LayoutOrder={100}
-							Icon={Px24.Close}
+							Icon={Icons.Close}
 							Pressed={this.props.CloseFunction}
 						/>
 					) : undefined;

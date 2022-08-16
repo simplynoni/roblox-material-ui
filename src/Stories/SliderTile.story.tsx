@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import SliderTile from '../SliderTile';
 import MockThemeController from '../Theme/MockTheme';
 import UIBase from '../UIBase';
@@ -32,7 +32,7 @@ export = function (frame: GuiObject) {
 				<SliderTile Title='Slider' Value={1} />
 				<SliderTile Title='Stepped Slider' Steps={10} Value={0} ShowValue />
 				<SliderTile Title='Slider' Value={1} ShowValue />
-				<SliderTile Title='Slider' Icon={Px24.Palette} Value={0} />
+				<SliderTile Title='Slider' Icon={Icons.Palette} Value={0} />
 			</UIBase>
 		</MockThemeController>,
 		frame,

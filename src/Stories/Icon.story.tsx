@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import Icon from '../Icon';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import MockThemeController from '../Theme/MockTheme';
 import ThemeContext from '../Theme/ThemeContext';
 import StoryTheme from './StoryTheme';
@@ -19,19 +19,19 @@ export = function (frame: GuiObject) {
 							/>
 							<Icon
 								Size={UDim2.fromOffset(24, 24)}
-								Icon={Px24.Palette}
+								Icon={Icons.Palette}
 								IconSize={'24p'}
 								IconColor={theme.Colors.primary}
 							/>
 							<Icon
 								Size={UDim2.fromOffset(24, 24)}
-								Icon={Px24.Palette}
+								Icon={Icons.Palette}
 								IconSize={'24p'}
 								IconColor={theme.Colors.secondary}
 							/>
 							<Icon
 								Size={UDim2.fromOffset(24, 24)}
-								Icon={Px24.Palette}
+								Icon={Icons.Palette}
 								IconSize={'24p'}
 								IconColor={theme.Colors.tertiary}
 							/>

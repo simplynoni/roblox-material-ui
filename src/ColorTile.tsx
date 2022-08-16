@@ -4,14 +4,14 @@ import ThemeContext from './Theme/ThemeContext';
 
 import { Theme } from './Constants';
 import Icon from './Icon';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 
 interface ColorTileProps {
 	Title: string;
 	Description?: string;
 	Color: Color3;
-	Icon?: Px24;
+	Icon?: Icons;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -23,7 +23,7 @@ interface ColorTileProps {
 
 interface ColorTileState {
 	Color: Color3;
-	Icon?: Px24;
+	Icon?: Icons;
 	Selected?: boolean;
 }
 
@@ -55,7 +55,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 				render={(theme) => {
 					const trailingIcon = this.props.OpensNewPage ? (
 						<Icon
-							Icon={Px24.NavigateRight}
+							Icon={Icons.NavigateRight}
 							IconSize='24p'
 							MaxSize
 							IconColor={theme.Colors.onBackground}
@@ -72,7 +72,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 							BackgroundColor3={theme.Colors.background}
 							BackgroundTransparency={theme.Theme === Theme.Dark ? 0.9 : 0.5}
 							ImageColor3={theme.Colors.onPrimaryContainer}
-							Image={Px24.Check}
+							Image={Icons.Check}
 						>
 							<uicorner CornerRadius={new UDim(1)} />
 						</imagelabel>

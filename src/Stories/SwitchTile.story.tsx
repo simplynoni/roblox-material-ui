@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import SwitchTile from '../SwitchTile';
 import MockThemeController from '../Theme/MockTheme';
 import UIBase from '../UIBase';
@@ -21,8 +21,8 @@ export = function (frame: GuiObject) {
 				<SwitchTile Title='Switch' Enabled={true} />
 				<SwitchTile Title='Switch' Enabled={false} />
 				<SwitchTile Title='Switch' Description='Description' Enabled={false} />
-				<SwitchTile Title='Switch' Description='Description' Icon={Px24.Palette} Enabled={false} />
-				<SwitchTile Title='Switch' Icon={Px24.Palette} Enabled={false} />
+				<SwitchTile Title='Switch' Description='Description' Icon={Icons.Palette} Enabled={false} />
+				<SwitchTile Title='Switch' Icon={Icons.Palette} Enabled={false} />
 			</UIBase>
 		</MockThemeController>,
 		frame,

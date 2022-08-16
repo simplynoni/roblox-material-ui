@@ -3,7 +3,7 @@ import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
 import Icon from './Icon';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 
 interface IconButtonProps {
@@ -12,7 +12,7 @@ interface IconButtonProps {
 	Size: UDim2;
 	ZIndex?: number;
 	LayoutOrder?: number;
-	Icon: Px24;
+	Icon: Icons;
 	IconColor?: Color3;
 	Pressed: () => void;
 }

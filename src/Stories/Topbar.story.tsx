@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import MockThemeController from '../Theme/MockTheme';
 import Topbar from '../Topbar';
 import UIBase from '../UIBase';
@@ -24,7 +24,7 @@ class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {
 							task.wait(2);
 							this.setState({ Closed: false });
 						}}
-						LeadingIcon={{ Icon: Px24.NavigateLeft, Function: () => {} }}
+						LeadingIcon={{ Icon: Icons.NavigateLeft, Function: () => {} }}
 					/>
 				</UIBase>
 			</MockThemeController>

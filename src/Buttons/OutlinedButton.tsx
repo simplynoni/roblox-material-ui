@@ -1,6 +1,6 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { Px24 } from '../Icons';
+import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
 
 interface OutlinedButtonProps {
@@ -9,7 +9,7 @@ interface OutlinedButtonProps {
 	Size?: UDim2;
 	AutomaticSize?: boolean;
 	Text: string;
-	Icon?: Px24;
+	Icon?: Icons;
 	Disabled?: boolean;
 	Pressed: () => void;
 }

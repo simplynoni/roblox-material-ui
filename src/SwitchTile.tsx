@@ -3,13 +3,13 @@ import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
 import Icon from './Icon';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 import Switch from './Switch';
 
 interface SwitchTileProps {
 	Enabled: boolean;
 	Title: string;
-	Icon?: Px24;
+	Icon?: Icons;
 	Description?: string;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
@@ -22,7 +22,7 @@ interface SwitchTileProps {
 interface SwitchTileState {
 	Enabled: boolean;
 	Debounce: boolean;
-	Icon?: Px24;
+	Icon?: Icons;
 }
 
 export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, SwitchTileState> {

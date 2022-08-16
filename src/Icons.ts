@@ -1,4 +1,4 @@
-export enum Px24 {
+export enum Icons {
 	DarkTheme = 'rbxassetid://8898846928',
 	LightTheme = 'rbxassetid://8900398449',
 	Music = 'rbxassetid://8899149710',

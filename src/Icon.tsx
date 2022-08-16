@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 
 interface IconProps {
-	Icon: Px24;
+	Icon: Icons;
 	IconSize: '24p';
 	IconColor: Color3;
 	AnchorPoint?: Vector2;

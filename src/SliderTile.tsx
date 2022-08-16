@@ -2,7 +2,7 @@ import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
 import Icon from './Icon';
-import { Px24 } from './Icons';
+import { Icons } from './Icons';
 import Slider from './Slider';
 
 interface SliderTileProps {
@@ -10,7 +10,7 @@ interface SliderTileProps {
 	ShowValue?: boolean;
 	Steps?: number;
 	Title: string;
-	Icon?: Px24;
+	Icon?: Icons;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -18,7 +18,7 @@ interface SliderTileProps {
 }
 
 interface SliderTileState {
-	Icon?: Px24;
+	Icon?: Icons;
 	DisplayValue: number;
 }
 

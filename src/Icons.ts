@@ -8,7 +8,7 @@ export enum Icons {
 	NavigateLeft = 'rbxassetid://9701103699',
 	Close = 'rbxassetid://9008260937',
 	Check = 'rbxassetid://9040764300',
-	Clear = 'rbxassetid://10618782450',
+	Clear = 'rbxassetid://10618783436',
 	Fog = 'rbxassetid://10618782912',
 	PartlyCloudy = 'rbxassetid://10618783141',
 	MostlyCloudy = 'rbxassetid://10618783293',

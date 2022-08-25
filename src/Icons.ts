@@ -14,4 +14,5 @@ export enum Icons {
 	MostlyCloudy = 'rbxassetid://10618783293',
 	Rain = 'rbxassetid://10618782450',
 	HeavyRain = 'rbxassetid://10618782732',
+	FullBattery = 'rbxassetid://10716426809',
 }

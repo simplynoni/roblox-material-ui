@@ -10,14 +10,20 @@ interface IconProps {
 	Position?: UDim2;
 	LayoutOrder?: number;
 	MaxSize?: boolean;
+	Circle?: boolean;
 }
 
 export default class Icon extends Roact.Component<IconProps> {
 	render() {
 		let maxSize: Roact.Element | undefined;
+		let corner: Roact.Element | undefined;
 
 		if (this.props.IconSize === '24p' && this.props.MaxSize) {
 			maxSize = <uisizeconstraint MaxSize={new Vector2(24, 24)} />;
+		}
+
+		if (this.props.Circle) {
+			corner = <uicorner CornerRadius={new UDim(1)} />;
 		}
 
 		return (
@@ -33,6 +39,7 @@ export default class Icon extends Roact.Component<IconProps> {
 			>
 				<uiaspectratioconstraint AspectRatio={1} />
 				{maxSize}
+				{corner}
 			</imagelabel>
 		);
 	}

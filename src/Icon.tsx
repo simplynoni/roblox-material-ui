@@ -2,7 +2,7 @@ import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
 
 interface IconProps {
-	Icon: Icons | string;
+	Icon: Icons;
 	IconSize: '24p';
 	IconColor: Color3;
 	AnchorPoint?: Vector2;

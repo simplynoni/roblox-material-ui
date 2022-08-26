@@ -15,4 +15,5 @@ export enum Icons {
 	Rain = 'rbxassetid://10618782450',
 	HeavyRain = 'rbxassetid://10618782732',
 	FullBattery = 'rbxassetid://10716426809',
+	AccountCircle = 'rbxassetid://10716954323',
 }

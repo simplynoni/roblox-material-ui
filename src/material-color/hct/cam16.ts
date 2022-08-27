@@ -1,4 +1,5 @@
 /**
+ * @license
  * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +15,8 @@
  * limitations under the License.
  */
 
-import * as utils from '../utils/color';
-import * as math_utils from '../utils/math';
+import * as utils from '../utils/color_utils';
+import * as mathUtils from '../utils/math_utils';
 
 import { ViewingConditions } from './viewing_conditions';
 
@@ -36,7 +37,7 @@ import { ViewingConditions } from './viewing_conditions';
  * point is accurately measured as a slightly chromatic blue by CAM16. (roughly,
  * hue 203, chroma 3, lightness 100)
  */
-export class CAM16 {
+export class Cam16 {
 	/**
 	 * All of the CAM16 dimensions can be calculated from 3 of the dimensions, in
 	 * the following combinations:
@@ -74,7 +75,7 @@ export class CAM16 {
 	 * a*, b*, or jstar, astar, bstar in code. CAM16-UCS is included in the CAM16
 	 * specification, and is used to measure distances between colors.
 	 */
-	distance(other: CAM16): number {
+	distance(other: Cam16): number {
 		const dJ = this.jstar - other.jstar;
 		const dA = this.astar - other.astar;
 		const dB = this.bstar - other.bstar;
@@ -88,8 +89,8 @@ export class CAM16 {
 	 * @return CAM16 color, assuming the color was viewed in default viewing
 	 *     conditions.
 	 */
-	static fromInt(argb: number): CAM16 {
-		return CAM16.fromIntInViewingConditions(argb, ViewingConditions.DEFAULT);
+	static fromInt(argb: number): Cam16 {
+		return Cam16.fromIntInViewingConditions(argb, ViewingConditions.DEFAULT);
 	}
 
 	/**
@@ -98,13 +99,13 @@ export class CAM16 {
 	 *     was observed.
 	 * @return CAM16 color.
 	 */
-	static fromIntInViewingConditions(argb: number, viewingConditions: ViewingConditions): CAM16 {
+	static fromIntInViewingConditions(argb: number, viewingConditions: ViewingConditions): Cam16 {
 		const red = (argb & 0x00ff0000) >> 16;
 		const green = (argb & 0x0000ff00) >> 8;
 		const blue = argb & 0x000000ff;
-		const redL = utils.linearized(red / 255.0) * 100.0;
-		const greenL = utils.linearized(green / 255.0) * 100.0;
-		const blueL = utils.linearized(blue / 255.0) * 100.0;
+		const redL = utils.linearized(red);
+		const greenL = utils.linearized(green);
+		const blueL = utils.linearized(blue);
 		const x = 0.41233895 * redL + 0.35762064 * greenL + 0.18051042 * blueL;
 		const y = 0.2126 * redL + 0.7152 * greenL + 0.0722 * blueL;
 		const z = 0.01932141 * redL + 0.11916382 * greenL + 0.95034478 * blueL;
@@ -121,9 +122,9 @@ export class CAM16 {
 		const gAF = math.pow((viewingConditions.fl * math.abs(gD)) / 100.0, 0.42);
 		const bAF = math.pow((viewingConditions.fl * math.abs(bD)) / 100.0, 0.42);
 
-		const rA = (math_utils.signum(rD) * 400.0 * rAF) / (rAF + 27.13);
-		const gA = (math_utils.signum(gD) * 400.0 * gAF) / (gAF + 27.13);
-		const bA = (math_utils.signum(bD) * 400.0 * bAF) / (bAF + 27.13);
+		const rA = (mathUtils.signum(rD) * 400.0 * rAF) / (rAF + 27.13);
+		const gA = (mathUtils.signum(gD) * 400.0 * gAF) / (gAF + 27.13);
+		const bA = (mathUtils.signum(bD) * 400.0 * bAF) / (bAF + 27.13);
 
 		const a = (11.0 * rA + -12.0 * gA + bA) / 11.0;
 		const b = (rA + gA - 2.0 * bA) / 9.0;
@@ -154,7 +155,7 @@ export class CAM16 {
 		const astar = mstar * math.cos(hueRadians);
 		const bstar = mstar * math.sin(hueRadians);
 
-		return new CAM16(hue, c, j, q, m, s, jstar, astar, bstar);
+		return new Cam16(hue, c, j, q, m, s, jstar, astar, bstar);
 	}
 
 	/**
@@ -162,8 +163,8 @@ export class CAM16 {
 	 * @param c CAM16 chroma
 	 * @param h CAM16 hue
 	 */
-	static fromJch(j: number, c: number, h: number): CAM16 {
-		return CAM16.fromJchInViewingConditions(j, c, h, ViewingConditions.DEFAULT);
+	static fromJch(j: number, c: number, h: number): Cam16 {
+		return Cam16.fromJchInViewingConditions(j, c, h, ViewingConditions.DEFAULT);
 	}
 
 	/**
@@ -173,7 +174,7 @@ export class CAM16 {
 	 * @param viewingConditions Information about the environment where the color
 	 *     was observed.
 	 */
-	static fromJchInViewingConditions(j: number, c: number, h: number, viewingConditions: ViewingConditions): CAM16 {
+	static fromJchInViewingConditions(j: number, c: number, h: number, viewingConditions: ViewingConditions): Cam16 {
 		const q =
 			(4.0 / viewingConditions.c) *
 			math.sqrt(j / 100.0) *
@@ -187,7 +188,7 @@ export class CAM16 {
 		const mstar = (1.0 / 0.0228) * math.log(1.0 + 0.0228 * m);
 		const astar = mstar * math.cos(hueRadians);
 		const bstar = mstar * math.sin(hueRadians);
-		return new CAM16(h, c, j, q, m, s, jstar, astar, bstar);
+		return new Cam16(h, c, j, q, m, s, jstar, astar, bstar);
 	}
 
 	/**
@@ -197,8 +198,8 @@ export class CAM16 {
 	 * @param bstar CAM16-UCS b dimension. Like a* in L*a*b*, it is a Cartesian
 	 *     coordinate on the X axis.
 	 */
-	static fromUcs(jstar: number, astar: number, bstar: number): CAM16 {
-		return CAM16.fromUcsInViewingConditions(jstar, astar, bstar, ViewingConditions.DEFAULT);
+	static fromUcs(jstar: number, astar: number, bstar: number): Cam16 {
+		return Cam16.fromUcsInViewingConditions(jstar, astar, bstar, ViewingConditions.DEFAULT);
 	}
 
 	/**
@@ -215,7 +216,7 @@ export class CAM16 {
 		astar: number,
 		bstar: number,
 		viewingConditions: ViewingConditions,
-	): CAM16 {
+	): Cam16 {
 		const a = astar;
 		const b = bstar;
 		const m = math.sqrt(a * a + b * b);
@@ -226,7 +227,7 @@ export class CAM16 {
 			h += 360.0;
 		}
 		const j = jstar / (1 - (jstar - 100) * 0.007);
-		return CAM16.fromJchInViewingConditions(j, c, h, viewingConditions);
+		return Cam16.fromJchInViewingConditions(j, c, h, viewingConditions);
 	}
 
 	/**
@@ -234,7 +235,7 @@ export class CAM16 {
 	 *     default viewing conditions, which are near-identical to the default
 	 *     viewing conditions for sRGB.
 	 */
-	viewedInSrgb(): number {
+	toInt(): number {
 		return this.viewed(ViewingConditions.DEFAULT);
 	}
 
@@ -265,11 +266,11 @@ export class CAM16 {
 		const bA = (460.0 * p2 - 220.0 * a - 6300.0 * b) / 1403.0;
 
 		const rCBase = math.max(0, (27.13 * math.abs(rA)) / (400.0 - math.abs(rA)));
-		const rC = math_utils.signum(rA) * (100.0 / viewingConditions.fl) * math.pow(rCBase, 1.0 / 0.42);
+		const rC = mathUtils.signum(rA) * (100.0 / viewingConditions.fl) * math.pow(rCBase, 1.0 / 0.42);
 		const gCBase = math.max(0, (27.13 * math.abs(gA)) / (400.0 - math.abs(gA)));
-		const gC = math_utils.signum(gA) * (100.0 / viewingConditions.fl) * math.pow(gCBase, 1.0 / 0.42);
+		const gC = mathUtils.signum(gA) * (100.0 / viewingConditions.fl) * math.pow(gCBase, 1.0 / 0.42);
 		const bCBase = math.max(0, (27.13 * math.abs(bA)) / (400.0 - math.abs(bA)));
-		const bC = math_utils.signum(bA) * (100.0 / viewingConditions.fl) * math.pow(bCBase, 1.0 / 0.42);
+		const bC = mathUtils.signum(bA) * (100.0 / viewingConditions.fl) * math.pow(bCBase, 1.0 / 0.42);
 		const rF = rC / viewingConditions.rgbD[0];
 		const gF = gC / viewingConditions.rgbD[1];
 		const bF = bC / viewingConditions.rgbD[2];
@@ -278,7 +279,7 @@ export class CAM16 {
 		const y = 0.38752654 * rF + 0.62144744 * gF - 0.00897398 * bF;
 		const z = -0.0158415 * rF - 0.03412294 * gF + 1.04996444 * bF;
 
-		const argb = utils.intFromXyzComponents(x, y, z);
+		const argb = utils.argbFromXyz(x, y, z);
 		return argb;
 	}
 }

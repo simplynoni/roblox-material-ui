@@ -15,7 +15,7 @@
  */
 
 import { Int } from '@rbxts/colour-utils';
-import { HCT } from '../hct/hct';
+import { Hct } from '../hct/hct';
 
 import { TonalPalette } from './tonal_palette';
 
@@ -37,9 +37,9 @@ export class CorePalette {
 	}
 
 	private constructor(argb: number) {
-		const hct = HCT.fromInt(argb);
-		const hue = hct.internalHue;
-		this.a1 = TonalPalette.fromHueAndChroma(hue, math.max(48, hct.internalChroma));
+		const hct = Hct.fromInt(argb);
+		const hue = hct.getHue();
+		this.a1 = TonalPalette.fromHueAndChroma(hue, math.max(48, hct.getChroma()));
 		this.a2 = TonalPalette.fromHueAndChroma(hue, 16);
 		this.a3 = TonalPalette.fromHueAndChroma(hue + 60, 24);
 		this.n1 = TonalPalette.fromHueAndChroma(hue, 4);

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { HCT } from '../hct/hct';
 import { Int } from '@rbxts/colour-utils';
+import { Hct } from '../hct/hct';
 
 /**
  *  A convenience class for retrieving colors that are constant in hue and
@@ -29,7 +29,7 @@ export class TonalPalette {
 	 * @return Tones matching that color's hue and chroma.
 	 */
 	static fromInt(argb: number): TonalPalette {
-		const hct = HCT.fromInt(argb);
+		const hct = Hct.fromInt(argb);
 		return TonalPalette.fromHueAndChroma(hct.internalHue, hct.internalChroma);
 	}
 
@@ -51,7 +51,7 @@ export class TonalPalette {
 	tone(tone: number): Color3 {
 		let argb = this.cache.get(tone);
 		if (argb === undefined) {
-			argb = HCT.from(this.hue, this.chroma, tone).toInt();
+			argb = Hct.from(this.hue, this.chroma, tone).toInt();
 			this.cache.set(tone, argb);
 		}
 		return Int.fromInt(argb);

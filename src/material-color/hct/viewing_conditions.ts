@@ -1,4 +1,5 @@
 /**
+ * @license
  * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +15,8 @@
  * limitations under the License.
  */
 
-import * as utils from '../utils/color';
-import * as math_utils from '../utils/math';
+import * as utils from '../utils/color_utils';
+import * as mathUtils from '../utils/math_utils';
 
 /**
  * In traditional color spaces, a color can be identified solely by the
@@ -57,7 +58,7 @@ export class ViewingConditions {
 	 *       self-luminous objects like displays.
 	 */
 	static make(
-		whitePoint = utils.WHITE_POINT_D65,
+		whitePoint = utils.whitePointD65(),
 		adaptingLuminance = ((200.0 / math.pi) * utils.yFromLstar(50.0)) / 100.0,
 		backgroundLstar = 50.0,
 		surround = 2.0,
@@ -69,7 +70,7 @@ export class ViewingConditions {
 		const bW = xyz[0] * -0.002079 + xyz[1] * 0.048952 + xyz[2] * 0.953127;
 		const f = 0.8 + surround / 10.0;
 		const c =
-			f >= 0.9 ? math_utils.lerp(0.59, 0.69, (f - 0.9) * 10.0) : math_utils.lerp(0.525, 0.59, (f - 0.8) * 10.0);
+			f >= 0.9 ? mathUtils.lerp(0.59, 0.69, (f - 0.9) * 10.0) : mathUtils.lerp(0.525, 0.59, (f - 0.8) * 10.0);
 		let d = discountingIlluminant ? 1.0 : f * (1.0 - (1.0 / 3.6) * math.exp((-adaptingLuminance - 42.0) / 92.0));
 		d = d > 1.0 ? 1.0 : d < 0.0 ? 0.0 : d;
 		const nc = f;
@@ -77,7 +78,7 @@ export class ViewingConditions {
 		const k = 1.0 / (5.0 * adaptingLuminance + 1.0);
 		const k4 = k * k * k * k;
 		const k4F = 1.0 - k4;
-		const fl = k4 * adaptingLuminance + 0.1 * k4F * k4F * math_utils.cbrt(5.0 * adaptingLuminance);
+		const fl = k4 * adaptingLuminance + 0.1 * k4F * k4F * mathUtils.cbrt(5.0 * adaptingLuminance);
 		const n = utils.yFromLstar(backgroundLstar) / whitePoint[1];
 		const z = 1.48 + math.sqrt(n);
 		const nbb = 0.725 / math.pow(n, 0.2);

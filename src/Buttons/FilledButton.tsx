@@ -120,7 +120,7 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 								Font={'GothamMedium'}
 								Text={this.props.Text}
 								TextColor3={
-									this.state.Disabled ? theme.Colors.onBackground : theme.Colors[lowerCaseColorScheme]
+									this.state.Disabled ? theme.Colors.onSurface : theme.Colors[`on${colorScheme}`]
 								}
 								TextTransparency={this.state.Disabled ? 1 - 0.38 : 0}
 								TextXAlignment={'Center'}

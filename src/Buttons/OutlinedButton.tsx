@@ -1,5 +1,6 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
+import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
 
@@ -11,6 +12,7 @@ interface OutlinedButtonProps {
 	Text: string;
 	Icon?: Icons;
 	Disabled?: boolean;
+	ColorScheme?: ColorScheme;
 	Pressed: () => void;
 }
 
@@ -50,6 +52,9 @@ export class OutlinedButton extends Roact.Component<OutlinedButtonProps, Outline
 		return (
 			<ThemeContext.Consumer
 				render={(theme) => {
+					const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
+					const lowerCaseColorScheme = colorScheme.lower() as LowerCaseColorScheme;
+
 					return (
 						<textbutton
 							AutoButtonColor={false}
@@ -57,7 +62,7 @@ export class OutlinedButton extends Roact.Component<OutlinedButtonProps, Outline
 							BackgroundTransparency={this.stateBinding.map((opacity) => {
 								return 1 - opacity;
 							})}
-							BackgroundColor3={theme.Colors.primary}
+							BackgroundColor3={theme.Colors[lowerCaseColorScheme]}
 							AnchorPoint={this.props.AnchorPoint}
 							Position={this.props.Position}
 							Size={
@@ -110,7 +115,9 @@ export class OutlinedButton extends Roact.Component<OutlinedButtonProps, Outline
 								BackgroundTransparency={1}
 								Font={'GothamMedium'}
 								Text={this.props.Text}
-								TextColor3={this.state.Disabled ? theme.Colors.onBackground : theme.Colors.primary}
+								TextColor3={
+									this.state.Disabled ? theme.Colors.onBackground : theme.Colors[lowerCaseColorScheme]
+								}
 								TextTransparency={this.state.Disabled ? 1 - 0.38 : 0}
 								TextXAlignment={'Center'}
 								TextYAlignment={'Center'}

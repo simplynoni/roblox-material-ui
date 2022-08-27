@@ -62,32 +62,36 @@ export class Blend {
 	 * Blends hue from one color into another. The chroma and tone of
 	 * the original color are maintained.
 	 *
-	 * @param from ARGB representation of color
-	 * @param to ARGB representation of color
+	 * @param from Color3 representation of color
+	 * @param to Color3 representation of color
 	 * @param amount how much blending to perform; 0.0 >= and <= 1.0
 	 * @return from, with a hue blended towards to. Chroma and tone
 	 * are constant.
 	 */
-	static hctHue(from: number, to: number, amount: number): number {
-		const ucs = Blend.cam16Ucs(from, to, amount);
+	static hctHue(from: Color3, to: Color3, amount: number): Color3 {
+		const fromInt = Int.toInt(from);
+		const ucs = Int.toInt(Blend.cam16Ucs(from, to, amount));
 		const ucsCam = Cam16.fromInt(ucs);
-		const fromCam = Cam16.fromInt(from);
-		const blended = Hct.from(ucsCam.hue, fromCam.chroma, colorUtils.lstarFromArgb(from));
-		return blended.toInt();
+		const fromCam = Cam16.fromInt(fromInt);
+		const blended = Hct.from(ucsCam.hue, fromCam.chroma, colorUtils.lstarFromArgb(fromInt));
+		const outputInt = blended.toInt();
+		return Int.fromInt(outputInt);
 	}
 
 	/**
 	 * Blend in CAM16-UCS space.
 	 *
-	 * @param from ARGB representation of color
-	 * @param to ARGB representation of color
+	 * @param from Color3 representation of color
+	 * @param to Color3 representation of color
 	 * @param amount how much blending to perform; 0.0 >= and <= 1.0
 	 * @return from, blended towards to. Hue, chroma, and tone will
 	 * change.
 	 */
-	static cam16Ucs(from: number, to: number, amount: number): number {
-		const fromCam = Cam16.fromInt(from);
-		const toCam = Cam16.fromInt(to);
+	static cam16Ucs(from: Color3, to: Color3, amount: number): Color3 {
+		const fromInt = Int.toInt(from);
+		const toInt = Int.toInt(to);
+		const fromCam = Cam16.fromInt(fromInt);
+		const toCam = Cam16.fromInt(toInt);
 		const fromJ = fromCam.jstar;
 		const fromA = fromCam.astar;
 		const fromB = fromCam.bstar;
@@ -97,6 +101,7 @@ export class Blend {
 		const jstar = fromJ + (toJ - fromJ) * amount;
 		const astar = fromA + (toA - fromA) * amount;
 		const bstar = fromB + (toB - fromB) * amount;
-		return Cam16.fromUcs(jstar, astar, bstar).toInt();
+		const outputInt = Cam16.fromUcs(jstar, astar, bstar).toInt();
+		return Int.fromInt(outputInt);
 	}
 }

@@ -142,5 +142,5 @@ export function matrixMultiply(row: number[], matrix: number[][]): number[] {
 }
 
 export function cbrt(x: number) {
-	return x ^ (1 / 3);
+	return x < 0 ? -math.pow(-x, 1 / 3) : math.pow(x, 1 / 3);
 }

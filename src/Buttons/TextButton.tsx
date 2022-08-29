@@ -4,7 +4,7 @@ import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
 
-interface FilledButtonProps {
+interface TextButtonProps {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -16,11 +16,11 @@ interface FilledButtonProps {
 	Pressed: () => void;
 }
 
-interface FilledButtonState {
+interface TextButtonState {
 	Debounce: boolean;
 }
 
-export class FilledButton extends Roact.Component<FilledButtonProps, FilledButtonState> {
+export class TextButton extends Roact.Component<TextButtonProps, TextButtonState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
@@ -28,7 +28,7 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 		Debounce: false,
 	};
 
-	constructor(props: FilledButtonProps) {
+	constructor(props: TextButtonProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -49,11 +49,10 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 					return (
 						<textbutton
 							AutoButtonColor={false}
-							BackgroundColor3={
-								this.props.Disabled ? theme.Colors.onSurface : theme.Colors[lowerCaseColorScheme]
-							}
-							BackgroundTransparency={this.props.Disabled ? 1 - 0.12 : 0}
-							BorderSizePixel={0}
+							BackgroundTransparency={this.stateBinding.map((opacity) => {
+								return 1 - opacity;
+							})}
+							BackgroundColor3={theme.Colors[lowerCaseColorScheme]}
 							AnchorPoint={this.props.AnchorPoint}
 							Position={this.props.Position}
 							Size={
@@ -61,7 +60,9 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 							}
 							Font={'GothamMedium'}
 							Text={this.props.Text}
-							TextColor3={this.props.Disabled ? theme.Colors.onSurface : theme.Colors[`on${colorScheme}`]}
+							TextColor3={
+								this.props.Disabled ? theme.Colors.onBackground : theme.Colors[lowerCaseColorScheme]
+							}
 							TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
 							TextXAlignment={'Center'}
 							TextYAlignment={'Center'}
@@ -84,6 +85,7 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 									}
 								},
 								MouseButton1Up: async () => {
+									// Why cant you just disable input on buttons 😭
 									if (this.props.Disabled) return;
 									this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
 								},
@@ -102,25 +104,13 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 							}}
 						>
 							<uitextsizeconstraint MaxTextSize={20} MinTextSize={1} />
+							<uicorner CornerRadius={new UDim(1, 0)} />
 							<uipadding
 								PaddingLeft={new UDim(0, 24)}
 								PaddingRight={new UDim(0, 24)}
 								PaddingBottom={new UDim(0, 6)}
 								PaddingTop={new UDim(0, 6)}
 							/>
-							<frame
-								Key={'StateLayer'}
-								AnchorPoint={new Vector2(0.5, 0.5)}
-								Position={UDim2.fromScale(0.5, 0.5)}
-								Size={new UDim2(1, 48, 1, 12)}
-								BackgroundColor3={theme.Colors[`on${colorScheme}`]}
-								BackgroundTransparency={this.stateBinding.map((opacity) => {
-									return 1 - opacity;
-								})}
-							>
-								<uicorner CornerRadius={new UDim(1, 0)} />
-							</frame>
-							<uicorner CornerRadius={new UDim(1, 0)} />
 						</textbutton>
 					);
 				}}

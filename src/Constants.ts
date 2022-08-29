@@ -18,6 +18,20 @@ export enum LowerCaseColorScheme {
 	Error = 'error',
 }
 
+export enum ContainerScheme {
+	PrimaryContainer = 'PrimaryContainer',
+	SecondaryContainer = 'SecondaryContainer',
+	TertiaryContainer = 'TertiaryContainer',
+	ErrorContainer = 'ErrorContainer',
+}
+
+export enum LowerCaseContainerScheme {
+	PrimaryContainer = 'primaryContainer',
+	SecondaryContainer = 'secondaryContainer',
+	TertiaryContainer = 'tertiaryContainer',
+	ErrorContainer = 'errorContainer',
+}
+
 export const ThemeColors = {
 	Red: { Color: Color3.fromHex('#ff2b2b'), Order: 1 },
 	Orange: { Color: Color3.fromHex('#ff802b'), Order: 2 },

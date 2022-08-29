@@ -1,10 +1,11 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { ColorScheme, LowerCaseColorScheme } from '../Constants';
+import { ContainerScheme, LowerCaseContainerScheme } from '../Constants';
 import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
+import { LowerCaseFirstLetter } from '../Utils';
 
-interface FilledButtonProps {
+interface TonalButtonProps {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -12,15 +13,15 @@ interface FilledButtonProps {
 	Text: string;
 	Icon?: Icons;
 	Disabled?: boolean;
-	ColorScheme?: ColorScheme;
+	ColorScheme?: ContainerScheme;
 	Pressed: () => void;
 }
 
-interface FilledButtonState {
+interface TonalButtonState {
 	Debounce: boolean;
 }
 
-export class FilledButton extends Roact.Component<FilledButtonProps, FilledButtonState> {
+export class TonalButton extends Roact.Component<TonalButtonProps, TonalButtonState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
@@ -28,7 +29,7 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 		Debounce: false,
 	};
 
-	constructor(props: FilledButtonProps) {
+	constructor(props: TonalButtonProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -43,8 +44,8 @@ export class FilledButton extends Roact.Component<FilledButtonProps, FilledButto
 		return (
 			<ThemeContext.Consumer
 				render={(theme) => {
-					const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
-					const lowerCaseColorScheme = colorScheme.lower() as LowerCaseColorScheme;
+					const colorScheme = this.props.ColorScheme || ContainerScheme.SecondaryContainer;
+					const lowerCaseColorScheme = LowerCaseFirstLetter(colorScheme) as LowerCaseContainerScheme;
 
 					return (
 						<textbutton

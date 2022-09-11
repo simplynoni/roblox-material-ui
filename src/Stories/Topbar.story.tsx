@@ -24,7 +24,7 @@ class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {
 							task.wait(2);
 							this.setState({ Closed: false });
 						}}
-						LeadingIcon={{ Icon: Icons.NavigateLeft, Function: () => {} }}
+						LeadingIcon={{ Icon: Icons.NavigateBack, Function: () => {} }}
 					/>
 				</UIBase>
 			</MockThemeController>

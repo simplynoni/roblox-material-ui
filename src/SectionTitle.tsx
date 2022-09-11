@@ -1,4 +1,5 @@
 import Roact from '@rbxts/roact';
+import { GothamMedium } from './Fonts';
 import ThemeContext from './Theme/ThemeContext';
 
 interface SectionTitleProps {
@@ -15,7 +16,7 @@ export default class SectionTitle extends Roact.PureComponent<SectionTitleProps>
 							Size={new UDim2(1, 0, 0, 28)}
 							BackgroundTransparency={1}
 							Text={this.props.Text}
-							Font={Enum.Font.GothamMedium}
+							FontFace={GothamMedium}
 							TextColor3={theme.Colors.primary}
 							TextXAlignment={Enum.TextXAlignment.Left}
 							TextYAlignment={Enum.TextYAlignment.Bottom}

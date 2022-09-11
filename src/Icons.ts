@@ -6,6 +6,8 @@ export enum Icons {
 	Palette = 'rbxassetid://8908936450',
 	NavigateRight = 'rbxassetid://8908881968',
 	NavigateLeft = 'rbxassetid://9701103699',
+	NavigateBack = 'rbxassetid://10880812776',
+	BackArrow = 'rbxassetid://10880812776',
 	Close = 'rbxassetid://9008260937',
 	Check = 'rbxassetid://9040764300',
 	Clear = 'rbxassetid://10618783436',

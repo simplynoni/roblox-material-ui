@@ -1,6 +1,7 @@
 import { SingleMotor, Spring } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { ColorScheme, LowerCaseColorScheme } from './Constants';
+import { GothamBold } from './Fonts';
 import RoundedFrame from './RoundedFrame';
 import ThemeContext from './Theme/ThemeContext';
 
@@ -65,7 +66,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 									Position={UDim2.fromScale(0, 0.5)}
 									Size={UDim2.fromScale(0.75, 1)}
 									BackgroundTransparency={1}
-									Font={Enum.Font.GothamBold}
+									FontFace={GothamBold}
 									Text={this.props.Label}
 									TextColor3={theme.Colors[`on${colorScheme}Container`]}
 									TextXAlignment={Enum.TextXAlignment.Left}
@@ -85,7 +86,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 									Position={UDim2.fromScale(1, 0.5)}
 									Size={UDim2.fromScale(0.25, 1)}
 									BackgroundTransparency={1}
-									Font={Enum.Font.GothamBold}
+									FontFace={GothamBold}
 									Text={tostring(this.state.Value)}
 									TextColor3={theme.Colors[`on${colorScheme}Container`]}
 									TextXAlignment={Enum.TextXAlignment.Right}
@@ -117,7 +118,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 										Position={UDim2.fromScale(0, 0.5)}
 										Size={new UDim2(0, this.state.HolderWidth * 0.75, 1, 0)}
 										BackgroundTransparency={1}
-										Font={Enum.Font.GothamBold}
+										FontFace={GothamBold}
 										Text={this.props.Label}
 										TextColor3={theme.Colors[`on${colorScheme}`]}
 										TextXAlignment={Enum.TextXAlignment.Left}
@@ -137,7 +138,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 										Position={new UDim2(0, this.state.HolderWidth, 0.5, 0)}
 										Size={UDim2.fromScale(0.25, 1)}
 										BackgroundTransparency={1}
-										Font={Enum.Font.GothamBold}
+										FontFace={GothamBold}
 										Text={tostring(this.state.Value)}
 										TextColor3={theme.Colors[`on${colorScheme}`]}
 										TextXAlignment={Enum.TextXAlignment.Right}

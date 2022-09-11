@@ -1,6 +1,7 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { ColorScheme, LowerCaseColorScheme } from '../Constants';
+import { GothamMedium } from '../Fonts';
 import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
 
@@ -58,7 +59,7 @@ export class OutlinedButton extends Roact.Component<OutlinedButtonProps, Outline
 							Size={
 								this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size
 							}
-							Font={'GothamMedium'}
+							FontFace={GothamMedium}
 							Text={this.props.Text}
 							TextColor3={
 								this.props.Disabled ? theme.Colors.onBackground : theme.Colors[lowerCaseColorScheme]

@@ -1,6 +1,7 @@
 import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
+import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Slider from './Slider';
@@ -89,7 +90,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 										LayoutOrder={1}
 										Size={UDim2.fromScale(1, 0.45)}
 										BackgroundTransparency={1}
-										Font={Enum.Font.GothamBold}
+										FontFace={GothamBold}
 										Text={this.props.Title}
 										TextColor3={theme.Colors.onBackground}
 										TextXAlignment={Enum.TextXAlignment.Left}
@@ -103,7 +104,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 												Position={UDim2.fromScale(1, 0.5)}
 												Size={UDim2.fromScale(0.25, 1)}
 												BackgroundTransparency={1}
-												Font={Enum.Font.Gotham}
+												FontFace={Gotham}
 												Text={tostring(this.state.DisplayValue)}
 												TextColor3={theme.Colors.onBackground}
 												TextXAlignment={Enum.TextXAlignment.Right}

@@ -2,6 +2,7 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
+import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Switch from './Switch';
@@ -141,7 +142,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 										LayoutOrder={1}
 										Size={UDim2.fromScale(1, 0.45)}
 										BackgroundTransparency={1}
-										Font={Enum.Font.GothamBold}
+										FontFace={GothamBold}
 										Text={this.props.Title}
 										TextColor3={theme.Colors.onBackground}
 										TextXAlignment={Enum.TextXAlignment.Left}
@@ -155,7 +156,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 											LayoutOrder={2}
 											Size={UDim2.fromScale(1, 0.35)}
 											BackgroundTransparency={1}
-											Font={Enum.Font.Gotham}
+											FontFace={Gotham}
 											Text={this.props.Description}
 											TextColor3={theme.Colors.onBackground}
 											TextXAlignment={Enum.TextXAlignment.Left}

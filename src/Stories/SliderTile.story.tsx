@@ -1,4 +1,5 @@
 import Roact from '@rbxts/roact';
+import { GothamBlack } from '../Fonts';
 import { Icons } from '../Icons';
 import SliderTile from '../SliderTile';
 import MockThemeController from '../Theme/MockTheme';
@@ -14,7 +15,7 @@ export = function (frame: GuiObject) {
 				Size={new UDim2(0.5, 0, 0, 16)}
 				BackgroundTransparency={1}
 				Text={"doesn't work in hoarcekat ui"}
-				Font={Enum.Font.GothamBold}
+				FontFace={GothamBlack}
 				TextSize={16}
 				TextTransparency={0.5}
 				TextColor3={Color3.fromRGB(242, 242, 242)}

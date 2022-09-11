@@ -12,7 +12,7 @@ interface IconButtonProps {
 	Size: UDim2;
 	ZIndex?: number;
 	LayoutOrder?: number;
-	Icon: Icons;
+	Icon: Icons | string;
 	IconColor?: Color3;
 	Pressed: () => void;
 }

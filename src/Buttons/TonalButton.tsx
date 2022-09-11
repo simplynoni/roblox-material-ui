@@ -1,6 +1,7 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { ContainerScheme, LowerCaseContainerScheme } from '../Constants';
+import { GothamMedium } from '../Fonts';
 import { Icons } from '../Icons';
 import ThemeContext from '../Theme/ThemeContext';
 import { LowerCaseFirstLetter } from '../Utils';
@@ -60,7 +61,7 @@ export class TonalButton extends Roact.Component<TonalButtonProps, TonalButtonSt
 							Size={
 								this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size
 							}
-							Font={'GothamMedium'}
+							FontFace={GothamMedium}
 							Text={this.props.Text}
 							TextColor3={this.props.Disabled ? theme.Colors.onSurface : theme.Colors[`on${colorScheme}`]}
 							TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}

@@ -1,6 +1,7 @@
 export * as Buttons from './Buttons';
 export { default as ColorTile } from './ColorTile';
 export { DefaultThemeColor, Theme, ThemeColors } from './Constants';
+export * as Fonts from './Fonts';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
 export { Icons } from './Icons';

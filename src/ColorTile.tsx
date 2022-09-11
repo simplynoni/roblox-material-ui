@@ -3,6 +3,7 @@ import Roact from '@rbxts/roact';
 import ThemeContext from './Theme/ThemeContext';
 
 import { Theme } from './Constants';
+import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
@@ -160,7 +161,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 										LayoutOrder={1}
 										Size={UDim2.fromScale(1, 0.45)}
 										BackgroundTransparency={1}
-										Font={Enum.Font.GothamBold}
+										FontFace={GothamBold}
 										Text={this.props.Title}
 										TextColor3={theme.Colors.onBackground}
 										TextXAlignment={Enum.TextXAlignment.Left}
@@ -174,7 +175,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 											LayoutOrder={2}
 											Size={UDim2.fromScale(1, 0.35)}
 											BackgroundTransparency={1}
-											Font={Enum.Font.Gotham}
+											FontFace={Gotham}
 											Text={this.props.Description}
 											TextColor3={theme.Colors.onBackground}
 											TextXAlignment={Enum.TextXAlignment.Left}

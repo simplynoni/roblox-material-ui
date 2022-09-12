@@ -11,7 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@rbxts/compiler-types": "^1.3.3-types.1",
+		"@rbxts/compiler-types": "^2.0.0-types.0",
 		"@rbxts/types": "^1.0.641",
 		"prettier": "^2.7.1",
 		"rbxts-transformer-services": "^1.0.1",

@@ -1,10 +1,12 @@
 import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
-import ThemeContext from './Theme/ThemeContext';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
+import { ThemeProps } from './types';
 
 interface UIBaseProps {
 	AnchorPoint: Vector2;
@@ -31,13 +33,13 @@ const defaults = {
 	fadeVelocity: 7,
 };
 
-export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
+class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 	positionMotor: GroupMotor<{ X: number; Y: number }>;
 	positionBinding: Roact.Binding<{ X: number; Y: number }>;
 	fadeMotor: SingleMotor;
 	fadeBinding: Roact.Binding<number>;
 
-	constructor(props: UIBaseProps) {
+	constructor(props: UIBaseProps & ThemeProps) {
 		super(props);
 
 		this.positionMotor = new GroupMotor(
@@ -72,6 +74,8 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 	}
 
 	render() {
+		const theme = this.props.Theme;
+
 		const aspectRatio = this.props.AspectRatio ? (
 			<uiaspectratioconstraint
 				Key='AspectRatio'
@@ -87,52 +91,46 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 			) : undefined;
 
 		return (
-			<ThemeContext.Consumer
-				render={(theme) => {
-					return (
-						<frame
-							Key='OuterContainer'
-							AnchorPoint={this.props.AnchorPoint}
-							Position={this.positionBinding.map(({ X, Y }) => {
-								return new UDim2(X, this.props.Position.X.Offset, Y, this.props.Position.Y.Offset);
-							})}
-							Size={this.props.Size}
-							BackgroundTransparency={1}
-							Visible={this.state.Visible}
-						>
-							<Shadow
-								Elevation={5}
-								Transparency={this.fadeBinding.map((opacity) => {
-									return 1 - opacity;
-								})}
-							/>
-							<canvasgroup
-								Key='InnerContainer'
-								AnchorPoint={new Vector2(0.5, 0.5)}
-								Position={UDim2.fromScale(0.5, 0.5)}
-								Size={UDim2.fromScale(1, 1)}
-								BackgroundTransparency={1}
-								GroupTransparency={this.fadeBinding.map((opacity) => {
-									return 1 - opacity;
-								})}
-							>
-								<RoundedFrame
-									Key='Main'
-									AnchorPoint={new Vector2(0.5, 0.5)}
-									Position={UDim2.fromScale(0.5, 0.5)}
-									Size={UDim2.fromScale(1, 1)}
-									Color={theme.Colors.background}
-									CornerRadius={16}
-								>
-									{this.props[Roact.Children]}
-								</RoundedFrame>
-							</canvasgroup>
-							{aspectRatio}
-							{sizeConstraint}
-						</frame>
-					);
-				}}
-			/>
+			<frame
+				Key='OuterContainer'
+				AnchorPoint={this.props.AnchorPoint}
+				Position={this.positionBinding.map(({ X, Y }) => {
+					return new UDim2(X, this.props.Position.X.Offset, Y, this.props.Position.Y.Offset);
+				})}
+				Size={this.props.Size}
+				BackgroundTransparency={1}
+				Visible={this.state.Visible}
+			>
+				<Shadow
+					Elevation={5}
+					Transparency={this.fadeBinding.map((opacity) => {
+						return 1 - opacity;
+					})}
+				/>
+				<canvasgroup
+					Key='InnerContainer'
+					AnchorPoint={new Vector2(0.5, 0.5)}
+					Position={UDim2.fromScale(0.5, 0.5)}
+					Size={UDim2.fromScale(1, 1)}
+					BackgroundTransparency={1}
+					GroupTransparency={this.fadeBinding.map((opacity) => {
+						return 1 - opacity;
+					})}
+				>
+					<RoundedFrame
+						Key='Main'
+						AnchorPoint={new Vector2(0.5, 0.5)}
+						Position={UDim2.fromScale(0.5, 0.5)}
+						Size={UDim2.fromScale(1, 1)}
+						Color={theme.Scheme.background}
+						CornerRadius={16}
+					>
+						{this.props[Roact.Children]}
+					</RoundedFrame>
+				</canvasgroup>
+				{aspectRatio}
+				{sizeConstraint}
+			</frame>
 		);
 	}
 
@@ -198,5 +196,21 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 		if (this.props.Closed !== undefined && previousProps.Closed !== this.props.Closed) {
 			this.setClosed(this.props.Closed);
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, UIBaseProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(UIBase);
+
+export default class ThemedUIBase extends Roact.Component<UIBaseProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

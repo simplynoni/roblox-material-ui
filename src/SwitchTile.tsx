@@ -1,11 +1,13 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import ThemeContext from './Theme/ThemeContext';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Switch from './Switch';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
+import { ThemeProps } from './types';
 
 interface SwitchTileProps {
 	Enabled: boolean;
@@ -26,11 +28,11 @@ interface SwitchTileState {
 	Icon?: Icons;
 }
 
-export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, SwitchTileState> {
+class SwitchTile extends Roact.PureComponent<SwitchTileProps & ThemeProps, SwitchTileState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
-	constructor(props: SwitchTileProps) {
+	constructor(props: SwitchTileProps & ThemeProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -49,136 +51,132 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 	}
 
 	render() {
+		const theme = this.props.Theme;
+
 		return (
-			<ThemeContext.Consumer
-				render={(theme) => {
-					return (
-						<textbutton
-							Key='SwitchTile'
-							AnchorPoint={this.props.AnchorPoint}
-							Position={this.props.Position}
-							Size={this.props.Size ?? new UDim2(1, 0, 0, 72)}
-							Text=''
-							BorderSizePixel={0}
-							BackgroundTransparency={this.stateBinding.map((opacity) => {
-								return 1 - opacity;
-							})}
-							BackgroundColor3={theme.Colors.onBackground}
-							AutoButtonColor={false}
-							Event={{
-								MouseButton1Click: async () => {
-									if (this.state.Debounce === false) {
-										this.setState({
-											Debounce: true,
-										});
+			<textbutton
+				Key='SwitchTile'
+				AnchorPoint={this.props.AnchorPoint}
+				Position={this.props.Position}
+				Size={this.props.Size ?? new UDim2(1, 0, 0, 72)}
+				Text=''
+				BorderSizePixel={0}
+				BackgroundTransparency={this.stateBinding.map((opacity) => {
+					return 1 - opacity;
+				})}
+				BackgroundColor3={theme.Scheme.onBackground}
+				AutoButtonColor={false}
+				Event={{
+					MouseButton1Click: async () => {
+						if (this.state.Debounce === false) {
+							this.setState({
+								Debounce: true,
+							});
 
-										this.setEnabled(!this.state.Enabled);
+							this.setEnabled(!this.state.Enabled);
 
-										await Promise.delay(0.25);
-										this.setState({
-											Debounce: false,
-										});
-									}
-								},
-								MouseButton1Up: async () => {
-									this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-								},
-								MouseEnter: () => {
-									this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-								},
-								MouseButton1Down: () => {
-									this.stateMotor.setGoal(new Linear(0.12, { velocity: 0.5 }));
-								},
-								MouseLeave: () => {
-									this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
-								},
-							}}
-						>
-							<uipadding
-								PaddingBottom={new UDim(0, 12)}
-								PaddingLeft={new UDim(0, 16)}
-								PaddingRight={new UDim(0, 16)}
-								PaddingTop={new UDim(0, 12)}
-							/>
-							<frame
-								Key='LeftAlign'
-								AnchorPoint={new Vector2(0, 0.5)}
-								Position={UDim2.fromScale(0, 0.5)}
-								Size={UDim2.fromScale(0.75, 1)}
-								BackgroundTransparency={1}
-							>
-								<uilistlayout
-									Padding={new UDim(0, 16)}
-									FillDirection={Enum.FillDirection.Horizontal}
-									HorizontalAlignment={Enum.HorizontalAlignment.Left}
-									VerticalAlignment={Enum.VerticalAlignment.Center}
-									SortOrder={Enum.SortOrder.LayoutOrder}
-								/>
-								{this.state.Icon ? (
-									<Icon
-										Icon={this.state.Icon}
-										IconSize='24p'
-										MaxSize
-										IconColor={theme.Colors.onBackground}
-										Size={UDim2.fromScale(0.25, 1)}
-										LayoutOrder={1}
-									/>
-								) : undefined}
-								<frame
-									Key='TextHolder'
-									Size={UDim2.fromScale(this.state.Icon ? 0.8 : 1, 1)}
-									BackgroundTransparency={1}
-									LayoutOrder={2}
-								>
-									<uilistlayout
-										Padding={new UDim(0, 5)}
-										FillDirection={Enum.FillDirection.Vertical}
-										HorizontalAlignment={Enum.HorizontalAlignment.Left}
-										VerticalAlignment={Enum.VerticalAlignment.Center}
-										SortOrder={Enum.SortOrder.LayoutOrder}
-									/>
-									<textlabel
-										Key='Title'
-										LayoutOrder={1}
-										Size={UDim2.fromScale(1, 0.45)}
-										BackgroundTransparency={1}
-										FontFace={GothamBold}
-										Text={this.props.Title}
-										TextColor3={theme.Colors.onBackground}
-										TextXAlignment={Enum.TextXAlignment.Left}
-										TextScaled
-									>
-										<uitextsizeconstraint MaxTextSize={18} />
-									</textlabel>
-									{this.props.Description ? (
-										<textlabel
-											Key='Description'
-											LayoutOrder={2}
-											Size={UDim2.fromScale(1, 0.35)}
-											BackgroundTransparency={1}
-											FontFace={Gotham}
-											Text={this.props.Description}
-											TextColor3={theme.Colors.onBackground}
-											TextXAlignment={Enum.TextXAlignment.Left}
-											TextScaled
-										>
-											<uitextsizeconstraint MaxTextSize={14} />
-										</textlabel>
-									) : undefined}
-								</frame>
-							</frame>
-							<Switch
-								Enabled={this.state.Enabled}
-								AnchorPoint={new Vector2(1, 0.5)}
-								Position={UDim2.fromScale(1, 0.5)}
-								ChangedEvent={(enabled) => {
-									this.setEnabled(enabled);
-								}}
-							/>
-						</textbutton>
-					);
+							await Promise.delay(0.25);
+							this.setState({
+								Debounce: false,
+							});
+						}
+					},
+					MouseButton1Up: async () => {
+						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
+					},
+					MouseEnter: () => {
+						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
+					},
+					MouseButton1Down: () => {
+						this.stateMotor.setGoal(new Linear(0.12, { velocity: 0.5 }));
+					},
+					MouseLeave: () => {
+						this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
+					},
 				}}
-			/>
+			>
+				<uipadding
+					PaddingBottom={new UDim(0, 12)}
+					PaddingLeft={new UDim(0, 16)}
+					PaddingRight={new UDim(0, 16)}
+					PaddingTop={new UDim(0, 12)}
+				/>
+				<frame
+					Key='LeftAlign'
+					AnchorPoint={new Vector2(0, 0.5)}
+					Position={UDim2.fromScale(0, 0.5)}
+					Size={UDim2.fromScale(0.75, 1)}
+					BackgroundTransparency={1}
+				>
+					<uilistlayout
+						Padding={new UDim(0, 16)}
+						FillDirection={Enum.FillDirection.Horizontal}
+						HorizontalAlignment={Enum.HorizontalAlignment.Left}
+						VerticalAlignment={Enum.VerticalAlignment.Center}
+						SortOrder={Enum.SortOrder.LayoutOrder}
+					/>
+					{this.state.Icon ? (
+						<Icon
+							Icon={this.state.Icon}
+							IconSize='24p'
+							MaxSize
+							IconColor={theme.Scheme.onBackground}
+							Size={UDim2.fromScale(0.25, 1)}
+							LayoutOrder={1}
+						/>
+					) : undefined}
+					<frame
+						Key='TextHolder'
+						Size={UDim2.fromScale(this.state.Icon ? 0.8 : 1, 1)}
+						BackgroundTransparency={1}
+						LayoutOrder={2}
+					>
+						<uilistlayout
+							Padding={new UDim(0, 5)}
+							FillDirection={Enum.FillDirection.Vertical}
+							HorizontalAlignment={Enum.HorizontalAlignment.Left}
+							VerticalAlignment={Enum.VerticalAlignment.Center}
+							SortOrder={Enum.SortOrder.LayoutOrder}
+						/>
+						<textlabel
+							Key='Title'
+							LayoutOrder={1}
+							Size={UDim2.fromScale(1, 0.45)}
+							BackgroundTransparency={1}
+							FontFace={GothamBold}
+							Text={this.props.Title}
+							TextColor3={theme.Scheme.onBackground}
+							TextXAlignment={Enum.TextXAlignment.Left}
+							TextScaled
+						>
+							<uitextsizeconstraint MaxTextSize={18} />
+						</textlabel>
+						{this.props.Description ? (
+							<textlabel
+								Key='Description'
+								LayoutOrder={2}
+								Size={UDim2.fromScale(1, 0.35)}
+								BackgroundTransparency={1}
+								FontFace={Gotham}
+								Text={this.props.Description}
+								TextColor3={theme.Scheme.onBackground}
+								TextXAlignment={Enum.TextXAlignment.Left}
+								TextScaled
+							>
+								<uitextsizeconstraint MaxTextSize={14} />
+							</textlabel>
+						) : undefined}
+					</frame>
+				</frame>
+				<Switch
+					Enabled={this.state.Enabled}
+					AnchorPoint={new Vector2(1, 0.5)}
+					Position={UDim2.fromScale(1, 0.5)}
+					ChangedEvent={(enabled) => {
+						this.setEnabled(enabled);
+					}}
+				/>
+			</textbutton>
 		);
 	}
 
@@ -207,5 +205,21 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 				Icon: this.props.Icon,
 			});
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SwitchTileProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(SwitchTile);
+
+export default class ThemedSwitchTile extends Roact.Component<SwitchTileProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

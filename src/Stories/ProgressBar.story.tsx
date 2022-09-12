@@ -1,8 +1,6 @@
 import Roact from '@rbxts/roact';
 import { ColorScheme } from '../Constants';
 import ProgressBar from '../ProgressBar';
-import MockThemeController from '../Theme/MockTheme';
-import StoryTheme from './StoryTheme';
 
 class StoryComponent extends Roact.Component<{}, { Value: number }> {
 	protected state: Readonly<{ Value: number }> = { Value: 50 };
@@ -10,6 +8,11 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 	render() {
 		return (
 			<>
+				<uilistlayout
+					VerticalAlignment={Enum.VerticalAlignment.Center}
+					HorizontalAlignment={Enum.HorizontalAlignment.Center}
+					Padding={new UDim(0, 24)}
+				/>
 				<ProgressBar
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
@@ -55,17 +58,7 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 }
 
 export = function (frame: GuiObject) {
-	const Tree = Roact.mount(
-		<MockThemeController Theme={StoryTheme}>
-			<uilistlayout
-				VerticalAlignment={Enum.VerticalAlignment.Center}
-				HorizontalAlignment={Enum.HorizontalAlignment.Center}
-				Padding={new UDim(0, 24)}
-			/>
-			<StoryComponent />
-		</MockThemeController>,
-		frame,
-	);
+	const Tree = Roact.mount(<StoryComponent />, frame);
 
 	return () => {
 		Roact.unmount(Tree);

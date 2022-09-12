@@ -1,14 +1,18 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import ColorTile from '../ColorTile';
 import { Icons } from '../Icons';
-import MockThemeController from '../Theme/MockTheme';
-import ThemeContext from '../Theme/ThemeContext';
+import { ThemeState, ThemeStore } from '../Theme/ThemeState';
+import { ThemeProps } from '../types';
 import UIBase from '../UIBase';
-import StoryTheme from './StoryTheme';
 
-export = function (frame: GuiObject) {
-	const Tree = Roact.mount(
-		<MockThemeController Theme={StoryTheme}>
+class StoryComponent extends Roact.Component<ThemeProps> {
+	protected state: Readonly<{ Closed: boolean }> = { Closed: false };
+
+	public render(): Roact.Element | undefined {
+		const theme = this.props.Theme;
+
+		return (
 			<UIBase
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
@@ -19,28 +23,35 @@ export = function (frame: GuiObject) {
 					HorizontalAlignment={Enum.HorizontalAlignment.Center}
 					Padding={new UDim(0, 0)}
 				/>
-				<ThemeContext.Consumer
-					render={(theme) => {
-						return (
-							<>
-								<ColorTile Title='Color' Color={theme.Colors.primary} />
-								<ColorTile Title='Color' Color={theme.Colors.secondary} />
-								<ColorTile Title='Color' Description='Description' Color={theme.Colors.tertiary} />
-								<ColorTile
-									Title='Color'
-									Description='Description'
-									Icon={Icons.Palette}
-									Color={theme.Colors.error}
-								/>
-								<ColorTile Title='Color' Icon={Icons.Palette} Color={theme.Colors.primaryContainer} />
-							</>
-						);
-					}}
-				/>
+
+				<ColorTile Title='Color' Color={theme.Scheme.primary} />
+				<ColorTile Title='Color' Color={theme.Scheme.secondary} />
+				<ColorTile Title='Color' Description='Description' Color={theme.Scheme.tertiary} />
+				<ColorTile Title='Color' Description='Description' Icon={Icons.Palette} Color={theme.Scheme.error} />
+				<ColorTile Title='Color' Icon={Icons.Palette} Color={theme.Scheme.primaryContainer} />
 			</UIBase>
-		</MockThemeController>,
-		frame,
-	);
+		);
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, {}, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(StoryComponent);
+
+class ThemedStoryComponent extends Roact.Component {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
+	}
+}
+
+export = function (frame: GuiObject) {
+	const Tree = Roact.mount(<ThemedStoryComponent />, frame);
 
 	return () => {
 		Roact.unmount(Tree);

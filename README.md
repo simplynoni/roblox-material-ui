@@ -22,4 +22,4 @@ A library of Roact UI components that roughly follow the [Material Design 3 Guid
 ## Examples
 
 ![Settings Menu](https://i.imgur.com/CiHkQgm.png)
-![Phone](https://i.imgur.com/3dhdPrH.png)
+![Phone](https://i.imgur.com/T2kNXae.png)

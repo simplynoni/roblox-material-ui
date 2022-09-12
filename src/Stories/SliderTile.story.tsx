@@ -2,13 +2,11 @@ import Roact from '@rbxts/roact';
 import { GothamBlack } from '../Fonts';
 import { Icons } from '../Icons';
 import SliderTile from '../SliderTile';
-import MockThemeController from '../Theme/MockTheme';
 import UIBase from '../UIBase';
-import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {
 	const Tree = Roact.mount(
-		<MockThemeController Theme={StoryTheme}>
+		<>
 			<textlabel
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.1)}
@@ -35,7 +33,7 @@ export = function (frame: GuiObject) {
 				<SliderTile Title='Slider' Value={1} ShowValue />
 				<SliderTile Title='Slider' Icon={Icons.Palette} Value={0} />
 			</UIBase>
-		</MockThemeController>,
+		</>,
 		frame,
 	);
 

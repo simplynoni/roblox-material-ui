@@ -1,12 +1,10 @@
 import Roact from '@rbxts/roact';
 import { GothamBlack } from '../Fonts';
 import Slider from '../Slider';
-import MockThemeController from '../Theme/MockTheme';
-import StoryTheme from './StoryTheme';
 
 export = function (frame: GuiObject) {
 	const Tree = Roact.mount(
-		<MockThemeController Theme={StoryTheme}>
+		<>
 			<uilistlayout
 				VerticalAlignment={Enum.VerticalAlignment.Center}
 				HorizontalAlignment={Enum.HorizontalAlignment.Center}
@@ -25,7 +23,7 @@ export = function (frame: GuiObject) {
 			/>
 			<Slider Value={1} Steps={10} Size={new UDim2(0.5, 0, 0, 15)} />
 			<Slider Value={0} Steps={10} Size={new UDim2(0.5, 0, 0, 15)} />
-		</MockThemeController>,
+		</>,
 		frame,
 	);
 

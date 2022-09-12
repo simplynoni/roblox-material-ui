@@ -1,8 +1,10 @@
 import { GroupMotor, Linear } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import ThemeContext from './Theme/ThemeContext';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
+import { ThemeProps } from './types';
 
 interface SwitchProps {
 	Enabled: boolean;
@@ -18,11 +20,11 @@ interface SwitchState {
 	Debounce: boolean;
 }
 
-export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState> {
+class Switch extends Roact.PureComponent<SwitchProps & ThemeProps, SwitchState> {
 	positionMotor: GroupMotor<{ Position: number; AnchorPoint: number }>;
 	positionBinding: Roact.Binding<{ Position: number; AnchorPoint: number }>;
 
-	constructor(props: SwitchProps) {
+	constructor(props: SwitchProps & ThemeProps) {
 		super(props);
 
 		this.positionMotor = new GroupMotor({
@@ -43,74 +45,70 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 	}
 
 	render() {
+		const theme = this.props.Theme;
+
 		return (
-			<ThemeContext.Consumer
-				render={(theme) => {
-					return (
-						<textbutton
-							Key='Track'
-							AnchorPoint={this.props.AnchorPoint}
-							Position={this.props.Position}
-							Size={UDim2.fromOffset(50, 28)}
-							BackgroundColor3={this.state.Enabled ? theme.Colors.primary : theme.Colors.surfaceVariant}
-							AutoButtonColor={false}
-							Text=''
-							BorderSizePixel={0}
-							Event={{
-								MouseButton1Click: async () => {
-									if (this.state.Debounce === false) {
-										this.setState({
-											Debounce: true,
-										});
+			<textbutton
+				Key='Track'
+				AnchorPoint={this.props.AnchorPoint}
+				Position={this.props.Position}
+				Size={UDim2.fromOffset(50, 28)}
+				BackgroundColor3={this.state.Enabled ? theme.Scheme.primary : theme.Scheme.surfaceVariant}
+				AutoButtonColor={false}
+				Text=''
+				BorderSizePixel={0}
+				Event={{
+					MouseButton1Click: async () => {
+						if (this.state.Debounce === false) {
+							this.setState({
+								Debounce: true,
+							});
 
-										this.setEnabled(!this.state.Enabled);
+							this.setEnabled(!this.state.Enabled);
 
-										await Promise.delay(0.25);
-										this.setState({
-											Debounce: false,
-										});
-									}
-								},
-							}}
-						>
-							{!this.state.Enabled ? (
-								<uistroke
-									ApplyStrokeMode={Enum.ApplyStrokeMode.Border}
-									Color={theme.Colors.outline}
-									Thickness={2}
-								/>
-							) : undefined}
-							<uicorner Key='Corner' CornerRadius={new UDim(1, 0)} />
-							<uipadding
-								Key='Padding'
-								PaddingBottom={new UDim(0, 4)}
-								PaddingLeft={new UDim(0, 5)}
-								PaddingRight={new UDim(0, 4)}
-								PaddingTop={new UDim(0, 4)}
-							/>
-							<RoundedFrame
-								Key='Thumb'
-								AnchorPoint={this.positionBinding.map(({ AnchorPoint }) => {
-									return new Vector2(AnchorPoint, 0.5);
-								})}
-								Position={this.positionBinding.map(({ Position }) => {
-									return UDim2.fromScale(Position, 0.5);
-								})}
-								Size={this.state.Enabled ? UDim2.fromOffset(24, 24) : UDim2.fromOffset(16, 16)}
-								CornerRadius='Full'
-								Color={this.state.Enabled ? theme.Colors.onPrimary : theme.Colors.outline}
-							>
-								<uiaspectratioconstraint
-									Key='AspectRatio'
-									AspectRatio={1}
-									AspectType={Enum.AspectType.ScaleWithParentSize}
-									DominantAxis={Enum.DominantAxis.Height}
-								/>
-							</RoundedFrame>
-						</textbutton>
-					);
+							await Promise.delay(0.25);
+							this.setState({
+								Debounce: false,
+							});
+						}
+					},
 				}}
-			/>
+			>
+				{!this.state.Enabled ? (
+					<uistroke
+						ApplyStrokeMode={Enum.ApplyStrokeMode.Border}
+						Color={theme.Scheme.outline}
+						Thickness={2}
+					/>
+				) : undefined}
+				<uicorner Key='Corner' CornerRadius={new UDim(1, 0)} />
+				<uipadding
+					Key='Padding'
+					PaddingBottom={new UDim(0, 4)}
+					PaddingLeft={new UDim(0, 5)}
+					PaddingRight={new UDim(0, 4)}
+					PaddingTop={new UDim(0, 4)}
+				/>
+				<RoundedFrame
+					Key='Thumb'
+					AnchorPoint={this.positionBinding.map(({ AnchorPoint }) => {
+						return new Vector2(AnchorPoint, 0.5);
+					})}
+					Position={this.positionBinding.map(({ Position }) => {
+						return UDim2.fromScale(Position, 0.5);
+					})}
+					Size={this.state.Enabled ? UDim2.fromOffset(24, 24) : UDim2.fromOffset(16, 16)}
+					CornerRadius='Full'
+					Color={this.state.Enabled ? theme.Scheme.onPrimary : theme.Scheme.outline}
+				>
+					<uiaspectratioconstraint
+						Key='AspectRatio'
+						AspectRatio={1}
+						AspectType={Enum.AspectType.ScaleWithParentSize}
+						DominantAxis={Enum.DominantAxis.Height}
+					/>
+				</RoundedFrame>
+			</textbutton>
 		);
 	}
 
@@ -138,5 +136,21 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 		if (this.props.Enabled !== previousProps.Enabled) {
 			this.setEnabled(this.props.Enabled);
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SwitchProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(Switch);
+
+export default class ThemedSwitch extends Roact.Component<SwitchProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

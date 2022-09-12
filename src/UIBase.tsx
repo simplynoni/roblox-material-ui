@@ -1,12 +1,12 @@
 import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
-import { useSelector } from '@rbxts/hook-bag';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
-import Hooks from '@rbxts/roact-hooks';
-import { StoreProvider } from '@rbxts/roact-rodux';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
+
 import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
+import { ThemeProps } from './types';
 
 interface UIBaseProps {
 	AnchorPoint: Vector2;
@@ -23,88 +23,166 @@ interface UIBaseProps {
 	FadeVelocity?: number;
 }
 
+interface UIBaseState {
+	Closed: boolean;
+	Visible: boolean;
+}
+
 const defaults = {
 	positionVelocity: 1,
 	fadeVelocity: 7,
 };
 
-// Couldnt think of a better name lol
-const UIBaseBase: Hooks.FC<UIBaseProps> = (props, hooks) => {
-	const theme = useSelector((state: ThemeState) => state)(hooks);
-	const [closed, setClosed] = hooks.useState(props.Closed ?? false);
-	const [visible, setVisible] = hooks.useState(!props.Closed ?? true);
+class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
+	positionMotor: GroupMotor<{ X: number; Y: number }>;
+	positionBinding: Roact.Binding<{ X: number; Y: number }>;
+	fadeMotor: SingleMotor;
+	fadeBinding: Roact.Binding<number>;
 
-	const [positionBinding, positionMotor] = hooks.useMemo(() => {
-		const positionMotor = new GroupMotor(
-			props.Closed
+	constructor(props: UIBaseProps & ThemeProps) {
+		super(props);
+
+		this.positionMotor = new GroupMotor(
+			this.props.Closed
 				? {
-						X: props.CustomClosePosition
-							? props.CustomClosePosition.X
-							: props.Position.X.Scale >= 0.5
-							? props.Position.X.Scale + 0.2
-							: props.Position.X.Scale - 0.2,
+						X: this.props.CustomClosePosition
+							? this.props.CustomClosePosition.X
+							: this.props.Position.X.Scale >= 0.5
+							? this.props.Position.X.Scale + 0.2
+							: this.props.Position.X.Scale - 0.2,
 						Y: props.Position.Y.Scale,
 				  }
 				: { X: props.Position.X.Scale, Y: props.Position.Y.Scale },
 		);
 
-		const [positionBinding, setPositionBinding] = Roact.createBinding(positionMotor.getValue());
-		positionMotor.onStep(setPositionBinding);
+		const [positionBinding, setPositionBinding] = Roact.createBinding(this.positionMotor.getValue());
+		this.positionBinding = positionBinding;
 
-		return [positionBinding, positionMotor] as LuaTuple<
-			[Roact.Binding<{ X: number; Y: number }>, GroupMotor<{ X: number; Y: number }>]
-		>;
-	}, []);
+		this.positionMotor.onStep(setPositionBinding);
 
-	const [fadeBinding, fadeMotor] = hooks.useMemo(() => {
-		const fadeMotor = new SingleMotor(1);
+		this.fadeMotor = new SingleMotor(1);
 
-		const [fadeBinding, setFadeBinding] = Roact.createBinding(fadeMotor.getValue());
-		fadeMotor.onStep(setFadeBinding);
+		const [fadeBinding, setFadeBinding] = Roact.createBinding(this.fadeMotor.getValue());
+		this.fadeBinding = fadeBinding;
 
-		return [fadeBinding, fadeMotor] as LuaTuple<[Roact.Binding<number>, SingleMotor]>;
-	}, []);
+		this.fadeMotor.onStep(setFadeBinding);
 
-	hooks.useEffect(() => {
+		this.setState({
+			Closed: this.props.Closed ?? false,
+			Visible: !this.props.Closed ?? true,
+		});
+	}
+
+	render() {
+		const theme = this.props.Theme;
+
+		const aspectRatio = this.props.AspectRatio ? (
+			<uiaspectratioconstraint
+				Key='AspectRatio'
+				AspectRatio={this.props.AspectRatio}
+				AspectType={this.props.AspectType || Enum.AspectType.ScaleWithParentSize}
+				DominantAxis={this.props.DominantAxis || Enum.DominantAxis.Width}
+			/>
+		) : undefined;
+
+		const sizeConstraint =
+			this.props.MaxSize || this.props.MinSize ? (
+				<uisizeconstraint Key='SizeConstraint' MaxSize={this.props.MaxSize} MinSize={this.props.MinSize} />
+			) : undefined;
+
+		return (
+			<frame
+				Key='OuterContainer'
+				AnchorPoint={this.props.AnchorPoint}
+				Position={this.positionBinding.map(({ X, Y }) => {
+					return new UDim2(X, this.props.Position.X.Offset, Y, this.props.Position.Y.Offset);
+				})}
+				Size={this.props.Size}
+				BackgroundTransparency={1}
+				Visible={this.state.Visible}
+			>
+				<Shadow
+					Elevation={5}
+					Transparency={this.fadeBinding.map((opacity) => {
+						return 1 - opacity;
+					})}
+				/>
+				<canvasgroup
+					Key='InnerContainer'
+					AnchorPoint={new Vector2(0.5, 0.5)}
+					Position={UDim2.fromScale(0.5, 0.5)}
+					Size={UDim2.fromScale(1, 1)}
+					BackgroundTransparency={1}
+					GroupTransparency={this.fadeBinding.map((opacity) => {
+						return 1 - opacity;
+					})}
+				>
+					<RoundedFrame
+						Key='Main'
+						AnchorPoint={new Vector2(0.5, 0.5)}
+						Position={UDim2.fromScale(0.5, 0.5)}
+						Size={UDim2.fromScale(1, 1)}
+						Color={theme.Scheme.background}
+						CornerRadius={16}
+					>
+						{this.props[Roact.Children]}
+					</RoundedFrame>
+				</canvasgroup>
+				{aspectRatio}
+				{sizeConstraint}
+			</frame>
+		);
+	}
+
+	private setClosed(closed: boolean) {
+		if (this.state.Closed === closed) return;
+
 		const maid = new Maid();
 
-		if (props.Closed === false) {
-			setClosed(props.Closed);
-			setVisible(!props.Closed);
+		if (closed === false) {
+			this.setState({
+				Closed: closed,
+				Visible: !closed,
+			});
 
-			positionMotor.setGoal({
-				X: new Linear(props.Position.X.Scale, {
-					velocity: props.PositionVelocity || defaults.positionVelocity,
+			this.positionMotor.setGoal({
+				X: new Linear(this.props.Position.X.Scale, {
+					velocity: this.props.PositionVelocity || defaults.positionVelocity,
 				}),
-				Y: new Linear(props.Position.Y.Scale, {
-					velocity: props.PositionVelocity || defaults.positionVelocity,
+				Y: new Linear(this.props.Position.Y.Scale, {
+					velocity: this.props.PositionVelocity || defaults.positionVelocity,
 				}),
 			});
 
-			fadeMotor.setGoal(new Linear(1, { velocity: props.FadeVelocity || defaults.fadeVelocity }));
-		} else if (props.Closed === true) {
-			setClosed(props.Closed);
+			this.fadeMotor.setGoal(new Linear(1, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
+		} else {
+			this.setState({
+				Closed: closed,
+			});
 
-			positionMotor.setGoal({
+			this.positionMotor.setGoal({
 				X: new Linear(
-					props.CustomClosePosition
-						? props.CustomClosePosition.X
-						: props.Position.X.Scale >= 0.5
-						? props.Position.X.Scale + 0.2
-						: props.Position.X.Scale - 0.2, // 💀
-					{ velocity: props.PositionVelocity || defaults.positionVelocity },
+					this.props.CustomClosePosition
+						? this.props.CustomClosePosition.X
+						: this.props.Position.X.Scale >= 0.5
+						? this.props.Position.X.Scale + 0.2
+						: this.props.Position.X.Scale - 0.2, // 💀
+					{ velocity: this.props.PositionVelocity || defaults.positionVelocity },
 				),
-				Y: new Linear(props.CustomClosePosition ? props.CustomClosePosition.Y : props.Position.Y.Scale, {
-					velocity: props.PositionVelocity || defaults.positionVelocity,
-				}),
+				Y: new Linear(
+					this.props.CustomClosePosition ? this.props.CustomClosePosition.Y : this.props.Position.Y.Scale,
+					{ velocity: this.props.PositionVelocity || defaults.positionVelocity },
+				),
 			});
 
-			fadeMotor.setGoal(new Linear(0, { velocity: props.FadeVelocity || defaults.fadeVelocity }));
+			this.fadeMotor.setGoal(new Linear(0, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
 
-			const onComplete = positionMotor.onComplete(() => {
+			const onComplete = this.positionMotor.onComplete(() => {
 				// UI could've opened again before the animation finished
-				if (closed) {
-					setVisible(false);
+				if (this.state.Closed) {
+					this.setState({
+						Visible: false,
+					});
 				}
 
 				maid.DoCleaning();
@@ -112,73 +190,26 @@ const UIBaseBase: Hooks.FC<UIBaseProps> = (props, hooks) => {
 
 			maid.GiveTask(() => onComplete.disconnect());
 		}
-	}, [props.Closed]);
+	}
 
-	const aspectRatio = props.AspectRatio ? (
-		<uiaspectratioconstraint
-			Key='AspectRatio'
-			AspectRatio={props.AspectRatio}
-			AspectType={props.AspectType || Enum.AspectType.ScaleWithParentSize}
-			DominantAxis={props.DominantAxis || Enum.DominantAxis.Width}
-		/>
-	) : undefined;
+	protected didUpdate(previousProps: UIBaseProps): void {
+		if (this.props.Closed !== undefined && previousProps.Closed !== this.props.Closed) {
+			this.setClosed(this.props.Closed);
+		}
+	}
+}
 
-	const sizeConstraint =
-		props.MaxSize || props.MinSize ? (
-			<uisizeconstraint Key='SizeConstraint' MaxSize={props.MaxSize} MinSize={props.MinSize} />
-		) : undefined;
+const Connected = connect<{ Theme: ThemeState }, {}, UIBaseProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(UIBase);
 
-	return (
-		<frame
-			Key='OuterContainer'
-			AnchorPoint={props.AnchorPoint}
-			Position={positionBinding.map(({ X, Y }) => {
-				return new UDim2(X, props.Position.X.Offset, Y, props.Position.Y.Offset);
-			})}
-			Size={props.Size}
-			BackgroundTransparency={1}
-			Visible={visible}
-		>
-			<Shadow
-				Elevation={5}
-				Transparency={fadeBinding.map((opacity) => {
-					return 1 - opacity;
-				})}
-			/>
-			<canvasgroup
-				Key='InnerContainer'
-				AnchorPoint={new Vector2(0.5, 0.5)}
-				Position={UDim2.fromScale(0.5, 0.5)}
-				Size={UDim2.fromScale(1, 1)}
-				BackgroundTransparency={1}
-				GroupTransparency={fadeBinding.map((opacity) => {
-					return 1 - opacity;
-				})}
-			>
-				<RoundedFrame
-					Key='Main'
-					AnchorPoint={new Vector2(0.5, 0.5)}
-					Position={UDim2.fromScale(0.5, 0.5)}
-					Size={UDim2.fromScale(1, 1)}
-					Color={theme.Scheme.background}
-					CornerRadius={16}
-				>
-					{props[Roact.Children]}
-				</RoundedFrame>
-			</canvasgroup>
-			{aspectRatio}
-			{sizeConstraint}
-		</frame>
-	);
-};
-
-const UIBaseHooks = new Hooks(Roact)(UIBaseBase);
-
-export default class UIBase extends Roact.Component<UIBaseProps> {
+export default class ThemedUIBase extends Roact.Component<UIBaseProps> {
 	render() {
 		return (
 			<StoreProvider store={ThemeStore}>
-				<UIBaseHooks {...this.props} />
+				<Connected {...this.props} />
 			</StoreProvider>
 		);
 	}

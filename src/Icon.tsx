@@ -5,6 +5,7 @@ interface IconProps {
 	Icon: Icons | string;
 	IconSize: '24p';
 	IconColor: Color3;
+	IconTransparency?: number;
 	AnchorPoint?: Vector2;
 	Size: UDim2;
 	Position?: UDim2;
@@ -34,6 +35,7 @@ export default class Icon extends Roact.Component<IconProps> {
 				Size={this.props.Size}
 				Image={this.props.Icon}
 				ImageColor3={this.props.IconColor}
+				ImageTransparency={this.props.IconTransparency}
 				BackgroundTransparency={1}
 				LayoutOrder={this.props.LayoutOrder}
 			>

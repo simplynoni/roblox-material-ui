@@ -17,7 +17,7 @@ A library of Roact UI components that roughly follow the [Material Design 3 Guid
 -   Icon
 -   ColorTile (unofficial)
 -   Shadow
--   All [Common Buttons](https://m3.material.io/components/buttons/overview) except for ElevatedButton (Icons not supported yet)
+-   All [Common Buttons](https://m3.material.io/components/buttons/overview) except for ElevatedButton
 
 ## Examples
 

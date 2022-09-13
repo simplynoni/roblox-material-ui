@@ -1,5 +1,6 @@
 import Roact from '@rbxts/roact';
 import { TextButton } from '../../Buttons';
+import { Icons } from '../../Icons';
 import UIBase from '../../UIBase';
 
 export = function (frame: GuiObject) {
@@ -7,7 +8,7 @@ export = function (frame: GuiObject) {
 		<UIBase
 			AnchorPoint={new Vector2(0.5, 0.5)}
 			Position={UDim2.fromScale(0.5, 0.5)}
-			Size={UDim2.fromScale(0.3, 0.5)}
+			Size={UDim2.fromScale(0.3, 0.55)}
 		>
 			<uilistlayout
 				SortOrder={Enum.SortOrder.LayoutOrder}
@@ -27,6 +28,16 @@ export = function (frame: GuiObject) {
 			<TextButton
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
+				AutomaticSize
+				Text='AutomaticSize Button w/ Icon'
+				Icon={Icons.DarkTheme}
+				Pressed={() => {
+					print('a');
+				}}
+			/>
+			<TextButton
+				AnchorPoint={new Vector2(0.5, 0.5)}
+				Position={UDim2.fromScale(0.5, 0.5)}
 				Size={new UDim2(0.75, 0, 0, 35)}
 				Text='Custom Size Button'
 				Pressed={() => {
@@ -39,6 +50,17 @@ export = function (frame: GuiObject) {
 				AutomaticSize
 				Text='Disabled Button'
 				Disabled
+				Pressed={() => {
+					print('a');
+				}}
+			/>
+			<TextButton
+				AnchorPoint={new Vector2(0.5, 0.5)}
+				Position={UDim2.fromScale(0.5, 0.5)}
+				AutomaticSize
+				Text='Disabled Button w/ Icon'
+				Disabled
+				Icon={Icons.DarkTheme}
 				Pressed={() => {
 					print('a');
 				}}

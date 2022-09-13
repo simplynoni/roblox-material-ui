@@ -3,6 +3,7 @@ import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
+import Icon from '../Icon';
 import { Icons } from '../Icons';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
 import { ThemeProps } from '../types';
@@ -13,7 +14,7 @@ interface OutlinedButtonProps {
 	Size?: UDim2;
 	AutomaticSize?: boolean;
 	Text: string;
-	Icon?: Icons;
+	Icon?: Icons | string;
 	Disabled?: boolean;
 	ColorScheme?: ColorScheme;
 	Pressed: () => void;
@@ -47,6 +48,16 @@ class OutlinedButton extends Roact.Component<OutlinedButtonProps & ThemeProps, O
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
 		const lowerCaseColorScheme = colorScheme.lower() as LowerCaseColorScheme;
 
+		const icon = this.props.Icon ? (
+			<Icon
+				Icon={this.props.Icon}
+				IconColor={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[lowerCaseColorScheme]}
+				IconTransparency={this.props.Disabled ? 1 - 0.38 : 0}
+				IconSize={'24p'}
+				Size={UDim2.fromScale(0.2, 1)}
+			/>
+		) : undefined;
+
 		return (
 			<textbutton
 				AutoButtonColor={false}
@@ -57,14 +68,8 @@ class OutlinedButton extends Roact.Component<OutlinedButtonProps & ThemeProps, O
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size}
-				FontFace={GothamMedium}
-				Text={this.props.Text}
-				TextColor3={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[lowerCaseColorScheme]}
-				TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
-				TextXAlignment={'Center'}
-				TextYAlignment={'Center'}
+				Text={''}
 				AutomaticSize={this.props.AutomaticSize ? 'X' : undefined}
-				TextScaled
 				Event={{
 					MouseButton1Click: async () => {
 						if (this.props.Disabled) return;
@@ -100,18 +105,41 @@ class OutlinedButton extends Roact.Component<OutlinedButtonProps & ThemeProps, O
 					},
 				}}
 			>
-				<uitextsizeconstraint MaxTextSize={20} MinTextSize={1} />
+				<uipadding
+					PaddingLeft={new UDim(0, this.props.Icon ? 16 : 24)}
+					PaddingRight={new UDim(0, 24)}
+					PaddingBottom={new UDim(0, 6)}
+					PaddingTop={new UDim(0, 6)}
+				/>
 				<uicorner CornerRadius={new UDim(1, 0)} />
+				<uilistlayout
+					FillDirection={Enum.FillDirection.Horizontal}
+					HorizontalAlignment={Enum.HorizontalAlignment.Center}
+					VerticalAlignment={Enum.VerticalAlignment.Center}
+					SortOrder={Enum.SortOrder.LayoutOrder}
+					Padding={new UDim(0, 8)}
+				/>
+				{icon}
+				<textlabel
+					Size={
+						this.props.AutomaticSize
+							? UDim2.fromScale(0, 1)
+							: this.props.Icon
+							? UDim2.fromScale(0.8, 1)
+							: UDim2.fromScale(1, 1)
+					}
+					AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
+					BackgroundTransparency={1}
+					FontFace={GothamMedium}
+					TextColor3={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[lowerCaseColorScheme]}
+					TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
+					Text={this.props.Text}
+					TextSize={14}
+				/>
 				<uistroke
 					ApplyStrokeMode={Enum.ApplyStrokeMode.Border}
 					Color={theme.Scheme.outline}
 					Transparency={this.props.Disabled ? 1 - 0.12 : 0}
-				/>
-				<uipadding
-					PaddingLeft={new UDim(0, 24)}
-					PaddingRight={new UDim(0, 24)}
-					PaddingBottom={new UDim(0, 6)}
-					PaddingTop={new UDim(0, 6)}
 				/>
 			</textbutton>
 		);

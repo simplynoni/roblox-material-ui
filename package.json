@@ -15,7 +15,7 @@
 		"@rbxts/types": "^1.0.641",
 		"prettier": "^2.7.1",
 		"rbxts-transformer-services": "^1.0.1",
-		"roblox-ts": "^2.0.1",
+		"roblox-ts": "^2.0.2",
 		"typescript": "^4.8.3"
 	},
 	"dependencies": {

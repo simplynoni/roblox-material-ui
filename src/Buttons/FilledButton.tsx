@@ -1,48 +1,12 @@
-import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { Icons } from '../Icons';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../types';
+import BaseButton, { ButtonProps } from './BaseButton';
 
-interface FilledButtonProps {
-	AnchorPoint?: Vector2;
-	Position?: UDim2;
-	Size?: UDim2;
-	AutomaticSize?: boolean;
-	Text: string;
-	Icon?: Icons | string;
-	Disabled?: boolean;
-	ColorScheme?: ColorScheme;
-	Pressed: () => void;
-}
-
-interface FilledButtonState {
-	Debounce: boolean;
-}
-
-class FilledButton extends Roact.Component<FilledButtonProps & ThemeProps, FilledButtonState> {
-	stateMotor: SingleMotor;
-	stateBinding: Roact.Binding<number>;
-
-	state = {
-		Debounce: false,
-	};
-
-	constructor(props: FilledButtonProps & ThemeProps) {
-		super(props);
-
-		this.stateMotor = new SingleMotor(0);
-
-		const [stateBinding, setStateBinding] = Roact.createBinding(this.stateMotor.getValue());
-		this.stateBinding = stateBinding;
-
-		this.stateMotor.onStep(setStateBinding);
-	}
-
+class FilledButton extends BaseButton {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -70,37 +34,11 @@ class FilledButton extends Roact.Component<FilledButtonProps & ThemeProps, Fille
 				Text={''}
 				AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
 				Event={{
-					MouseButton1Click: async () => {
-						if (this.props.Disabled) return;
-						if (this.state.Debounce === false) {
-							this.setState({
-								Debounce: true,
-							});
-
-							task.spawn(this.props.Pressed);
-
-							await Promise.delay(0.25);
-							this.setState({
-								Debounce: false,
-							});
-						}
-					},
-					MouseButton1Up: async () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-					},
-					MouseEnter: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-					},
-					MouseButton1Down: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.12, { velocity: 0.5 }));
-					},
-					MouseLeave: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
-					},
+					MouseButton1Click: async () => this.MouseClick(),
+					MouseButton1Up: () => this.MouseUp(),
+					MouseEnter: () => this.MouseEnter(),
+					MouseButton1Down: () => this.MouseDown(),
+					MouseLeave: () => this.MouseLeave(),
 				}}
 			>
 				<frame
@@ -150,13 +88,13 @@ class FilledButton extends Roact.Component<FilledButtonProps & ThemeProps, Fille
 	}
 }
 
-const Connected = connect<{ Theme: ThemeState }, {}, FilledButtonProps, ThemeState>((state) => {
+const Connected = connect<{ Theme: ThemeState }, {}, ButtonProps, ThemeState>((state) => {
 	return {
 		Theme: { ...state },
 	};
 })(FilledButton);
 
-export default class ThemedFilledButton extends Roact.Component<FilledButtonProps> {
+export default class ThemedFilledButton extends Roact.Component<Omit<ButtonProps, 'Theme'>> {
 	render() {
 		return (
 			<StoreProvider store={ThemeStore}>

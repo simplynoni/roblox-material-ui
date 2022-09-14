@@ -1,48 +1,12 @@
-import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { Icons } from '../Icons';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../types';
+import BaseButton, { ButtonProps } from './BaseButton';
 
-interface TextButtonProps {
-	AnchorPoint?: Vector2;
-	Position?: UDim2;
-	Size?: UDim2;
-	AutomaticSize?: boolean;
-	Text: string;
-	Icon?: Icons | string;
-	Disabled?: boolean;
-	ColorScheme?: ColorScheme;
-	Pressed: () => void;
-}
-
-interface TextButtonState {
-	Debounce: boolean;
-}
-
-class TextButton extends Roact.Component<TextButtonProps & ThemeProps, TextButtonState> {
-	stateMotor: SingleMotor;
-	stateBinding: Roact.Binding<number>;
-
-	state = {
-		Debounce: false,
-	};
-
-	constructor(props: TextButtonProps & ThemeProps) {
-		super(props);
-
-		this.stateMotor = new SingleMotor(0);
-
-		const [stateBinding, setStateBinding] = Roact.createBinding(this.stateMotor.getValue());
-		this.stateBinding = stateBinding;
-
-		this.stateMotor.onStep(setStateBinding);
-	}
-
+class TextButton extends BaseButton {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -71,38 +35,11 @@ class TextButton extends Roact.Component<TextButtonProps & ThemeProps, TextButto
 				Text={''}
 				AutomaticSize={this.props.AutomaticSize ? 'X' : undefined}
 				Event={{
-					MouseButton1Click: async () => {
-						if (this.props.Disabled) return;
-						if (this.state.Debounce === false) {
-							this.setState({
-								Debounce: true,
-							});
-
-							task.spawn(this.props.Pressed);
-
-							await Promise.delay(0.25);
-							this.setState({
-								Debounce: false,
-							});
-						}
-					},
-					MouseButton1Up: async () => {
-						// Why cant you just disable input on buttons 😭
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-					},
-					MouseEnter: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.08, { velocity: 0.5 }));
-					},
-					MouseButton1Down: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0.12, { velocity: 0.5 }));
-					},
-					MouseLeave: () => {
-						if (this.props.Disabled) return;
-						this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
-					},
+					MouseButton1Click: async () => this.MouseClick(),
+					MouseButton1Up: () => this.MouseUp(),
+					MouseEnter: () => this.MouseEnter(),
+					MouseButton1Down: () => this.MouseDown(),
+					MouseLeave: () => this.MouseLeave(),
 				}}
 			>
 				<uipadding
@@ -141,13 +78,13 @@ class TextButton extends Roact.Component<TextButtonProps & ThemeProps, TextButto
 	}
 }
 
-const Connected = connect<{ Theme: ThemeState }, {}, TextButtonProps, ThemeState>((state) => {
+const Connected = connect<{ Theme: ThemeState }, {}, ButtonProps, ThemeState>((state) => {
 	return {
 		Theme: { ...state },
 	};
 })(TextButton);
 
-export default class ThemedOutlinedButton extends Roact.Component<TextButtonProps> {
+export default class ThemedOutlinedButton extends Roact.Component<Omit<ButtonProps, 'Theme'>> {
 	render() {
 		return (
 			<StoreProvider store={ThemeStore}>

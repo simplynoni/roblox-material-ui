@@ -4,10 +4,11 @@ import { ContainerScheme, LowerCaseContainerScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
+import { ThemeProps } from '../types';
 import { LowerCaseFirstLetter } from '../Utils';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 
-class TonalButton extends BaseButton<ContainerButtonProps> {
+class TonalButtonBase extends BaseButton<ContainerButtonProps & ThemeProps> {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ContainerScheme.SecondaryContainer;
@@ -89,13 +90,13 @@ class TonalButton extends BaseButton<ContainerButtonProps> {
 	}
 }
 
-const Connected = connect<{ Theme: ThemeState }, {}, ContainerButtonProps, ThemeState>((state) => {
+const Connected = connect<ThemeProps, {}, ContainerButtonProps, ThemeState>((state) => {
 	return {
 		Theme: { ...state },
 	};
-})(TonalButton);
+})(TonalButtonBase);
 
-export default class ThemedOutlinedButton extends Roact.Component<Omit<ContainerButtonProps, 'Theme'>> {
+export default class TonalButton extends Roact.Component<ContainerButtonProps> {
 	render() {
 		return (
 			<StoreProvider store={ThemeStore}>

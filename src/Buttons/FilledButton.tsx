@@ -4,9 +4,10 @@ import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
+import { ThemeProps } from '../types';
 import BaseButton, { ButtonProps } from './BaseButton';
 
-class FilledButton extends BaseButton {
+class FilledButtonBase extends BaseButton {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -88,13 +89,13 @@ class FilledButton extends BaseButton {
 	}
 }
 
-const Connected = connect<{ Theme: ThemeState }, {}, ButtonProps, ThemeState>((state) => {
+const Connected = connect<ThemeProps, {}, ButtonProps, ThemeState>((state) => {
 	return {
 		Theme: { ...state },
 	};
-})(FilledButton);
+})(FilledButtonBase);
 
-export default class ThemedFilledButton extends Roact.Component<Omit<ButtonProps, 'Theme'>> {
+export default class ThemedFilledButton extends Roact.Component<ButtonProps> {
 	render() {
 		return (
 			<StoreProvider store={ThemeStore}>

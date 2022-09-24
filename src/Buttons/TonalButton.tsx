@@ -4,7 +4,7 @@ import { ContainerScheme, LowerCaseContainerScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../types';
+import { ThemeProps } from '../Types';
 import { LowerCaseFirstLetter } from '../Utils';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 

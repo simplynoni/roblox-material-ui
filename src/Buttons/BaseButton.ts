@@ -2,7 +2,7 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { ColorScheme, ContainerScheme } from '../Constants';
 import { Icons } from '../Icons';
-import { ThemeProps } from '../types';
+import { ThemeProps } from '../Types';
 
 export interface ButtonProps {
 	AnchorPoint?: Vector2;

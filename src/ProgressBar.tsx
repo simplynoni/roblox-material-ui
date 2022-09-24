@@ -5,7 +5,7 @@ import { ColorScheme, LowerCaseColorScheme } from './Constants';
 import { GothamBold } from './Fonts';
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface ProgressBarProps {
 	AnchorPoint?: Vector2;

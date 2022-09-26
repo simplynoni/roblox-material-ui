@@ -2,6 +2,7 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { ColorScheme, ContainerScheme } from '../Constants';
 import { Icons } from '../Icons';
+import { CustomColorGroup } from '../material-color';
 import { ThemeProps } from '../Types';
 
 export interface ButtonProps {
@@ -13,6 +14,7 @@ export interface ButtonProps {
 	Icon?: Icons | string;
 	Disabled?: boolean;
 	ColorScheme?: ColorScheme;
+	CustomColorGroup?: CustomColorGroup['Colors'];
 	Pressed: () => void;
 }
 

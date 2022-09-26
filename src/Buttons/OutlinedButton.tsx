@@ -13,10 +13,14 @@ class OutlinedButtonBase extends BaseButton {
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
 		const lowerCaseColorScheme = colorScheme.lower() as LowerCaseColorScheme;
 
+		const color = this.props.CustomColorGroup
+			? this.props.CustomColorGroup.color
+			: theme.Scheme[lowerCaseColorScheme];
+
 		const icon = this.props.Icon ? (
 			<Icon
 				Icon={this.props.Icon}
-				IconColor={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[lowerCaseColorScheme]}
+				IconColor={this.props.Disabled ? theme.Scheme.onBackground : color}
 				IconTransparency={this.props.Disabled ? 1 - 0.38 : 0}
 				IconSize={'24p'}
 				Size={UDim2.fromScale(0.2, 1)}
@@ -29,7 +33,7 @@ class OutlinedButtonBase extends BaseButton {
 				BackgroundTransparency={this.stateBinding.map((opacity) => {
 					return 1 - opacity;
 				})}
-				BackgroundColor3={theme.Scheme[lowerCaseColorScheme]}
+				BackgroundColor3={color}
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size}
@@ -69,7 +73,7 @@ class OutlinedButtonBase extends BaseButton {
 					AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
 					BackgroundTransparency={1}
 					FontFace={GothamMedium}
-					TextColor3={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[lowerCaseColorScheme]}
+					TextColor3={this.props.Disabled ? theme.Scheme.onBackground : color}
 					TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
 					Text={this.props.Text}
 					TextSize={14}

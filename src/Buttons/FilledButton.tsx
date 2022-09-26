@@ -13,10 +13,17 @@ class FilledButtonBase extends BaseButton {
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
 		const lowerCaseColorScheme = colorScheme.lower() as LowerCaseColorScheme;
 
+		const color = this.props.CustomColorGroup
+			? this.props.CustomColorGroup.color
+			: theme.Scheme[lowerCaseColorScheme];
+		const onColor = this.props.CustomColorGroup
+			? this.props.CustomColorGroup.onColor
+			: theme.Scheme[`on${colorScheme}`];
+
 		const icon = this.props.Icon ? (
 			<Icon
 				Icon={this.props.Icon}
-				IconColor={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[`on${colorScheme}`]}
+				IconColor={this.props.Disabled ? theme.Scheme.onBackground : onColor}
 				IconTransparency={this.props.Disabled ? 1 - 0.38 : 0}
 				IconSize={'24p'}
 				Size={UDim2.fromScale(0.2, 1)}
@@ -26,7 +33,7 @@ class FilledButtonBase extends BaseButton {
 		return (
 			<textbutton
 				AutoButtonColor={false}
-				BackgroundColor3={this.props.Disabled ? theme.Scheme.onSurface : theme.Scheme[lowerCaseColorScheme]}
+				BackgroundColor3={this.props.Disabled ? theme.Scheme.onSurface : color}
 				BackgroundTransparency={this.props.Disabled ? 1 - 0.12 : 0}
 				BorderSizePixel={0}
 				AnchorPoint={this.props.AnchorPoint}
@@ -46,7 +53,7 @@ class FilledButtonBase extends BaseButton {
 					Key={'StateLayer'}
 					Size={UDim2.fromScale(this.props.AutomaticSize ? 0 : 1, 1)}
 					AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
-					BackgroundColor3={theme.Scheme[`on${colorScheme}`]}
+					BackgroundColor3={onColor}
 					BackgroundTransparency={this.stateBinding.map((opacity) => {
 						return 1 - opacity;
 					})}
@@ -77,7 +84,7 @@ class FilledButtonBase extends BaseButton {
 						AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
 						BackgroundTransparency={1}
 						FontFace={GothamMedium}
-						TextColor3={this.props.Disabled ? theme.Scheme.onBackground : theme.Scheme[`on${colorScheme}`]}
+						TextColor3={this.props.Disabled ? theme.Scheme.onBackground : onColor}
 						TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
 						Text={this.props.Text}
 						TextSize={14}

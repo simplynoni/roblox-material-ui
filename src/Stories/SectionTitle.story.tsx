@@ -9,7 +9,7 @@ export = function (frame: GuiObject) {
 			Position={UDim2.fromScale(0.5, 0.5)}
 			Size={UDim2.fromScale(0.5, 0.6)}
 		>
-			<SectionTitle Text='Section Title' />
+			<SectionTitle Text='Section Title' MaxTextSize={16} />
 		</UIBase>,
 		frame,
 	);

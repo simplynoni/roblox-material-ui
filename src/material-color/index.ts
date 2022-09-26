@@ -124,3 +124,36 @@ export default class Scheme {
 		},
 	) {}
 }
+
+export class CustomColorGroup {
+	static light(color3: Color3): CustomColorGroup {
+		const core = CorePalette.of(color3);
+		const tones = core.a1;
+		return new CustomColorGroup({
+			color: tones.tone(40),
+			onColor: tones.tone(100),
+			colorContainer: tones.tone(90),
+			onColorContainer: tones.tone(10),
+		});
+	}
+
+	static dark(color3: Color3): CustomColorGroup {
+		const core = CorePalette.of(color3);
+		const tones = core.a1;
+		return new CustomColorGroup({
+			color: tones.tone(80),
+			onColor: tones.tone(20),
+			colorContainer: tones.tone(30),
+			onColorContainer: tones.tone(90),
+		});
+	}
+
+	public constructor(
+		public readonly Colors: {
+			color: Color3;
+			onColor: Color3;
+			colorContainer: Color3;
+			onColorContainer: Color3;
+		},
+	) {}
+}

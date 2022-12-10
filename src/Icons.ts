@@ -19,4 +19,6 @@ export enum Icons {
 	FullBattery = 'rbxassetid://10716426809',
 	AccountCircle = 'rbxassetid://10716954284',
 	Send = 'rbxassetid://10880723832',
+	Notifications = 'rbxassetid://11781643627',
+	NotificationsOff = 'rbxassetid://11781643721',
 }

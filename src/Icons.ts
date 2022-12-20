@@ -21,4 +21,5 @@ export enum Icons {
 	Send = 'rbxassetid://10880723832',
 	Notifications = 'rbxassetid://11781643627',
 	NotificationsOff = 'rbxassetid://11781643721',
+	Settings = 'rbxassetid://11867315522',
 }

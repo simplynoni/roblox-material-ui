@@ -9,6 +9,7 @@ exports.Fonts = TS.import(script, script, "Fonts")
 exports.Icon = TS.import(script, script, "Icon").default
 exports.IconButton = TS.import(script, script, "IconButton").default
 exports.Icons = TS.import(script, script, "Icons").Icons
+exports.ProgressBar = TS.import(script, script, "ProgressBar").default
 exports.RoundedFrame = TS.import(script, script, "RoundedFrame").default
 exports.SectionTitle = TS.import(script, script, "SectionTitle").default
 exports.Shadow = TS.import(script, script, "Shadow").default

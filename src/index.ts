@@ -4,6 +4,7 @@ export * as Fonts from './Fonts';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
 export { Icons } from './Icons';
+export { default as ProgressBar } from './ProgressBar';
 export { default as RoundedFrame } from './RoundedFrame';
 export { default as SectionTitle } from './SectionTitle';
 export { default as Shadow } from './Shadow';

@@ -1,0 +1,129 @@
+-- Compiled with roblox-ts v2.0.4
+local TS = _G[script]
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+local Linear = _flipper.Linear
+local SingleMotor = _flipper.SingleMotor
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
+local connect = _roact_rodux.connect
+local StoreProvider = _roact_rodux.StoreProvider
+local Icon = TS.import(script, script.Parent, "Icon").default
+local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
+local IconButton
+do
+	IconButton = Roact.Component:extend("IconButton")
+	function IconButton:init(props)
+		self.stateMotor = SingleMotor.new(0)
+		local stateBinding, setStateBinding = Roact.createBinding(self.stateMotor:getValue())
+		self.stateBinding = stateBinding
+		self.stateMotor:onStep(setStateBinding)
+		self:setState({
+			Debounce = false,
+		})
+	end
+	function IconButton:render()
+		local theme = self.props.Theme
+		return Roact.createElement("TextButton", {
+			AnchorPoint = self.props.AnchorPoint,
+			Position = self.props.Position,
+			Size = self.props.Size,
+			ZIndex = self.props.ZIndex,
+			LayoutOrder = self.props.LayoutOrder,
+			AutoButtonColor = false,
+			BackgroundTransparency = 1,
+			Text = "",
+			[Roact.Event.MouseButton1Click] = TS.async(function()
+				if self.state.Debounce == false then
+					self:setState({
+						Debounce = true,
+					})
+					self.props.Pressed()
+					TS.await(TS.Promise.delay(0.25))
+					self:setState({
+						Debounce = false,
+					})
+				end
+			end),
+			[Roact.Event.MouseButton1Up] = TS.async(function()
+				self.stateMotor:setGoal(Linear.new(0.08, {
+					velocity = 0.5,
+				}))
+			end),
+			[Roact.Event.MouseEnter] = function()
+				self.stateMotor:setGoal(Linear.new(0.08, {
+					velocity = 0.5,
+				}))
+			end,
+			[Roact.Event.MouseButton1Down] = function()
+				self.stateMotor:setGoal(Linear.new(0.12, {
+					velocity = 0.5,
+				}))
+			end,
+			[Roact.Event.MouseLeave] = function()
+				self.stateMotor:setGoal(Linear.new(0, {
+					velocity = 0.5,
+				}))
+			end,
+		}, {
+			Roact.createElement("UIAspectRatioConstraint", {
+				AspectRatio = 1,
+				AspectType = Enum.AspectType.ScaleWithParentSize,
+				DominantAxis = Enum.DominantAxis.Height,
+			}),
+			Roact.createElement("UICorner", {
+				CornerRadius = UDim.new(1),
+			}),
+			Roact.createElement(Icon, {
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(0.75, 0.75),
+				Icon = self.props.Icon,
+				IconSize = "24p",
+				IconColor = self.props.IconColor or theme.Scheme.onBackground,
+			}),
+			StateLayer = Roact.createElement(RoundedFrame, {
+				CornerRadius = "Full",
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(1, 1),
+				Color = theme.Scheme.onBackground,
+				Transparency = self.stateBinding:map(function(opacity)
+					return 1 - opacity
+				end),
+			}),
+		})
+	end
+end
+local Connected = connect(function(state)
+	local _object = {}
+	local _left = "Theme"
+	local _object_1 = {}
+	for _k, _v in state do
+		_object_1[_k] = _v
+	end
+	_object[_left] = _object_1
+	return _object
+end)(IconButton)
+local ThemedIconButton
+do
+	ThemedIconButton = Roact.Component:extend("ThemedIconButton")
+	function ThemedIconButton:init()
+	end
+	function ThemedIconButton:render()
+		local _attributes = {
+			store = ThemeStore,
+		}
+		local _children = {}
+		local _length = #_children
+		local _attributes_1 = {}
+		for _k, _v in self.props do
+			_attributes_1[_k] = _v
+		end
+		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
+		return Roact.createElement(StoreProvider, _attributes, _children)
+	end
+end
+return {
+	default = ThemedIconButton,
+}

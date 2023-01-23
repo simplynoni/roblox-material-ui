@@ -1,11 +1,10 @@
-export * as Buttons from './Buttons';
+export * from './Buttons';
 export { default as ColorTile } from './ColorTile';
 export { DefaultThemeColor, Theme, ThemeColors } from './Constants';
 export * as Fonts from './Fonts';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
 export { Icons } from './Icons';
-export { CustomColorGroup, default as Scheme } from './material-color';
 export { default as RoundedFrame } from './RoundedFrame';
 export { default as SectionTitle } from './SectionTitle';
 export { default as Shadow } from './Shadow';
@@ -17,3 +16,4 @@ export * from './Theme/ThemeState';
 export { default as Topbar } from './Topbar';
 export { ThemeProps } from './Types';
 export { default as UIBase } from './UIBase';
+export { CustomColorGroup, default as Scheme } from './material-color';

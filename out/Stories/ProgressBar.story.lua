@@ -1,8 +1,8 @@
 -- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local ColorScheme = TS.import(script, script.Parent.Parent, "Constants").ColorScheme
 local ProgressBar = TS.import(script, script.Parent.Parent, "ProgressBar").default
+local ColorScheme = TS.import(script, script.Parent.Parent, "Types").ColorScheme
 local StoryComponent
 do
 	StoryComponent = Roact.Component:extend("StoryComponent")

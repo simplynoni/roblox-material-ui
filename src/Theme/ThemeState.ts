@@ -1,5 +1,6 @@
 import Rodux from '@rbxts/rodux';
-import { DefaultThemeColor, Theme } from '../Constants';
+import { DefaultThemeColor } from '../Constants';
+import { Theme } from '../Types';
 import Scheme from '../material-color';
 
 export interface ThemeState {
@@ -35,8 +36,8 @@ type ThemeActions = SetThemeAction | SetColorAction;
 const ThemeReducer = Rodux.createReducer<ThemeState, ThemeActions>(
 	{
 		Theme: Theme.Dark,
-		Color: DefaultThemeColor.Color,
-		Scheme: Scheme.dark(DefaultThemeColor.Color).Colors,
+		Color: DefaultThemeColor,
+		Scheme: Scheme.dark(DefaultThemeColor).Colors,
 	},
 	{
 		SetTheme: (state, action) => {

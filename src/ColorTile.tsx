@@ -2,13 +2,12 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
-import { Theme } from './Constants';
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { Theme, ThemeProps } from './Types';
 
 interface ColorTileProps {
 	Title: string;

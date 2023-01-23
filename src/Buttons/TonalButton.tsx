@@ -1,10 +1,9 @@
 import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
-import { ContainerScheme, LowerCaseContainerScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../Types';
+import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../Types';
 import { LowerCaseFirstLetter } from '../Utils';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 

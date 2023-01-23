@@ -1,6 +1,5 @@
 export * from './Buttons';
 export { default as ColorTile } from './ColorTile';
-export { DefaultThemeColor, Theme, ThemeColors } from './Constants';
 export * as Fonts from './Fonts';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
@@ -14,6 +13,6 @@ export { default as Switch } from './Switch';
 export { default as SwitchTile } from './SwitchTile';
 export * from './Theme/ThemeState';
 export { default as Topbar } from './Topbar';
-export { ThemeProps } from './Types';
+export * from './Types';
 export { default as UIBase } from './UIBase';
 export { CustomColorGroup, default as Scheme } from './material-color';

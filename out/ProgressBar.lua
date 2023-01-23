@@ -5,12 +5,12 @@ local SingleMotor = _flipper.SingleMotor
 local Spring = _flipper.Spring
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local connect = _roact_rodux.connect
 local StoreProvider = _roact_rodux.StoreProvider
-local ColorScheme = TS.import(script, script.Parent, "Constants").ColorScheme
+local connect = _roact_rodux.connect
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
+local ColorScheme = TS.import(script, script.Parent, "Types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")

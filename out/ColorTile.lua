@@ -7,7 +7,6 @@ local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
 local connect = _roact_rodux.connect
 local StoreProvider = _roact_rodux.StoreProvider
-local Theme = TS.import(script, script.Parent, "Constants").Theme
 local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
@@ -15,6 +14,7 @@ local Icon = TS.import(script, script.Parent, "Icon").default
 local Icons = TS.import(script, script.Parent, "Icons").Icons
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
+local Theme = TS.import(script, script.Parent, "Types").Theme
 local ColorTile
 do
 	ColorTile = Roact.PureComponent:extend("ColorTile")

@@ -1,9 +1,8 @@
 -- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Rodux = TS.import(script, TS.getModule(script, "@rbxts", "rodux").src)
-local _Constants = TS.import(script, script.Parent.Parent, "Constants")
-local DefaultThemeColor = _Constants.DefaultThemeColor
-local Theme = _Constants.Theme
+local DefaultThemeColor = TS.import(script, script.Parent.Parent, "Constants").DefaultThemeColor
+local Theme = TS.import(script, script.Parent.Parent, "Types").Theme
 local Scheme = TS.import(script, script.Parent.Parent, "material-color").default
 local function SetTheme(theme)
 	return {
@@ -19,8 +18,8 @@ local function SetColor(color)
 end
 local ThemeReducer = Rodux.createReducer({
 	Theme = Theme.Dark,
-	Color = DefaultThemeColor.Color,
-	Scheme = Scheme:dark(DefaultThemeColor.Color).Colors,
+	Color = DefaultThemeColor,
+	Scheme = Scheme:dark(DefaultThemeColor).Colors,
 }, {
 	SetTheme = function(state, action)
 		if action.Theme == state.Theme then

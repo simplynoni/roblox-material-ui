@@ -4,10 +4,10 @@ local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
 local connect = _roact_rodux.connect
 local StoreProvider = _roact_rodux.StoreProvider
-local ColorScheme = TS.import(script, script.Parent.Parent, "Constants").ColorScheme
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
 local ThemeStore = TS.import(script, script.Parent.Parent, "Theme", "ThemeState").ThemeStore
+local ColorScheme = TS.import(script, script.Parent.Parent, "Types").ColorScheme
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local TextButtonBase
 do

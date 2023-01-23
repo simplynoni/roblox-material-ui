@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="rodux" />
 import Rodux from '@rbxts/rodux';
-import { Theme } from '../Constants';
+import { Theme } from '../Types';
 import Scheme from '../material-color';
 export interface ThemeState {
     Theme: Theme;

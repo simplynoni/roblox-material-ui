@@ -5,10 +5,6 @@ for _k, _v in TS.import(script, script, "Buttons") or {} do
 	exports[_k] = _v
 end
 exports.ColorTile = TS.import(script, script, "ColorTile").default
-local _Constants = TS.import(script, script, "Constants")
-exports.DefaultThemeColor = _Constants.DefaultThemeColor
-exports.Theme = _Constants.Theme
-exports.ThemeColors = _Constants.ThemeColors
 exports.Fonts = TS.import(script, script, "Fonts")
 exports.Icon = TS.import(script, script, "Icon").default
 exports.IconButton = TS.import(script, script, "IconButton").default
@@ -24,6 +20,9 @@ for _k, _v in TS.import(script, script, "Theme", "ThemeState") or {} do
 	exports[_k] = _v
 end
 exports.Topbar = TS.import(script, script, "Topbar").default
+for _k, _v in TS.import(script, script, "Types") or {} do
+	exports[_k] = _v
+end
 exports.UIBase = TS.import(script, script, "UIBase").default
 local _material_color = TS.import(script, script, "material-color")
 exports.CustomColorGroup = _material_color.CustomColorGroup

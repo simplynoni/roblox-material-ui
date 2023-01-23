@@ -1,10 +1,9 @@
 import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
-import { ColorScheme, LowerCaseColorScheme } from '../Constants';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../Types';
+import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../Types';
 import BaseButton, { ButtonProps } from './BaseButton';
 
 class FilledButtonBase extends BaseButton {

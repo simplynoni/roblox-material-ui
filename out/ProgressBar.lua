@@ -10,7 +10,7 @@ local connect = _roact_rodux.connect
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
-local ColorScheme = TS.import(script, script.Parent, "Types").ColorScheme
+local ColorScheme = TS.import(script, script.Parent, "types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")

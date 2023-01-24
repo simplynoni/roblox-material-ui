@@ -6,7 +6,7 @@ import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface IconButtonProps {
 	AnchorPoint?: Vector2;

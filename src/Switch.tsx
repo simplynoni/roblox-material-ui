@@ -4,7 +4,7 @@ import { connect, StoreProvider } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface SwitchProps {
 	Enabled: boolean;

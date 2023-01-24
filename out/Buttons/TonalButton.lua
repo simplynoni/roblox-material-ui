@@ -7,7 +7,7 @@ local StoreProvider = _roact_rodux.StoreProvider
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
 local ThemeStore = TS.import(script, script.Parent.Parent, "Theme", "ThemeState").ThemeStore
-local ContainerScheme = TS.import(script, script.Parent.Parent, "Types").ContainerScheme
+local ContainerScheme = TS.import(script, script.Parent.Parent, "types").ContainerScheme
 local LowerCaseFirstLetter = TS.import(script, script.Parent.Parent, "Utils").LowerCaseFirstLetter
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local TonalButtonBase

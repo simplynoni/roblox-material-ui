@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local ProgressBar = TS.import(script, script.Parent.Parent, "ProgressBar").default
-local ColorScheme = TS.import(script, script.Parent.Parent, "Types").ColorScheme
+local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
 local StoryComponent
 do
 	StoryComponent = Roact.Component:extend("StoryComponent")

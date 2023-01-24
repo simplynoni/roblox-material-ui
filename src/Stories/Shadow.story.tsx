@@ -3,7 +3,7 @@ import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import RoundedFrame from '../RoundedFrame';
 import Shadow from '../Shadow';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../Types';
+import { ThemeProps } from '../types';
 
 class StoryComponent extends Roact.Component<ThemeProps> {
 	protected state: Readonly<{ Closed: boolean }> = { Closed: false };

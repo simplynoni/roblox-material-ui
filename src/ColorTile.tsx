@@ -7,7 +7,7 @@ import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { Theme, ThemeProps } from './Types';
+import { Theme, ThemeProps } from './types';
 
 interface ColorTileProps {
 	Title: string;

@@ -3,7 +3,7 @@ import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../Types';
+import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../types';
 import BaseButton, { ButtonProps } from './BaseButton';
 
 class OutlinedButtonBase extends BaseButton {

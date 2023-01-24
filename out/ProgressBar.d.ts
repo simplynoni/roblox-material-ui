@@ -2,7 +2,7 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
-import { ColorScheme } from './Types';
+import { ColorScheme } from './types';
 interface ProgressBarProps {
     AnchorPoint?: Vector2;
     Position?: UDim2;

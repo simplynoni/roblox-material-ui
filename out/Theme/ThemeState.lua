@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Rodux = TS.import(script, TS.getModule(script, "@rbxts", "rodux").src)
 local DefaultThemeColor = TS.import(script, script.Parent.Parent, "Constants").DefaultThemeColor
-local Theme = TS.import(script, script.Parent.Parent, "Types").Theme
+local Theme = TS.import(script, script.Parent.Parent, "types").Theme
 local Scheme = TS.import(script, script.Parent.Parent, "material-color").default
 local function SetTheme(theme)
 	return {

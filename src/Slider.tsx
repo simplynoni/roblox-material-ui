@@ -5,7 +5,7 @@ import { SingleMotor, Spring } from '@rbxts/flipper';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { UserInputService } from '@rbxts/services';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface SliderProps {
 	Value: number;

@@ -21,7 +21,7 @@ for _k, _v in TS.import(script, script, "Theme", "ThemeState") or {} do
 	exports[_k] = _v
 end
 exports.Topbar = TS.import(script, script, "Topbar").default
-for _k, _v in TS.import(script, script, "Types") or {} do
+for _k, _v in TS.import(script, script, "types") or {} do
 	exports[_k] = _v
 end
 exports.UIBase = TS.import(script, script, "UIBase").default

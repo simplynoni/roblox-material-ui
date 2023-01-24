@@ -1,6 +1,6 @@
 import Rodux from '@rbxts/rodux';
 import { DefaultThemeColor } from '../Constants';
-import { Theme } from '../Types';
+import { Theme } from '../types';
 import Scheme from '../material-color';
 
 export interface ThemeState {

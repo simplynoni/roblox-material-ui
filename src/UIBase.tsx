@@ -164,7 +164,7 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 						? this.props.CustomClosePosition.X
 						: this.props.Position.X.Scale >= 0.5
 						? this.props.Position.X.Scale + 0.2
-						: this.props.Position.X.Scale - 0.2, // 💀
+						: this.props.Position.X.Scale - 0.2,
 					{ velocity: this.props.PositionVelocity || defaults.positionVelocity },
 				),
 				Y: new Linear(
@@ -176,7 +176,6 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 			this.fadeMotor.setGoal(new Linear(0, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
 
 			const onComplete = this.positionMotor.onComplete(() => {
-				// UI could've opened again before the animation finished
 				if (this.state.Closed) {
 					this.setState({
 						Visible: false,

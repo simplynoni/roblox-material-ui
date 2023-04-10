@@ -22,6 +22,7 @@ A library of Roact UI components that roughly follow the [Material Design 3 Guid
 ## Examples
 
 ```typescript
+// Creates a red filled button in the center of the screen
 import { FilledButton, Scheme, Theme, ThemeState } from '@rbxts/material-ui';
 import Roact from '@rbxts/roact';
 import { Players } from '@rbxts/services';

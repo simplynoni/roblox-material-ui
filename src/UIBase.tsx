@@ -4,7 +4,7 @@ import Roact from '@rbxts/roact';
 
 import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface UIBaseProps extends ThemeProps {
 	AnchorPoint: Vector2;

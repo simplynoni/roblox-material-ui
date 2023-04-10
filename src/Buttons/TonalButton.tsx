@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../Types';
 import { LowerCaseFirstLetter } from '../Utils';
+import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../types';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 
 export default class TonalButtonBase extends BaseButton<ContainerButtonProps & ThemeProps> {

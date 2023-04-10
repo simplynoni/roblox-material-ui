@@ -2,7 +2,7 @@ import { SingleMotor, Spring } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { GothamBold } from './Fonts';
 import RoundedFrame from './RoundedFrame';
-import { ColorScheme, LowerCaseColorScheme, ThemeProps } from './Types';
+import { ColorScheme, LowerCaseColorScheme, ThemeProps } from './types';
 
 interface ProgressBarProps extends ThemeProps {
 	AnchorPoint?: Vector2;

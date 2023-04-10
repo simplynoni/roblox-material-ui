@@ -21,5 +21,36 @@ A library of Roact UI components that roughly follow the [Material Design 3 Guid
 
 ## Examples
 
+```typescript
+import { FilledButton, Scheme, Theme, ThemeState } from '@rbxts/material-ui';
+import Roact from '@rbxts/roact';
+import { Players } from '@rbxts/services';
+
+const themeColor = Color3.fromRGB(255, 0, 0);
+const theme: ThemeState = {
+	Color: themeColor,
+	Theme: Theme.Dark,
+	Scheme: Scheme.dark(themeColor).Colors,
+};
+
+const component = (
+	<screengui>
+		<FilledButton
+			Theme={theme}
+			AnchorPoint={new Vector2(0.5, 0.5)}
+			Position={UDim2.fromScale(0.5, 0.5)}
+			Text='This is a button!'
+			AutomaticSize
+			Pressed={() => {
+				print('pressed!');
+			}}
+		/>
+	</screengui>
+);
+
+const player = Players.LocalPlayer;
+Roact.mount(component, player.WaitForChild('PlayerGui'));
+```
+
 ![Settings Menu](https://i.imgur.com/CiHkQgm.png)
 ![Phone](https://i.imgur.com/T2kNXae.png)

@@ -3,7 +3,7 @@ local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
-local ColorScheme = TS.import(script, script.Parent.Parent, "Types").ColorScheme
+local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local OutlinedButtonBase
 do

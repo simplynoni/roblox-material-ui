@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import { GothamMedium } from './Fonts';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface SectionTitleProps extends ThemeProps {
 	Text: string;

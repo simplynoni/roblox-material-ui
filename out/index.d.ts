@@ -13,6 +13,6 @@ export { default as SliderTile } from './SliderTile';
 export { default as Switch } from './Switch';
 export { default as SwitchTile } from './SwitchTile';
 export { default as Topbar } from './Topbar';
-export * from './Types';
 export { default as UIBase } from './UIBase';
 export { CustomColorGroup, default as Scheme } from './material-color';
+export * from './types';

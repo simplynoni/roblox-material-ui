@@ -5,7 +5,7 @@ import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Switch from './Switch';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface SwitchTileProps extends ThemeProps {
 	Enabled: boolean;

@@ -5,7 +5,7 @@ import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
-import { Theme, ThemeProps } from './Types';
+import { Theme, ThemeProps } from './types';
 
 interface ColorTileProps extends ThemeProps {
 	Title: string;

@@ -3,7 +3,7 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 interface SliderTileProps extends ThemeProps {
     Value: number;
     ShowValue?: boolean;

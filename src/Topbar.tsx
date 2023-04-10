@@ -2,7 +2,7 @@ import Roact from '@rbxts/roact';
 import { GothamBold } from './Fonts';
 import IconButton from './IconButton';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
 interface TopbarProps extends ThemeProps {
 	Title: string;

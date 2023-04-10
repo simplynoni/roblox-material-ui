@@ -18,11 +18,11 @@ exports.SliderTile = TS.import(script, script, "SliderTile").default
 exports.Switch = TS.import(script, script, "Switch").default
 exports.SwitchTile = TS.import(script, script, "SwitchTile").default
 exports.Topbar = TS.import(script, script, "Topbar").default
-for _k, _v in TS.import(script, script, "Types") or {} do
-	exports[_k] = _v
-end
 exports.UIBase = TS.import(script, script, "UIBase").default
 local _material_color = TS.import(script, script, "material-color")
 exports.CustomColorGroup = _material_color.CustomColorGroup
 exports.Scheme = _material_color.default
+for _k, _v in TS.import(script, script, "types") or {} do
+	exports[_k] = _v
+end
 return exports

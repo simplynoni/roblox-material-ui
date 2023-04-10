@@ -1,15 +1,13 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
-import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { Theme, ThemeProps } from './Types';
 
-interface ColorTileProps {
+interface ColorTileProps extends ThemeProps {
 	Title: string;
 	Description?: string;
 	Color: Color3;
@@ -29,11 +27,11 @@ interface ColorTileState {
 	Selected?: boolean;
 }
 
-class ColorTile extends Roact.PureComponent<ColorTileProps & ThemeProps, ColorTileState> {
+export default class ColorTile extends Roact.PureComponent<ColorTileProps, ColorTileState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
-	constructor(props: ColorTileProps & ThemeProps) {
+	constructor(props: ColorTileProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -241,21 +239,5 @@ class ColorTile extends Roact.PureComponent<ColorTileProps & ThemeProps, ColorTi
 				Selected: this.props.Selected,
 			});
 		}
-	}
-}
-
-const Connected = connect<{ Theme: ThemeState }, {}, ColorTileProps, ThemeState>((state) => {
-	return {
-		Theme: { ...state },
-	};
-})(ColorTile);
-
-export default class ThemedColorTile extends Roact.Component<ColorTileProps> {
-	render() {
-		return (
-			<StoreProvider store={ThemeStore}>
-				<Connected {...this.props} />
-			</StoreProvider>
-		);
 	}
 }

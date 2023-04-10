@@ -1,12 +1,10 @@
 import Roact from '@rbxts/roact';
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../Types';
-import BaseButton, { ButtonProps } from './BaseButton';
+import { ColorScheme, LowerCaseColorScheme } from '../Types';
+import BaseButton from './BaseButton';
 
-class FilledButtonBase extends BaseButton {
+export default class FilledButton extends BaseButton {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -91,22 +89,6 @@ class FilledButtonBase extends BaseButton {
 				</frame>
 				<uicorner CornerRadius={new UDim(1, 0)} />
 			</textbutton>
-		);
-	}
-}
-
-const Connected = connect<ThemeProps, {}, ButtonProps, ThemeState>((state) => {
-	return {
-		Theme: { ...state },
-	};
-})(FilledButtonBase);
-
-export default class ThemedFilledButton extends Roact.Component<ButtonProps> {
-	render() {
-		return (
-			<StoreProvider store={ThemeStore}>
-				<Connected {...this.props} />
-			</StoreProvider>
 		);
 	}
 }

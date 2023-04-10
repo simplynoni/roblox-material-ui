@@ -1,16 +1,12 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local SingleMotor = _flipper.SingleMotor
 local Spring = _flipper.Spring
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local StoreProvider = _roact_rodux.StoreProvider
-local connect = _roact_rodux.connect
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
-local ColorScheme = TS.import(script, script.Parent, "types").ColorScheme
+local ColorScheme = TS.import(script, script.Parent, "Types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")
@@ -163,8 +159,6 @@ do
 		})
 	end
 	function ProgressBar:didMount()
-		-- very hacky "fix"
-		-- might not work on low end devices
 		coroutine.wrap(function()
 			task.wait(0.01)
 			local holder = self.holderRef:getValue()
@@ -187,35 +181,6 @@ do
 		end
 	end
 end
-local Connected = connect(function(state)
-	local _object = {}
-	local _left = "Theme"
-	local _object_1 = {}
-	for _k, _v in state do
-		_object_1[_k] = _v
-	end
-	_object[_left] = _object_1
-	return _object
-end)(ProgressBar)
-local ThemedProgressBar
-do
-	ThemedProgressBar = Roact.Component:extend("ThemedProgressBar")
-	function ThemedProgressBar:init()
-	end
-	function ThemedProgressBar:render()
-		local _attributes = {
-			store = ThemeStore,
-		}
-		local _children = {}
-		local _length = #_children
-		local _attributes_1 = {}
-		for _k, _v in self.props do
-			_attributes_1[_k] = _v
-		end
-		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
-		return Roact.createElement(StoreProvider, _attributes, _children)
-	end
-end
 return {
-	default = ThemedProgressBar,
+	default = ProgressBar,
 }

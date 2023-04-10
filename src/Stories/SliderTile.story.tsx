@@ -3,9 +3,10 @@ import { GothamBlack } from '../Fonts';
 import { Icons } from '../Icons';
 import SliderTile from '../SliderTile';
 import UIBase from '../UIBase';
+import DefaultTheme from './DefaultTheme';
 
 export = function (frame: GuiObject) {
-	const Tree = Roact.mount(
+	const component = (
 		<>
 			<textlabel
 				AnchorPoint={new Vector2(0.5, 0.5)}
@@ -19,6 +20,7 @@ export = function (frame: GuiObject) {
 				TextColor3={Color3.fromRGB(242, 242, 242)}
 			/>
 			<UIBase
+				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				Size={UDim2.fromScale(0.4, 0.6)}
@@ -28,16 +30,17 @@ export = function (frame: GuiObject) {
 					HorizontalAlignment={Enum.HorizontalAlignment.Center}
 					Padding={new UDim(0, 0)}
 				/>
-				<SliderTile Title='Slider' Value={1} />
-				<SliderTile Title='Stepped Slider' Steps={10} Value={0} ShowValue />
-				<SliderTile Title='Slider' Value={1} ShowValue />
-				<SliderTile Title='Slider' Icon={Icons.Palette} Value={0} />
+				<SliderTile Theme={DefaultTheme} Title='Slider' Value={1} />
+				<SliderTile Theme={DefaultTheme} Title='Stepped Slider' Steps={10} Value={0} ShowValue />
+				<SliderTile Theme={DefaultTheme} Title='Slider' Value={1} ShowValue />
+				<SliderTile Theme={DefaultTheme} Title='Slider' Icon={Icons.Palette} Value={0} />
 			</UIBase>
-		</>,
-		frame,
+		</>
 	);
 
+	const tree = Roact.mount(component, frame);
+
 	return () => {
-		Roact.unmount(Tree);
+		Roact.unmount(tree);
 	};
 };

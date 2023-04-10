@@ -1,14 +1,12 @@
 import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
-import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
-import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface UIBaseProps {
+interface UIBaseProps extends ThemeProps {
 	AnchorPoint: Vector2;
 	Position: UDim2;
 	Size: UDim2;
@@ -33,13 +31,13 @@ const defaults = {
 	fadeVelocity: 7,
 };
 
-class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
+export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 	positionMotor: GroupMotor<{ X: number; Y: number }>;
 	positionBinding: Roact.Binding<{ X: number; Y: number }>;
 	fadeMotor: SingleMotor;
 	fadeBinding: Roact.Binding<number>;
 
-	constructor(props: UIBaseProps & ThemeProps) {
+	constructor(props: UIBaseProps) {
 		super(props);
 
 		this.positionMotor = new GroupMotor(
@@ -196,21 +194,5 @@ class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 		if (this.props.Closed !== undefined && previousProps.Closed !== this.props.Closed) {
 			this.setClosed(this.props.Closed);
 		}
-	}
-}
-
-const Connected = connect<{ Theme: ThemeState }, {}, UIBaseProps, ThemeState>((state) => {
-	return {
-		Theme: { ...state },
-	};
-})(UIBase);
-
-export default class ThemedUIBase extends Roact.Component<UIBaseProps> {
-	render() {
-		return (
-			<StoreProvider store={ThemeStore}>
-				<Connected {...this.props} />
-			</StoreProvider>
-		);
 	}
 }

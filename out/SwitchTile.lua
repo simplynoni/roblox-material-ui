@@ -1,18 +1,14 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local connect = _roact_rodux.connect
-local StoreProvider = _roact_rodux.StoreProvider
 local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
 local Icon = TS.import(script, script.Parent, "Icon").default
 local Switch = TS.import(script, script.Parent, "Switch").default
-local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
 local SwitchTile
 do
 	SwitchTile = Roact.PureComponent:extend("SwitchTile")
@@ -162,6 +158,7 @@ do
 		_children_1.TextHolder = Roact.createElement("Frame", _attributes_2, _children_2)
 		_children.LeftAlign = Roact.createElement("Frame", _attributes_1, _children_1)
 		_children[_length + 1] = Roact.createElement(Switch, {
+			Theme = theme,
 			Enabled = self.state.Enabled,
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.fromScale(1, 0.5),
@@ -203,35 +200,6 @@ do
 		end
 	end
 end
-local Connected = connect(function(state)
-	local _object = {}
-	local _left = "Theme"
-	local _object_1 = {}
-	for _k, _v in state do
-		_object_1[_k] = _v
-	end
-	_object[_left] = _object_1
-	return _object
-end)(SwitchTile)
-local ThemedSwitchTile
-do
-	ThemedSwitchTile = Roact.Component:extend("ThemedSwitchTile")
-	function ThemedSwitchTile:init()
-	end
-	function ThemedSwitchTile:render()
-		local _attributes = {
-			store = ThemeStore,
-		}
-		local _children = {}
-		local _length = #_children
-		local _attributes_1 = {}
-		for _k, _v in self.props do
-			_attributes_1[_k] = _v
-		end
-		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
-		return Roact.createElement(StoreProvider, _attributes, _children)
-	end
-end
 return {
-	default = ThemedSwitchTile,
+	default = SwitchTile,
 }

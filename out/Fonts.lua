@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local Gotham = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular)
 local GothamMedium = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
 local GothamBold = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)

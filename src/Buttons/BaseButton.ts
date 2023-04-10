@@ -4,7 +4,7 @@ import { Icons } from '../Icons';
 import { ColorScheme, ContainerScheme, ThemeProps } from '../Types';
 import { CustomColorGroup } from '../material-color';
 
-export interface ButtonProps {
+export interface ButtonProps extends ThemeProps {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -24,7 +24,7 @@ export interface ButtonState {
 }
 
 export default abstract class BaseButton<
-	Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps,
+	Props extends ButtonProps | ContainerButtonProps = ButtonProps,
 > extends Roact.Component<Props, ButtonState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;

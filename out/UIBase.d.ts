@@ -4,7 +4,7 @@
 /// <reference types="roact" />
 import { GroupMotor, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface UIBaseProps extends ThemeProps {
     AnchorPoint: Vector2;
     Position: UDim2;

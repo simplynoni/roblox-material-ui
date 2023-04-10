@@ -4,7 +4,7 @@
 import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface ColorTileProps extends ThemeProps {
     Title: string;
     Description?: string;

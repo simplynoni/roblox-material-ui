@@ -10,7 +10,7 @@ local GothamBold = _Fonts.GothamBold
 local Icon = TS.import(script, script.Parent, "Icon").default
 local Icons = TS.import(script, script.Parent, "Icons").Icons
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local Theme = TS.import(script, script.Parent, "types").Theme
+local Theme = TS.import(script, script.Parent, "Types").Theme
 local ColorTile
 do
 	ColorTile = Roact.PureComponent:extend("ColorTile")

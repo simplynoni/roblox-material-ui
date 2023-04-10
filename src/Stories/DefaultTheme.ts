@@ -1,5 +1,5 @@
+import { Theme, ThemeState } from '../Types';
 import Scheme from '../material-color';
-import { Theme, ThemeState } from '../types';
 
 const DefaultColor = Color3.fromRGB(255, 89, 0);
 const DefaultTheme: ThemeState = {

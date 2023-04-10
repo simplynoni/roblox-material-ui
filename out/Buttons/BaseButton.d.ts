@@ -6,8 +6,8 @@
 import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
+import { ColorScheme, ContainerScheme, ThemeProps } from '../Types';
 import { CustomColorGroup } from '../material-color';
-import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
 export interface ButtonProps extends ThemeProps {
     AnchorPoint?: Vector2;
     Position?: UDim2;

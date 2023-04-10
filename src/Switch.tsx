@@ -2,7 +2,7 @@ import { GroupMotor, Linear } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 
 import RoundedFrame from './RoundedFrame';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SwitchProps extends ThemeProps {
 	Enabled: boolean;

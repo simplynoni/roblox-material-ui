@@ -3,7 +3,7 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface TopbarProps extends ThemeProps {
     Title: string;
     Height?: UDim;

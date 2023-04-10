@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import ProgressBar from '../ProgressBar';
-import { ColorScheme } from '../types';
+import { ColorScheme } from '../Types';
 import DefaultTheme from './DefaultTheme';
 
 class Component extends Roact.Component<{}, { Value: number }> {

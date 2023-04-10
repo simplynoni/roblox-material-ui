@@ -4,7 +4,7 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
 import { SingleMotor } from '@rbxts/flipper';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface SliderProps extends ThemeProps {
     Value: number;
     Steps?: number;

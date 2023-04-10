@@ -4,7 +4,7 @@ import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Slider from './Slider';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SliderTileProps extends ThemeProps {
 	Value: number;

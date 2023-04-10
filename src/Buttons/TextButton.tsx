@@ -1,7 +1,7 @@
 import Roact from '@rbxts/roact';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { ColorScheme, LowerCaseColorScheme } from '../types';
+import { ColorScheme, LowerCaseColorScheme } from '../Types';
 import BaseButton from './BaseButton';
 
 export default class TextButtonBase extends BaseButton {

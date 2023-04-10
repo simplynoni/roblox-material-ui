@@ -6,7 +6,7 @@ local Spring = _flipper.Spring
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local ColorScheme = TS.import(script, script.Parent, "types").ColorScheme
+local ColorScheme = TS.import(script, script.Parent, "Types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")

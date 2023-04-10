@@ -3,7 +3,7 @@ import RoundedFrame from './RoundedFrame';
 
 import { SingleMotor, Spring } from '@rbxts/flipper';
 import { UserInputService } from '@rbxts/services';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SliderProps extends ThemeProps {
 	Value: number;

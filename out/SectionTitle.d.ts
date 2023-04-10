@@ -2,7 +2,7 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface SectionTitleProps extends ThemeProps {
     Text: string;
     Size?: UDim2;

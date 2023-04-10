@@ -4,7 +4,7 @@ import Roact from '@rbxts/roact';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface IconButtonProps extends ThemeProps {
 	AnchorPoint?: Vector2;

@@ -3,7 +3,7 @@
 /// <reference types="roact" />
 import { GroupMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 interface SwitchProps extends ThemeProps {
     Enabled: boolean;
     AnchorPoint?: Vector2;

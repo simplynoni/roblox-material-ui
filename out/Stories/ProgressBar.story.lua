@@ -1,18 +1,17 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local ProgressBar = TS.import(script, script.Parent.Parent, "ProgressBar").default
-local ColorScheme = TS.import(script, script.Parent.Parent, "Types").ColorScheme
-local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
-local Component
+local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
+local StoryComponent
 do
-	Component = Roact.Component:extend("Component")
-	function Component:init()
+	StoryComponent = Roact.Component:extend("StoryComponent")
+	function StoryComponent:init()
 		self.state = {
 			Value = 50,
 		}
 	end
-	function Component:render()
+	function StoryComponent:render()
 		return Roact.createFragment({
 			Roact.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -20,7 +19,6 @@ do
 				Padding = UDim.new(0, 24),
 			}),
 			Roact.createElement(ProgressBar, {
-				Theme = DefaultTheme,
 				Size = UDim2.new(0.5, 0, 0, 20),
 				Value = self.state.Value,
 				ColorScheme = ColorScheme.Primary,
@@ -28,7 +26,6 @@ do
 				ShowValue = true,
 			}),
 			Roact.createElement(ProgressBar, {
-				Theme = DefaultTheme,
 				Size = UDim2.new(0.5, 0, 0, 20),
 				Value = self.state.Value,
 				ColorScheme = ColorScheme.Secondary,
@@ -36,7 +33,6 @@ do
 				ShowValue = true,
 			}),
 			Roact.createElement(ProgressBar, {
-				Theme = DefaultTheme,
 				Size = UDim2.new(0.5, 0, 0, 20),
 				Value = self.state.Value,
 				ColorScheme = ColorScheme.Tertiary,
@@ -44,7 +40,6 @@ do
 				ShowValue = true,
 			}),
 			Roact.createElement(ProgressBar, {
-				Theme = DefaultTheme,
 				Size = UDim2.new(0.5, 0, 0, 20),
 				Value = self.state.Value,
 				ColorScheme = ColorScheme.Error,
@@ -53,7 +48,7 @@ do
 			}),
 		})
 	end
-	function Component:didMount()
+	function StoryComponent:didMount()
 		task.spawn(function()
 			task.wait(3)
 			self:setState({
@@ -71,8 +66,8 @@ do
 	end
 end
 return function(frame)
-	local tree = Roact.mount(Roact.createElement(Component), frame)
+	local Tree = Roact.mount(Roact.createElement(StoryComponent), frame)
 	return function()
-		Roact.unmount(tree)
+		Roact.unmount(Tree)
 	end
 end

@@ -1,13 +1,15 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Switch from './Switch';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface SwitchTileProps extends ThemeProps {
+interface SwitchTileProps {
 	Enabled: boolean;
 	Title: string;
 	Icon?: Icons;
@@ -26,11 +28,11 @@ interface SwitchTileState {
 	Icon?: Icons;
 }
 
-export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, SwitchTileState> {
+class SwitchTile extends Roact.PureComponent<SwitchTileProps & ThemeProps, SwitchTileState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
-	constructor(props: SwitchTileProps) {
+	constructor(props: SwitchTileProps & ThemeProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -167,7 +169,6 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 					</frame>
 				</frame>
 				<Switch
-					Theme={theme}
 					Enabled={this.state.Enabled}
 					AnchorPoint={new Vector2(1, 0.5)}
 					Position={UDim2.fromScale(1, 0.5)}
@@ -204,5 +205,21 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 				Icon: this.props.Icon,
 			});
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SwitchTileProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(SwitchTile);
+
+export default class ThemedSwitchTile extends Roact.Component<SwitchTileProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

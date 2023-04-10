@@ -1,10 +1,12 @@
 import { SingleMotor, Spring } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 import { GothamBold } from './Fonts';
 import RoundedFrame from './RoundedFrame';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ColorScheme, LowerCaseColorScheme, ThemeProps } from './Types';
 
-interface ProgressBarProps extends ThemeProps {
+interface ProgressBarProps {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -19,7 +21,7 @@ interface ProgressBarState {
 	HolderWidth: number;
 }
 
-export default class ProgressBar extends Roact.Component<ProgressBarProps, ProgressBarState> {
+class ProgressBar extends Roact.Component<ProgressBarProps & ThemeProps, ProgressBarState> {
 	protected state: Readonly<ProgressBarState> = { Value: this.props.Value, HolderWidth: 0 };
 
 	private holderRef: Roact.Ref<Frame>;
@@ -160,6 +162,8 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 	}
 
 	protected didMount(): void {
+		// very hacky "fix"
+		// might not work on low end devices
 		coroutine.wrap(() => {
 			task.wait(0.01);
 			const holder = this.holderRef.getValue();
@@ -184,5 +188,21 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 				HolderWidth: holder.AbsoluteSize.X,
 			});
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, ProgressBarProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(ProgressBar);
+
+export default class ThemedProgressBar extends Roact.Component<ProgressBarProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

@@ -1,10 +1,4 @@
-import Scheme from './material-color';
-
-export interface ThemeState {
-	Theme: Theme;
-	Scheme: Scheme['Colors'];
-	Color: Color3;
-}
+import { ThemeState } from './Theme/ThemeState';
 
 export interface ThemeProps {
 	Theme: ThemeState;

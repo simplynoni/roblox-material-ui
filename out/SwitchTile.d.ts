@@ -1,11 +1,9 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
-import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
-interface SwitchTileProps extends ThemeProps {
+interface SwitchTileProps {
     Enabled: boolean;
     Title: string;
     Icon?: Icons;
@@ -17,17 +15,7 @@ interface SwitchTileProps extends ThemeProps {
     OffEvent?: () => void;
     ChangedEvent?: (Enabled: boolean) => void;
 }
-interface SwitchTileState {
-    Enabled: boolean;
-    Debounce: boolean;
-    Icon?: Icons;
-}
-export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, SwitchTileState> {
-    stateMotor: SingleMotor;
-    stateBinding: Roact.Binding<number>;
-    constructor(props: SwitchTileProps);
+export default class ThemedSwitchTile extends Roact.Component<SwitchTileProps> {
     render(): Roact.Element;
-    private setEnabled;
-    protected didUpdate(previousProps: SwitchTileProps): void;
 }
 export {};

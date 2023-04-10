@@ -7,6 +7,7 @@ interface ShadowProps {
 	ZIndex?: number;
 }
 
+// @TODO: Theme
 export default class Shadow extends Roact.PureComponent<ShadowProps> {
 	render() {
 		const shadowElevation = ShadowElevations[this.props.Elevation];
@@ -14,6 +15,7 @@ export default class Shadow extends Roact.PureComponent<ShadowProps> {
 			<imagelabel
 				Key='Shadow'
 				Image={shadowElevation.Id}
+				// @TODO: Theme
 				ImageColor3={new Color3(0, 0, 0)}
 				BackgroundTransparency={1}
 				AnchorPoint={new Vector2(0.5, 0.5)}

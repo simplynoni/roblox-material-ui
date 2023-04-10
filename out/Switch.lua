@@ -1,10 +1,14 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local GroupMotor = _flipper.GroupMotor
 local Linear = _flipper.Linear
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
+local connect = _roact_rodux.connect
+local StoreProvider = _roact_rodux.StoreProvider
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
 local Switch
 do
 	Switch = Roact.PureComponent:extend("Switch")
@@ -120,6 +124,35 @@ do
 		end
 	end
 end
+local Connected = connect(function(state)
+	local _object = {}
+	local _left = "Theme"
+	local _object_1 = {}
+	for _k, _v in state do
+		_object_1[_k] = _v
+	end
+	_object[_left] = _object_1
+	return _object
+end)(Switch)
+local ThemedSwitch
+do
+	ThemedSwitch = Roact.Component:extend("ThemedSwitch")
+	function ThemedSwitch:init()
+	end
+	function ThemedSwitch:render()
+		local _attributes = {
+			store = ThemeStore,
+		}
+		local _children = {}
+		local _length = #_children
+		local _attributes_1 = {}
+		for _k, _v in self.props do
+			_attributes_1[_k] = _v
+		end
+		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
+		return Roact.createElement(StoreProvider, _attributes, _children)
+	end
+end
 return {
-	default = Switch,
+	default = ThemedSwitch,
 }

@@ -1,7 +1,8 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local ShadowElevations = TS.import(script, script, "Elevations").default
+-- @TODO: Theme
 local Shadow
 do
 	Shadow = Roact.PureComponent:extend("Shadow")

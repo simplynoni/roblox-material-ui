@@ -1,11 +1,9 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
-import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
-interface ColorTileProps extends ThemeProps {
+interface ColorTileProps {
     Title: string;
     Description?: string;
     Color: Color3;
@@ -18,16 +16,7 @@ interface ColorTileProps extends ThemeProps {
     OpensNewPage?: boolean;
     Selected?: boolean;
 }
-interface ColorTileState {
-    Color: Color3;
-    Icon?: Icons;
-    Selected?: boolean;
-}
-export default class ColorTile extends Roact.PureComponent<ColorTileProps, ColorTileState> {
-    stateMotor: SingleMotor;
-    stateBinding: Roact.Binding<number>;
-    constructor(props: ColorTileProps);
+export default class ThemedColorTile extends Roact.Component<ColorTileProps> {
     render(): Roact.Element;
-    protected didUpdate(previousProps: ColorTileProps): void;
 }
 export {};

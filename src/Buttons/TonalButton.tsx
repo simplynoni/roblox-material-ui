@@ -1,11 +1,13 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
+import { ThemeState, ThemeStore } from '../Theme/ThemeState';
 import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../Types';
 import { LowerCaseFirstLetter } from '../Utils';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 
-export default class TonalButtonBase extends BaseButton<ContainerButtonProps & ThemeProps> {
+class TonalButtonBase extends BaseButton<ContainerButtonProps & ThemeProps> {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ContainerScheme.SecondaryContainer;
@@ -90,6 +92,22 @@ export default class TonalButtonBase extends BaseButton<ContainerButtonProps & T
 				</frame>
 				<uicorner CornerRadius={new UDim(1, 0)} />
 			</textbutton>
+		);
+	}
+}
+
+const Connected = connect<ThemeProps, {}, ContainerButtonProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(TonalButtonBase);
+
+export default class TonalButton extends Roact.Component<ContainerButtonProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
 		);
 	}
 }

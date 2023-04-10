@@ -1,9 +1,13 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
+local connect = _roact_rodux.connect
+local StoreProvider = _roact_rodux.StoreProvider
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local IconButton = TS.import(script, script.Parent, "IconButton").default
 local Icons = TS.import(script, script.Parent, "Icons").Icons
+local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
 local Topbar
 do
 	Topbar = Roact.PureComponent:extend("Topbar")
@@ -12,14 +16,12 @@ do
 	function Topbar:render()
 		local theme = self.props.Theme
 		local closeButton = if self.props.CloseFunction then (Roact.createElement(IconButton, {
-			Theme = theme,
 			Size = UDim2.fromScale(0, 1),
 			LayoutOrder = 100,
 			Icon = Icons.Close,
 			Pressed = self.props.CloseFunction,
 		})) else nil
 		local leadingButton = if self.props.LeadingIcon then (Roact.createElement(IconButton, {
-			Theme = theme,
 			Size = UDim2.fromScale(0, 1),
 			LayoutOrder = 0,
 			Icon = self.props.LeadingIcon.Icon,
@@ -124,6 +126,35 @@ do
 		})
 	end
 end
+local Connected = connect(function(state)
+	local _object = {}
+	local _left = "Theme"
+	local _object_1 = {}
+	for _k, _v in state do
+		_object_1[_k] = _v
+	end
+	_object[_left] = _object_1
+	return _object
+end)(Topbar)
+local ThemedTopbar
+do
+	ThemedTopbar = Roact.Component:extend("ThemedTopbar")
+	function ThemedTopbar:init()
+	end
+	function ThemedTopbar:render()
+		local _attributes = {
+			store = ThemeStore,
+		}
+		local _children = {}
+		local _length = #_children
+		local _attributes_1 = {}
+		for _k, _v in self.props do
+			_attributes_1[_k] = _v
+		end
+		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
+		return Roact.createElement(StoreProvider, _attributes, _children)
+	end
+end
 return {
-	default = Topbar,
+	default = ThemedTopbar,
 }

@@ -2,12 +2,10 @@ import Roact from '@rbxts/roact';
 import { TextButton } from '../../Buttons';
 import { Icons } from '../../Icons';
 import UIBase from '../../UIBase';
-import DefaultTheme from '../DefaultTheme';
 
 export = function (frame: GuiObject) {
-	const component = (
+	const Tree = Roact.mount(
 		<UIBase
-			Theme={DefaultTheme}
 			AnchorPoint={new Vector2(0.5, 0.5)}
 			Position={UDim2.fromScale(0.5, 0.5)}
 			Size={UDim2.fromScale(0.3, 0.55)}
@@ -19,7 +17,6 @@ export = function (frame: GuiObject) {
 				Padding={new UDim(0, 20)}
 			/>
 			<TextButton
-				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AutomaticSize
@@ -29,7 +26,6 @@ export = function (frame: GuiObject) {
 				}}
 			/>
 			<TextButton
-				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AutomaticSize
@@ -40,7 +36,6 @@ export = function (frame: GuiObject) {
 				}}
 			/>
 			<TextButton
-				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				Size={new UDim2(0.75, 0, 0, 35)}
@@ -50,7 +45,6 @@ export = function (frame: GuiObject) {
 				}}
 			/>
 			<TextButton
-				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AutomaticSize
@@ -61,7 +55,6 @@ export = function (frame: GuiObject) {
 				}}
 			/>
 			<TextButton
-				Theme={DefaultTheme}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AutomaticSize
@@ -72,12 +65,11 @@ export = function (frame: GuiObject) {
 					print('a');
 				}}
 			/>
-		</UIBase>
+		</UIBase>,
+		frame,
 	);
 
-	const tree = Roact.mount(component, frame);
-
 	return () => {
-		Roact.unmount(tree);
+		Roact.unmount(Tree);
 	};
 };

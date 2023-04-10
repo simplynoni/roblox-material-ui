@@ -1,11 +1,9 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
-import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
-interface IconButtonProps extends ThemeProps {
+interface IconButtonProps {
     AnchorPoint?: Vector2;
     Position?: UDim2;
     Size: UDim2;
@@ -15,13 +13,7 @@ interface IconButtonProps extends ThemeProps {
     IconColor?: Color3;
     Pressed: () => void;
 }
-interface IconButtonState {
-    Debounce: boolean;
-}
-export default class IconButton extends Roact.Component<IconButtonProps, IconButtonState> {
-    stateMotor: SingleMotor;
-    stateBinding: Roact.Binding<number>;
-    constructor(props: IconButtonProps);
+export default class ThemedIconButton extends Roact.Component<IconButtonProps> {
     render(): Roact.Element;
 }
 export {};

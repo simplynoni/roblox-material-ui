@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local Elevations = {
 	[1] = {
 		Id = "rbxassetid://8483729324",

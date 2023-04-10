@@ -1,12 +1,14 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface IconButtonProps extends ThemeProps {
+interface IconButtonProps {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size: UDim2;
@@ -21,11 +23,11 @@ interface IconButtonState {
 	Debounce: boolean;
 }
 
-export default class IconButton extends Roact.Component<IconButtonProps, IconButtonState> {
+class IconButton extends Roact.Component<IconButtonProps & ThemeProps, IconButtonState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
-	constructor(props: IconButtonProps) {
+	constructor(props: IconButtonProps & ThemeProps) {
 		super(props);
 
 		this.stateMotor = new SingleMotor(0);
@@ -109,6 +111,22 @@ export default class IconButton extends Roact.Component<IconButtonProps, IconBut
 					})}
 				/>
 			</textbutton>
+		);
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, IconButtonProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(IconButton);
+
+export default class ThemedIconButton extends Roact.Component<IconButtonProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
 		);
 	}
 }

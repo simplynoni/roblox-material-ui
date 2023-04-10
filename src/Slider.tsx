@@ -2,10 +2,12 @@ import Roact from '@rbxts/roact';
 import RoundedFrame from './RoundedFrame';
 
 import { SingleMotor, Spring } from '@rbxts/flipper';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 import { UserInputService } from '@rbxts/services';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface SliderProps extends ThemeProps {
+interface SliderProps {
 	Value: number;
 	Steps?: number;
 	AnchorPoint?: Vector2;
@@ -19,7 +21,7 @@ interface SliderState {
 	Value: number;
 }
 
-export default class Slider extends Roact.PureComponent<SliderProps, SliderState> {
+class Slider extends Roact.PureComponent<SliderProps & ThemeProps, SliderState> {
 	railRef: Roact.Ref<Frame>;
 
 	dragMotor: SingleMotor;
@@ -177,5 +179,21 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 		if (this.props.Value !== previousProps.Value) {
 			this.setValue(this.props.Value);
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SliderProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(Slider);
+
+export default class ThemedSlider extends Roact.Component<SliderProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

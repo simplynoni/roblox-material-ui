@@ -1,10 +1,12 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamBold } from './Fonts';
 import IconButton from './IconButton';
 import { Icons } from './Icons';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface TopbarProps extends ThemeProps {
+interface TopbarProps {
 	Title: string;
 	Height?: UDim;
 	CloseFunction?: () => void;
@@ -14,13 +16,12 @@ interface TopbarProps extends ThemeProps {
 	};
 }
 
-export default class Topbar extends Roact.PureComponent<TopbarProps> {
+class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
 	render() {
 		const theme = this.props.Theme;
 
 		const closeButton = this.props.CloseFunction ? (
 			<IconButton
-				Theme={theme}
 				Size={UDim2.fromScale(0, 1)}
 				LayoutOrder={100}
 				Icon={Icons.Close}
@@ -30,7 +31,6 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 
 		const leadingButton = this.props.LeadingIcon ? (
 			<IconButton
-				Theme={theme}
 				Size={UDim2.fromScale(0, 1)}
 				LayoutOrder={0}
 				Icon={this.props.LeadingIcon.Icon}
@@ -110,6 +110,22 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 					BackgroundColor3={theme.Scheme.outline}
 				/>
 			</frame>
+		);
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, TopbarProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(Topbar);
+
+export default class ThemedTopbar extends Roact.Component<TopbarProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
 		);
 	}
 }

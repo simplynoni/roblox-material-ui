@@ -1,16 +1,20 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
+local connect = _roact_rodux.connect
+local StoreProvider = _roact_rodux.StoreProvider
 local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
 local Icon = TS.import(script, script.Parent, "Icon").default
 local Icons = TS.import(script, script.Parent, "Icons").Icons
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local Theme = TS.import(script, script.Parent, "Types").Theme
+local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
+local Theme = TS.import(script, script.Parent, "types").Theme
 local ColorTile
 do
 	ColorTile = Roact.PureComponent:extend("ColorTile")
@@ -237,6 +241,35 @@ do
 		end
 	end
 end
+local Connected = connect(function(state)
+	local _object = {}
+	local _left = "Theme"
+	local _object_1 = {}
+	for _k, _v in state do
+		_object_1[_k] = _v
+	end
+	_object[_left] = _object_1
+	return _object
+end)(ColorTile)
+local ThemedColorTile
+do
+	ThemedColorTile = Roact.Component:extend("ThemedColorTile")
+	function ThemedColorTile:init()
+	end
+	function ThemedColorTile:render()
+		local _attributes = {
+			store = ThemeStore,
+		}
+		local _children = {}
+		local _length = #_children
+		local _attributes_1 = {}
+		for _k, _v in self.props do
+			_attributes_1[_k] = _v
+		end
+		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
+		return Roact.createElement(StoreProvider, _attributes, _children)
+	end
+end
 return {
-	default = ColorTile,
+	default = ThemedColorTile,
 }

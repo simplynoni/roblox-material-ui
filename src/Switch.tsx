@@ -1,10 +1,12 @@
 import { GroupMotor, Linear } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface SwitchProps extends ThemeProps {
+interface SwitchProps {
 	Enabled: boolean;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
@@ -18,11 +20,11 @@ interface SwitchState {
 	Debounce: boolean;
 }
 
-export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState> {
+class Switch extends Roact.PureComponent<SwitchProps & ThemeProps, SwitchState> {
 	positionMotor: GroupMotor<{ Position: number; AnchorPoint: number }>;
 	positionBinding: Roact.Binding<{ Position: number; AnchorPoint: number }>;
 
-	constructor(props: SwitchProps) {
+	constructor(props: SwitchProps & ThemeProps) {
 		super(props);
 
 		this.positionMotor = new GroupMotor({
@@ -134,5 +136,21 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 		if (this.props.Enabled !== previousProps.Enabled) {
 			this.setEnabled(this.props.Enabled);
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SwitchProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(Switch);
+
+export default class ThemedSwitch extends Roact.Component<SwitchProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

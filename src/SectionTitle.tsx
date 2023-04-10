@@ -1,15 +1,17 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from './Fonts';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface SectionTitleProps extends ThemeProps {
+interface SectionTitleProps {
 	Text: string;
 	Size?: UDim2;
 	TextSize?: number;
 	MaxTextSize?: number;
 }
 
-export default class SectionTitle extends Roact.PureComponent<SectionTitleProps> {
+class SectionTitleBase extends Roact.PureComponent<SectionTitleProps & ThemeProps> {
 	render() {
 		const theme = this.props.Theme;
 
@@ -28,6 +30,22 @@ export default class SectionTitle extends Roact.PureComponent<SectionTitleProps>
 				<uipadding PaddingLeft={new UDim(0, 16)} PaddingRight={new UDim(0, 16)} />
 				{this.props.MaxTextSize ? <uitextsizeconstraint MaxTextSize={this.props.MaxTextSize} /> : undefined}
 			</textlabel>
+		);
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SectionTitleProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(SectionTitleBase);
+
+export default class SectionTitle extends Roact.Component<SectionTitleProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
 		);
 	}
 }

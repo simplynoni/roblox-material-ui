@@ -1,13 +1,11 @@
--- Compiled with roblox-ts v2.1.0
+-- Compiled with roblox-ts v2.0.4
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local TonalButton = TS.import(script, script.Parent.Parent.Parent, "Buttons").TonalButton
 local Icons = TS.import(script, script.Parent.Parent.Parent, "Icons").Icons
 local UIBase = TS.import(script, script.Parent.Parent.Parent, "UIBase").default
-local DefaultTheme = TS.import(script, script.Parent.Parent, "DefaultTheme").default
 return function(frame)
-	local component = (Roact.createElement(UIBase, {
-		Theme = DefaultTheme,
+	local Tree = Roact.mount(Roact.createElement(UIBase, {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(0.3, 0.55),
@@ -19,7 +17,6 @@ return function(frame)
 			Padding = UDim.new(0, 20),
 		}),
 		Roact.createElement(TonalButton, {
-			Theme = DefaultTheme,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AutomaticSize = true,
@@ -29,7 +26,6 @@ return function(frame)
 			end,
 		}),
 		Roact.createElement(TonalButton, {
-			Theme = DefaultTheme,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AutomaticSize = true,
@@ -40,7 +36,6 @@ return function(frame)
 			end,
 		}),
 		Roact.createElement(TonalButton, {
-			Theme = DefaultTheme,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.new(0.75, 0, 0, 35),
@@ -50,7 +45,6 @@ return function(frame)
 			end,
 		}),
 		Roact.createElement(TonalButton, {
-			Theme = DefaultTheme,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AutomaticSize = true,
@@ -61,7 +55,6 @@ return function(frame)
 			end,
 		}),
 		Roact.createElement(TonalButton, {
-			Theme = DefaultTheme,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AutomaticSize = true,
@@ -72,9 +65,8 @@ return function(frame)
 				print("a")
 			end,
 		}),
-	}))
-	local tree = Roact.mount(component, frame)
+	}), frame)
 	return function()
-		Roact.unmount(tree)
+		Roact.unmount(Tree)
 	end
 end

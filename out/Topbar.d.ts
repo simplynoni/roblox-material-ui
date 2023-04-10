@@ -3,8 +3,7 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
 import { Icons } from './Icons';
-import { ThemeProps } from './Types';
-interface TopbarProps extends ThemeProps {
+interface TopbarProps {
     Title: string;
     Height?: UDim;
     CloseFunction?: () => void;
@@ -13,7 +12,7 @@ interface TopbarProps extends ThemeProps {
         Function: () => void;
     };
 }
-export default class Topbar extends Roact.PureComponent<TopbarProps> {
+export default class ThemedTopbar extends Roact.Component<TopbarProps> {
     render(): Roact.Element;
 }
 export {};

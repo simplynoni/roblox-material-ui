@@ -1,12 +1,14 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Slider from './Slider';
+import { ThemeState, ThemeStore } from './Theme/ThemeState';
 import { ThemeProps } from './Types';
 
-interface SliderTileProps extends ThemeProps {
+interface SliderTileProps {
 	Value: number;
 	ShowValue?: boolean;
 	Steps?: number;
@@ -23,7 +25,7 @@ interface SliderTileState {
 	DisplayValue: number;
 }
 
-export default class SliderTile extends Roact.PureComponent<SliderTileProps, SliderTileState> {
+class SliderTile extends Roact.PureComponent<SliderTileProps & ThemeProps, SliderTileState> {
 	state = {
 		Icon: this.props.Icon,
 		DisplayValue: this.props.Value,
@@ -114,7 +116,6 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 							) : undefined}
 						</textlabel>
 						<Slider
-							Theme={theme}
 							Value={this.props.Value}
 							Steps={this.props.Steps}
 							ChangedEvent={(value) => {
@@ -141,5 +142,21 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 				Icon: this.props.Icon,
 			});
 		}
+	}
+}
+
+const Connected = connect<{ Theme: ThemeState }, {}, SliderTileProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(SliderTile);
+
+export default class ThemedSliderTile extends Roact.Component<SliderTileProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
+		);
 	}
 }

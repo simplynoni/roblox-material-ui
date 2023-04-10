@@ -1,10 +1,12 @@
 import Roact from '@rbxts/roact';
+import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { ColorScheme, LowerCaseColorScheme } from '../Types';
-import BaseButton from './BaseButton';
+import { ThemeState, ThemeStore } from '../Theme/ThemeState';
+import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../Types';
+import BaseButton, { ButtonProps } from './BaseButton';
 
-export default class OutlinedButtonBase extends BaseButton {
+class OutlinedButtonBase extends BaseButton {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -81,6 +83,22 @@ export default class OutlinedButtonBase extends BaseButton {
 					Transparency={this.props.Disabled ? 1 - 0.12 : 0}
 				/>
 			</textbutton>
+		);
+	}
+}
+
+const Connected = connect<ThemeProps, {}, ButtonProps, ThemeState>((state) => {
+	return {
+		Theme: { ...state },
+	};
+})(OutlinedButtonBase);
+
+export default class OutlinedButton extends Roact.Component<ButtonProps> {
+	render() {
+		return (
+			<StoreProvider store={ThemeStore}>
+				<Connected {...this.props} />
+			</StoreProvider>
 		);
 	}
 }

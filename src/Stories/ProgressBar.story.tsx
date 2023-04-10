@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import ProgressBar from '../ProgressBar';
-import { ColorScheme } from '../types';
+import { ColorScheme } from '../Types';
 
 class StoryComponent extends Roact.Component<{}, { Value: number }> {
 	protected state: Readonly<{ Value: number }> = { Value: 50 };

@@ -3,7 +3,7 @@ import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import ColorTile from '../ColorTile';
 import { Icons } from '../Icons';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ThemeProps } from '../types';
+import { ThemeProps } from '../Types';
 import UIBase from '../UIBase';
 
 class StoryComponent extends Roact.Component<ThemeProps> {

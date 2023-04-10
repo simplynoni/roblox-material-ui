@@ -6,37 +6,39 @@
 import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
-import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
+import { ColorScheme, ContainerScheme, ThemeProps } from '../Types';
 import { CustomColorGroup } from '../material-color';
 export interface ButtonProps {
-    AnchorPoint?: Vector2;
-    Position?: UDim2;
-    Size?: UDim2;
-    AutomaticSize?: boolean;
-    Text: string;
-    Icon?: Icons | string;
-    Disabled?: boolean;
-    ColorScheme?: ColorScheme;
-    CustomColorGroup?: CustomColorGroup['Colors'];
-    Pressed: () => void;
+	AnchorPoint?: Vector2;
+	Position?: UDim2;
+	Size?: UDim2;
+	AutomaticSize?: boolean;
+	Text: string;
+	Icon?: Icons | string;
+	Disabled?: boolean;
+	ColorScheme?: ColorScheme;
+	CustomColorGroup?: CustomColorGroup['Colors'];
+	Pressed: () => void;
 }
 export declare type ContainerButtonProps = Omit<ButtonProps, 'ColorScheme'> & {
-    ColorScheme?: ContainerScheme;
+	ColorScheme?: ContainerScheme;
 };
 export interface ButtonState {
-    Debounce: boolean;
+	Debounce: boolean;
 }
-export default abstract class BaseButton<Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps> extends Roact.Component<Props, ButtonState> {
-    stateMotor: SingleMotor;
-    stateBinding: Roact.Binding<number>;
-    state: {
-        Debounce: boolean;
-    };
-    constructor(props: Props);
-    render(): Roact.Element | undefined;
-    MouseClick(): Promise<void>;
-    MouseUp(): void;
-    MouseDown(): void;
-    MouseEnter(): void;
-    MouseLeave(): void;
+export default abstract class BaseButton<
+	Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps,
+> extends Roact.Component<Props, ButtonState> {
+	stateMotor: SingleMotor;
+	stateBinding: Roact.Binding<number>;
+	state: {
+		Debounce: boolean;
+	};
+	constructor(props: Props);
+	render(): Roact.Element | undefined;
+	MouseClick(): Promise<void>;
+	MouseUp(): void;
+	MouseDown(): void;
+	MouseEnter(): void;
+	MouseLeave(): void;
 }

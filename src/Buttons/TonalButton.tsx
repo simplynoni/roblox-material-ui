@@ -3,7 +3,7 @@ import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
 import { ThemeState, ThemeStore } from '../Theme/ThemeState';
-import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../types';
+import { ContainerScheme, LowerCaseContainerScheme, ThemeProps } from '../Types';
 import { LowerCaseFirstLetter } from '../Utils';
 import BaseButton, { ContainerButtonProps } from './BaseButton';
 

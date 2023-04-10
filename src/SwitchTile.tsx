@@ -1,13 +1,13 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
 import { Icons } from './Icons';
 import Switch from './Switch';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SwitchTileProps {
 	Enabled: boolean;

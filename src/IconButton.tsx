@@ -1,12 +1,12 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import Icon from './Icon';
 import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface IconButtonProps {
 	AnchorPoint?: Vector2;

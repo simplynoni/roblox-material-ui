@@ -2,7 +2,7 @@ import Roact from '@rbxts/roact';
 import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamMedium } from './Fonts';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SectionTitleProps {
 	Text: string;

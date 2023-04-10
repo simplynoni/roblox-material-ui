@@ -14,6 +14,6 @@ export { default as Switch } from './Switch';
 export { default as SwitchTile } from './SwitchTile';
 export * from './Theme/ThemeState';
 export { default as Topbar } from './Topbar';
-export * from './types';
+export * from './Types';
 export { default as UIBase } from './UIBase';
 export { CustomColorGroup, default as Scheme } from './material-color';

@@ -1,6 +1,6 @@
 import Rodux from '@rbxts/rodux';
 import { DefaultThemeColor } from '../Constants';
-import { Theme } from '../types';
+import { Theme } from '../Types';
 import Scheme from '../material-color';
 
 export interface ThemeState {
@@ -73,4 +73,4 @@ const ThemeReducer = Rodux.createReducer<ThemeState, ThemeActions>(
 
 const ThemeStore = new Rodux.Store<ThemeState, ThemeActions>(ThemeReducer);
 
-export { SetTheme, SetColor, ThemeReducer, ThemeStore };
+export { SetColor, SetTheme, ThemeReducer, ThemeStore };

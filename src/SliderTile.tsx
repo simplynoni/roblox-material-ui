@@ -6,7 +6,7 @@ import Icon from './Icon';
 import { Icons } from './Icons';
 import Slider from './Slider';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface SliderTileProps {
 	Value: number;

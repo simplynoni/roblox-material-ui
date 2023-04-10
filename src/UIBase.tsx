@@ -1,12 +1,12 @@
 import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
+import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
 import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface UIBaseProps {
 	AnchorPoint: Vector2;

@@ -4,7 +4,7 @@ import { GothamBold } from './Fonts';
 import IconButton from './IconButton';
 import { Icons } from './Icons';
 import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './types';
+import { ThemeProps } from './Types';
 
 interface TopbarProps {
 	Title: string;

@@ -74,6 +74,7 @@ do
 			FontFace = GothamBold,
 			Text = self.props.Title,
 			TextColor3 = theme.Scheme.onBackground,
+			RichText = self.props.RichText,
 			TextScaled = true,
 		}, {
 			Roact.createElement("UITextSizeConstraint", {

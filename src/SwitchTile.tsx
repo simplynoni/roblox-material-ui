@@ -44,7 +44,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 		this.setState({
 			Enabled: this.props.Enabled,
 			Debounce: false,
-			Icon: this.props.Icon,
+			Icon: this.props.Icon!,
 		});
 	}
 
@@ -201,7 +201,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 
 		if (this.props.Icon !== previousProps.Icon) {
 			this.setState({
-				Icon: this.props.Icon,
+				Icon: this.props.Icon!,
 			});
 		}
 	}

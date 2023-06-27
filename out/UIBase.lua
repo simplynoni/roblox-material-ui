@@ -204,7 +204,6 @@ do
 			_object_3[_left_4] = _condition_2
 			_fn_1:setGoal(Linear.new(0, _object_3))
 			local onComplete = self.positionMotor:onComplete(function()
-				-- UI could've opened again before the animation finished
 				if self.state.Closed then
 					self:setState({
 						Visible = false,

@@ -138,7 +138,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 	protected didUpdate(previousProps: SliderTileProps): void {
 		if (previousProps.Icon !== this.props.Icon) {
 			this.setState({
-				Icon: this.props.Icon,
+				Icon: this.props.Icon!,
 			});
 		}
 	}

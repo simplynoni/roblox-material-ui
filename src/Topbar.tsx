@@ -6,6 +6,7 @@ import { ThemeProps } from './types';
 
 interface TopbarProps extends ThemeProps {
 	Title: string;
+	RichText?: boolean;
 	Height?: UDim;
 	CloseFunction?: () => void;
 	LeadingIcon?: {
@@ -79,6 +80,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 						FontFace={GothamBold}
 						Text={this.props.Title}
 						TextColor3={theme.Scheme.onBackground}
+						RichText={this.props.RichText}
 						TextScaled
 					>
 						<uitextsizeconstraint MaxTextSize={22} />

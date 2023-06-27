@@ -44,8 +44,8 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 
 		this.setState({
 			Color: this.props.Color,
-			Icon: this.props.Icon,
-			Selected: this.props.Selected,
+			Icon: this.props.Icon!,
+			Selected: this.props.Selected!,
 		});
 	}
 
@@ -230,13 +230,13 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 
 		if (this.props.Icon !== previousProps.Icon) {
 			this.setState({
-				Icon: this.props.Icon,
+				Icon: this.props.Icon!,
 			});
 		}
 
 		if (this.props.Selected !== previousProps.Selected) {
 			this.setState({
-				Selected: this.props.Selected,
+				Selected: this.props.Selected!,
 			});
 		}
 	}

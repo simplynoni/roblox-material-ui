@@ -6,6 +6,7 @@ import { Icons } from './Icons';
 import { ThemeProps } from './types';
 interface TopbarProps extends ThemeProps {
     Title: string;
+    RichText?: boolean;
     Height?: UDim;
     CloseFunction?: () => void;
     LeadingIcon?: {

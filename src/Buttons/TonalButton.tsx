@@ -36,7 +36,7 @@ export default class TonalButtonBase extends BaseButton<ContainerButtonProps & T
 				BorderSizePixel={0}
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
-				Size={this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size}
+				Size={this.props.Size}
 				Text={''}
 				AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
 				Event={{

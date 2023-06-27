@@ -43,7 +43,7 @@ do
 			BackgroundColor3 = color,
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
-			Size = if self.props.AutomaticSize then UDim2.new(UDim.new(0, 0), UDim.new(0, 35)) else self.props.Size,
+			Size = self.props.Size,
 			Text = "",
 			AutomaticSize = if self.props.AutomaticSize then "X" else nil,
 			[Roact.Event.MouseButton1Click] = TS.async(function()

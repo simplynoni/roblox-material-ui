@@ -33,7 +33,7 @@ export default class TextButtonBase extends BaseButton {
 				BackgroundColor3={color}
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
-				Size={this.props.AutomaticSize ? new UDim2(new UDim(0, 0), new UDim(0, 35)) : this.props.Size}
+				Size={this.props.Size}
 				Text={''}
 				AutomaticSize={this.props.AutomaticSize ? 'X' : undefined}
 				Event={{

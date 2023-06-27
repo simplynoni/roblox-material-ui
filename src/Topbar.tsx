@@ -7,6 +7,7 @@ import { ThemeProps } from './types';
 interface TopbarProps extends ThemeProps {
 	Title: string;
 	RichText?: boolean;
+	TextAlignment?: Enum.TextXAlignment;
 	Height?: UDim;
 	CloseFunction?: () => void;
 	LeadingIcon?: {
@@ -54,7 +55,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 					Size={UDim2.fromScale(1, 1)}
 					BackgroundTransparency={1}
 				>
-					<uipadding PaddingLeft={new UDim(0, 16)} PaddingRight={new UDim(0, 16)} />
+					<uipadding PaddingLeft={new UDim(0, 12)} PaddingRight={new UDim(0, 12)} />
 					<frame
 						Key='Leading'
 						AnchorPoint={new Vector2(0, 0.5)}
@@ -80,6 +81,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 						FontFace={GothamBold}
 						Text={this.props.Title}
 						TextColor3={theme.Scheme.onBackground}
+						TextXAlignment={this.props.TextAlignment}
 						RichText={this.props.RichText}
 						TextScaled
 					>

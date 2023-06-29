@@ -2,7 +2,6 @@ import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
 
-import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
 import { ThemeProps } from './types';
 
@@ -110,21 +109,13 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(1, 1)}
-					BackgroundTransparency={1}
+					BackgroundColor3={theme.Scheme.background}
 					GroupTransparency={this.fadeBinding.map((opacity) => {
 						return 1 - opacity;
 					})}
 				>
-					<RoundedFrame
-						Key='Main'
-						AnchorPoint={new Vector2(0.5, 0.5)}
-						Position={UDim2.fromScale(0.5, 0.5)}
-						Size={UDim2.fromScale(1, 1)}
-						Color={theme.Scheme.background}
-						CornerRadius={16}
-					>
-						{this.props[Roact.Children]}
-					</RoundedFrame>
+					<uicorner CornerRadius={new UDim(0, 16)} />
+					{this.props[Roact.Children]}
 				</canvasgroup>
 				{aspectRatio}
 				{sizeConstraint}

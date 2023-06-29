@@ -6,7 +6,6 @@ local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
 local Maid = TS.import(script, TS.getModule(script, "@rbxts", "maid").Maid)
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local Shadow = TS.import(script, script.Parent, "Shadow").default
 local defaults = {
 	positionVelocity = 1,
@@ -86,33 +85,27 @@ do
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = 1,
+			BackgroundColor3 = theme.Scheme.background,
 			GroupTransparency = self.fadeBinding:map(function(opacity)
 				return 1 - opacity
 			end),
 		}
-		local _children_1 = {}
-		local _length_1 = #_children_1
-		local _attributes_2 = {
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromScale(1, 1),
-			Color = theme.Scheme.background,
-			CornerRadius = 16,
+		local _children_1 = {
+			Roact.createElement("UICorner", {
+				CornerRadius = UDim.new(0, 16),
+			}),
 		}
-		local _children_2 = {}
-		local _length_2 = #_children_2
+		local _length_1 = #_children_1
 		local _child = self.props[Roact.Children]
 		if _child then
 			for _k, _v in _child do
 				if type(_k) == "number" then
-					_children_2[_length_2 + _k] = _v
+					_children_1[_length_1 + _k] = _v
 				else
-					_children_2[_k] = _v
+					_children_1[_k] = _v
 				end
 			end
 		end
-		_children_1.Main = Roact.createElement(RoundedFrame, _attributes_2, _children_2)
 		_children.InnerContainer = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
 		if aspectRatio then
 			_children[_length + 1] = aspectRatio

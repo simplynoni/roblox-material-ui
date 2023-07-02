@@ -1,7 +1,7 @@
 -- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent, "Icons")
 local Topbar = TS.import(script, script.Parent.Parent, "Topbar").default
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
 local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
@@ -34,7 +34,7 @@ do
 					})
 				end,
 				LeadingIcon = {
-					Icon = Icons.NavigateBack,
+					Icon = Icons.navigate_before,
 					Function = function() end,
 				},
 			}),

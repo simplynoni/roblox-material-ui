@@ -22,7 +22,6 @@ export default class FilledButton extends BaseButton {
 				Icon={this.props.Icon}
 				IconColor={this.props.Disabled ? theme.Scheme.onBackground : onColor}
 				IconTransparency={this.props.Disabled ? 1 - 0.38 : 0}
-				IconSize={'24p'}
 				Size={UDim2.fromScale(0.2, 1)}
 			/>
 		) : undefined;

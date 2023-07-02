@@ -1,9 +1,15 @@
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/types" />
 import Scheme from './material-color';
 export interface ThemeState {
     Theme: Theme;
     Scheme: Scheme['Colors'];
     Color: Color3;
+}
+export interface IconData {
+    Image: string;
+    ImageRectSize: Vector2;
+    ImageRectOffset: Vector2;
 }
 export interface ThemeProps {
     Theme: ThemeState;

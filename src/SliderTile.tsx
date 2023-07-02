@@ -2,16 +2,15 @@ import Roact from '@rbxts/roact';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
-import { Icons } from './Icons';
 import Slider from './Slider';
-import { ThemeProps } from './types';
+import { IconData, ThemeProps } from './types';
 
 interface SliderTileProps extends ThemeProps {
 	Value: number;
 	ShowValue?: boolean;
 	Steps?: number;
 	Title: string;
-	Icon?: Icons;
+	Icon?: IconData;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -19,7 +18,7 @@ interface SliderTileProps extends ThemeProps {
 }
 
 interface SliderTileState {
-	Icon?: Icons;
+	Icon?: IconData;
 	DisplayValue: number;
 }
 
@@ -64,8 +63,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 					{this.state.Icon ? (
 						<Icon
 							Icon={this.state.Icon}
-							IconSize='24p'
-							MaxSize
+							MaxSize={24}
 							IconColor={theme.Scheme.onBackground}
 							Size={UDim2.fromScale(0.25, 1)}
 							LayoutOrder={1}

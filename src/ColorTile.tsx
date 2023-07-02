@@ -3,15 +3,15 @@ import Roact from '@rbxts/roact';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
-import { Icons } from './Icons';
+import Icons from './Icons';
 import RoundedFrame from './RoundedFrame';
-import { Theme, ThemeProps } from './types';
+import { IconData, Theme, ThemeProps } from './types';
 
 interface ColorTileProps extends ThemeProps {
 	Title: string;
 	Description?: string;
 	Color: Color3;
-	Icon?: Icons;
+	Icon?: IconData;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
@@ -23,7 +23,7 @@ interface ColorTileProps extends ThemeProps {
 
 interface ColorTileState {
 	Color: Color3;
-	Icon?: Icons;
+	Icon?: IconData;
 	Selected?: boolean;
 }
 
@@ -54,9 +54,8 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 
 		const trailingIcon = this.props.OpensNewPage ? (
 			<Icon
-				Icon={Icons.NavigateRight}
-				IconSize='24p'
-				MaxSize
+				Icon={Icons.navigate_next}
+				MaxSize={24}
 				IconColor={theme.Scheme.onBackground}
 				Size={new UDim2(0, 24, 1, 0)}
 				LayoutOrder={2}
@@ -71,7 +70,9 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 				BackgroundColor3={theme.Scheme.background}
 				BackgroundTransparency={theme.Theme === Theme.Dark ? 0.9 : 0.5}
 				ImageColor3={theme.Scheme.onPrimaryContainer}
-				Image={Icons.Check}
+				Image={Icons.check.Image}
+				ImageRectOffset={Icons.check.ImageRectOffset}
+				ImageRectSize={Icons.check.ImageRectSize}
 			>
 				<uicorner CornerRadius={new UDim(1)} />
 			</imagelabel>
@@ -134,8 +135,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 					{this.state.Icon ? (
 						<Icon
 							Icon={this.state.Icon}
-							IconSize='24p'
-							MaxSize
+							MaxSize={24}
 							IconColor={theme.Scheme.onBackground}
 							Size={UDim2.fromScale(0.25, 1)}
 							LayoutOrder={1}

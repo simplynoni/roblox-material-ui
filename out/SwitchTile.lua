@@ -96,8 +96,7 @@ do
 		local _length_1 = #_children_1
 		local _child = if self.state.Icon then (Roact.createElement(Icon, {
 			Icon = self.state.Icon,
-			IconSize = "24p",
-			MaxSize = true,
+			MaxSize = 24,
 			IconColor = theme.Scheme.onBackground,
 			Size = UDim2.fromScale(0.25, 1),
 			LayoutOrder = 1,

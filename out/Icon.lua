@@ -9,9 +9,10 @@ do
 	function Icon:render()
 		local maxSize
 		local corner
-		if self.props.IconSize == "24p" and self.props.MaxSize then
+		local _value = self.props.MaxSize
+		if _value ~= 0 and (_value == _value and _value) then
 			maxSize = Roact.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(24, 24),
+				MaxSize = Vector2.new(self.props.MaxSize, self.props.MaxSize),
 			})
 		end
 		if self.props.Circle then
@@ -23,7 +24,9 @@ do
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = self.props.Size,
-			Image = self.props.Icon,
+			Image = self.props.Icon.Image,
+			ImageRectOffset = self.props.Icon.ImageRectOffset,
+			ImageRectSize = self.props.Icon.ImageRectSize,
 			ImageColor3 = self.props.IconColor,
 			ImageTransparency = self.props.IconTransparency,
 			BackgroundTransparency = 1,

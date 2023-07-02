@@ -1,0 +1,8 @@
+name = "roblox-material-ui"
+
+[[inputs]]
+glob = "icons/**/*.png"
+packable = true
+codegen = true
+codegen-path = "src/Icons.lua"
+codegen-base-path = "icons"

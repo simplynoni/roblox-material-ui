@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local IconButton = TS.import(script, script.Parent.Parent, "IconButton").default
-local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent, "Icons")
 local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
 return function(frame)
 	local component = (Roact.createFragment({
@@ -14,21 +14,21 @@ return function(frame)
 		Roact.createElement(IconButton, {
 			Theme = DefaultTheme,
 			Size = UDim2.fromOffset(36, 36),
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			IconColor = DefaultTheme.Scheme.primary,
 			Pressed = function() end,
 		}),
 		Roact.createElement(IconButton, {
 			Theme = DefaultTheme,
 			Size = UDim2.fromOffset(36, 36),
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			IconColor = DefaultTheme.Scheme.secondary,
 			Pressed = function() end,
 		}),
 		Roact.createElement(IconButton, {
 			Theme = DefaultTheme,
 			Size = UDim2.fromOffset(36, 36),
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			IconColor = DefaultTheme.Scheme.tertiary,
 			Pressed = function() end,
 		}),

@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import ColorTile from '../ColorTile';
-import { Icons } from '../Icons';
+import Icons from '../Icons';
 import UIBase from '../UIBase';
 import DefaultTheme from './DefaultTheme';
 
@@ -30,13 +30,13 @@ export = function (frame: GuiObject) {
 				Theme={DefaultTheme}
 				Title='Color'
 				Description='Description'
-				Icon={Icons.Palette}
+				Icon={Icons.palette}
 				Color={DefaultTheme.Scheme.error}
 			/>
 			<ColorTile
 				Theme={DefaultTheme}
 				Title='Color'
-				Icon={Icons.Palette}
+				Icon={Icons.palette}
 				Color={DefaultTheme.Scheme.primaryContainer}
 			/>
 		</UIBase>

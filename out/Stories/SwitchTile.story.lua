@@ -1,7 +1,7 @@
 -- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent, "Icons")
 local SwitchTile = TS.import(script, script.Parent.Parent, "SwitchTile").default
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
 local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
@@ -37,13 +37,13 @@ return function(frame)
 			Theme = DefaultTheme,
 			Title = "Switch",
 			Description = "Description",
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			Enabled = false,
 		}),
 		Roact.createElement(SwitchTile, {
 			Theme = DefaultTheme,
 			Title = "Switch",
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			Enabled = false,
 		}),
 	}))

@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local OutlinedButton = TS.import(script, script.Parent.Parent.Parent, "Buttons").OutlinedButton
-local Icons = TS.import(script, script.Parent.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent.Parent, "Icons")
 local UIBase = TS.import(script, script.Parent.Parent.Parent, "UIBase").default
 local DefaultTheme = TS.import(script, script.Parent.Parent, "DefaultTheme").default
 return function(frame)
@@ -34,7 +34,7 @@ return function(frame)
 			Position = UDim2.fromScale(0.5, 0.5),
 			AutomaticSize = true,
 			Text = "AutomaticSize Button w/ Icon",
-			Icon = Icons.DarkTheme,
+			Icon = Icons.nightlight_round,
 			Pressed = function()
 				print("a")
 			end,
@@ -67,7 +67,7 @@ return function(frame)
 			AutomaticSize = true,
 			Text = "Disabled Button w/ Icon",
 			Disabled = true,
-			Icon = Icons.DarkTheme,
+			Icon = Icons.nightlight_round,
 			Pressed = function()
 				print("a")
 			end,

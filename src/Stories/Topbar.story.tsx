@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Icons } from '../Icons';
+import Icons from '../Icons';
 import Topbar from '../Topbar';
 import UIBase from '../UIBase';
 import DefaultTheme from './DefaultTheme';
@@ -24,7 +24,7 @@ class Component extends Roact.Component<{}, { Closed: boolean }> {
 						task.wait(2);
 						this.setState({ Closed: false });
 					}}
-					LeadingIcon={{ Icon: Icons.NavigateBack, Function: () => {} }}
+					LeadingIcon={{ Icon: Icons.navigate_before, Function: () => {} }}
 				/>
 			</UIBase>
 		);

@@ -19,7 +19,6 @@ export default class OutlinedButtonBase extends BaseButton {
 				Icon={this.props.Icon}
 				IconColor={this.props.Disabled ? theme.Scheme.onBackground : color}
 				IconTransparency={this.props.Disabled ? 1 - 0.38 : 0}
-				IconSize={'24p'}
 				Size={UDim2.fromScale(0.2, 1)}
 			/>
 		) : undefined;

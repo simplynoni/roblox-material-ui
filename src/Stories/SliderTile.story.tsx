@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import { GothamBlack } from '../Fonts';
-import { Icons } from '../Icons';
+import Icons from '../Icons';
 import SliderTile from '../SliderTile';
 import UIBase from '../UIBase';
 import DefaultTheme from './DefaultTheme';
@@ -33,7 +33,7 @@ export = function (frame: GuiObject) {
 				<SliderTile Theme={DefaultTheme} Title='Slider' Value={1} />
 				<SliderTile Theme={DefaultTheme} Title='Stepped Slider' Steps={10} Value={0} ShowValue />
 				<SliderTile Theme={DefaultTheme} Title='Slider' Value={1} ShowValue />
-				<SliderTile Theme={DefaultTheme} Title='Slider' Icon={Icons.Palette} Value={0} />
+				<SliderTile Theme={DefaultTheme} Title='Slider' Icon={Icons.palette} Value={0} />
 			</UIBase>
 		</>
 	);

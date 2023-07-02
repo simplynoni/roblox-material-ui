@@ -3,7 +3,7 @@ local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
 local IconButton = TS.import(script, script.Parent, "IconButton").default
-local Icons = TS.import(script, script.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent, "Icons")
 local Topbar
 do
 	Topbar = Roact.PureComponent:extend("Topbar")
@@ -15,7 +15,7 @@ do
 			Theme = theme,
 			Size = UDim2.fromScale(0, 1),
 			LayoutOrder = 100,
-			Icon = Icons.Close,
+			Icon = Icons.close,
 			Pressed = self.props.CloseFunction,
 		})) else nil
 		local leadingButton = if self.props.LeadingIcon then (Roact.createElement(IconButton, {

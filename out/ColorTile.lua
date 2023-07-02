@@ -8,7 +8,7 @@ local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
 local Icon = TS.import(script, script.Parent, "Icon").default
-local Icons = TS.import(script, script.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent, "Icons")
 local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local Theme = TS.import(script, script.Parent, "types").Theme
 local ColorTile
@@ -28,9 +28,8 @@ do
 	function ColorTile:render()
 		local theme = self.props.Theme
 		local trailingIcon = if self.props.OpensNewPage then (Roact.createElement(Icon, {
-			Icon = Icons.NavigateRight,
-			IconSize = "24p",
-			MaxSize = true,
+			Icon = Icons.navigate_next,
+			MaxSize = 24,
 			IconColor = theme.Scheme.onBackground,
 			Size = UDim2.new(0, 24, 1, 0),
 			LayoutOrder = 2,
@@ -42,7 +41,9 @@ do
 			BackgroundColor3 = theme.Scheme.background,
 			BackgroundTransparency = if theme.Theme == Theme.Dark then 0.9 else 0.5,
 			ImageColor3 = theme.Scheme.onPrimaryContainer,
-			Image = Icons.Check,
+			Image = Icons.check.Image,
+			ImageRectOffset = Icons.check.ImageRectOffset,
+			ImageRectSize = Icons.check.ImageRectSize,
 		}, {
 			Roact.createElement("UICorner", {
 				CornerRadius = UDim.new(1),
@@ -113,8 +114,7 @@ do
 		local _length_1 = #_children_1
 		local _child = if self.state.Icon then (Roact.createElement(Icon, {
 			Icon = self.state.Icon,
-			IconSize = "24p",
-			MaxSize = true,
+			MaxSize = 24,
 			IconColor = theme.Scheme.onBackground,
 			Size = UDim2.fromScale(0.25, 1),
 			LayoutOrder = 1,

@@ -15,6 +15,7 @@
 	],
 	"types": "out/index.d.ts",
 	"scripts": {
+		"syncIcons": "tarmac sync --target roblox -v && ltts src/Icons.lua && sed -i 's/Vector2.new/new Vector2/g' src/Icons.ts && rm src/Icons.lua",
 		"build": "rbxtsc --optimizedLoops --rojo serve.project.json",
 		"watch": "rbxtsc -w --optimizedLoops --rojo serve.project.json",
 		"prepublishOnly": "npm run build"
@@ -32,6 +33,7 @@
 		"@rbxts/flipper": "^2.0.1",
 		"@rbxts/maid": "^1.0.0-ts.1",
 		"@rbxts/roact": "^1.4.4-ts.0",
-		"@rbxts/services": "^1.5.1"
+		"@rbxts/services": "^1.5.1",
+		"lua-to-typescript": "^0.2.2"
 	}
 }

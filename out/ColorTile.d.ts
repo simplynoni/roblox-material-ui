@@ -3,13 +3,12 @@
 /// <reference types="roact" />
 import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { Icons } from './Icons';
-import { ThemeProps } from './types';
+import { IconData, ThemeProps } from './types';
 interface ColorTileProps extends ThemeProps {
     Title: string;
     Description?: string;
     Color: Color3;
-    Icon?: Icons;
+    Icon?: IconData;
     AnchorPoint?: Vector2;
     Position?: UDim2;
     Size?: UDim2;
@@ -20,7 +19,7 @@ interface ColorTileProps extends ThemeProps {
 }
 interface ColorTileState {
     Color: Color3;
-    Icon?: Icons;
+    Icon?: IconData;
     Selected?: boolean;
 }
 export default class ColorTile extends Roact.PureComponent<ColorTileProps, ColorTileState> {

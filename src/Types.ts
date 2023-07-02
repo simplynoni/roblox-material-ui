@@ -6,6 +6,12 @@ export interface ThemeState {
 	Color: Color3;
 }
 
+export interface IconData {
+	Image: string;
+	ImageRectSize: Vector2;
+	ImageRectOffset: Vector2;
+}
+
 export interface ThemeProps {
 	Theme: ThemeState;
 }

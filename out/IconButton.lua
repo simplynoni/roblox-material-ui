@@ -75,7 +75,6 @@ do
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(0.75, 0.75),
 				Icon = self.props.Icon,
-				IconSize = "24p",
 				IconColor = self.props.IconColor or theme.Scheme.onBackground,
 			}),
 			StateLayer = Roact.createElement(RoundedFrame, {

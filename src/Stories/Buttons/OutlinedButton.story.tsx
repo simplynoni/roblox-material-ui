@@ -1,6 +1,6 @@
 import Roact from '@rbxts/roact';
 import { OutlinedButton } from '../../Buttons';
-import { Icons } from '../../Icons';
+import Icons from '../../Icons';
 import UIBase from '../../UIBase';
 import DefaultTheme from '../DefaultTheme';
 
@@ -34,7 +34,7 @@ export = function (frame: GuiObject) {
 				Position={UDim2.fromScale(0.5, 0.5)}
 				AutomaticSize
 				Text='AutomaticSize Button w/ Icon'
-				Icon={Icons.DarkTheme}
+				Icon={Icons.nightlight_round}
 				Pressed={() => {
 					print('a');
 				}}
@@ -67,7 +67,7 @@ export = function (frame: GuiObject) {
 				AutomaticSize
 				Text='Disabled Button w/ Icon'
 				Disabled
-				Icon={Icons.DarkTheme}
+				Icon={Icons.nightlight_round}
 				Pressed={() => {
 					print('a');
 				}}

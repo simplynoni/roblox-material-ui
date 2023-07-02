@@ -1,8 +1,7 @@
 import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-import { Icons } from '../Icons';
 import { CustomColorGroup } from '../material-color';
-import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
+import { ColorScheme, ContainerScheme, IconData, ThemeProps } from '../types';
 
 export interface ButtonProps extends ThemeProps {
 	AnchorPoint?: Vector2;
@@ -10,7 +9,7 @@ export interface ButtonProps extends ThemeProps {
 	Size?: UDim2;
 	AutomaticSize?: boolean;
 	Text: string;
-	Icon?: Icons | string;
+	Icon?: IconData;
 	Disabled?: boolean;
 	ColorScheme?: ColorScheme;
 	CustomColorGroup?: CustomColorGroup['Colors'];

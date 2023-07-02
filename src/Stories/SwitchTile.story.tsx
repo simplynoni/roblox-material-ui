@@ -1,5 +1,5 @@
 import Roact from '@rbxts/roact';
-import { Icons } from '../Icons';
+import Icons from '../Icons';
 import SwitchTile from '../SwitchTile';
 import UIBase from '../UIBase';
 import DefaultTheme from './DefaultTheme';
@@ -24,10 +24,10 @@ export = function (frame: GuiObject) {
 				Theme={DefaultTheme}
 				Title='Switch'
 				Description='Description'
-				Icon={Icons.Palette}
+				Icon={Icons.palette}
 				Enabled={false}
 			/>
-			<SwitchTile Theme={DefaultTheme} Title='Switch' Icon={Icons.Palette} Enabled={false} />
+			<SwitchTile Theme={DefaultTheme} Title='Switch' Icon={Icons.palette} Enabled={false} />
 		</UIBase>
 	);
 

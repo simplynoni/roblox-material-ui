@@ -27,12 +27,10 @@ do
 		local colorScheme = self.props.ColorScheme or ColorScheme.Primary
 		local lowerCaseColorScheme = string.lower(colorScheme)
 		local color = if self.props.CustomColorGroup then self.props.CustomColorGroup.color else theme.Scheme[lowerCaseColorScheme]
-		local _value = self.props.Icon
-		local icon = if _value ~= "" and _value then (Roact.createElement(Icon, {
+		local icon = if self.props.Icon then (Roact.createElement(Icon, {
 			Icon = self.props.Icon,
 			IconColor = if self.props.Disabled then theme.Scheme.onBackground else color,
 			IconTransparency = if self.props.Disabled then 1 - 0.38 else 0,
-			IconSize = "24p",
 			Size = UDim2.fromScale(0.2, 1),
 		})) else nil
 		local _attributes = {
@@ -62,46 +60,39 @@ do
 				return self:MouseLeave()
 			end,
 		}
-		local _children = {}
+		local _children = {
+			Roact.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, if self.props.Icon then 16 else 24),
+				PaddingRight = UDim.new(0, 24),
+				PaddingBottom = UDim.new(0, 6),
+				PaddingTop = UDim.new(0, 6),
+			}),
+			Roact.createElement("UICorner", {
+				CornerRadius = UDim.new(1, 0),
+			}),
+			Roact.createElement("UIListLayout", {
+				FillDirection = Enum.FillDirection.Horizontal,
+				HorizontalAlignment = Enum.HorizontalAlignment.Center,
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				Padding = UDim.new(0, 8),
+			}),
+		}
 		local _length = #_children
-		local _attributes_1 = {}
-		local _value_1 = self.props.Icon
-		_attributes_1.PaddingLeft = UDim.new(0, if _value_1 ~= "" and _value_1 then 16 else 24)
-		_attributes_1.PaddingRight = UDim.new(0, 24)
-		_attributes_1.PaddingBottom = UDim.new(0, 6)
-		_attributes_1.PaddingTop = UDim.new(0, 6)
-		_children[_length + 1] = Roact.createElement("UIPadding", _attributes_1)
-		_children[_length + 2] = Roact.createElement("UICorner", {
-			CornerRadius = UDim.new(1, 0),
-		})
-		_children[_length + 3] = Roact.createElement("UIListLayout", {
-			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			VerticalAlignment = Enum.VerticalAlignment.Center,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, 8),
-		})
 		if icon then
-			_children[_length + 4] = icon
+			_children[_length + 1] = icon
 		end
 		_length = #_children
-		local _attributes_2 = {}
-		local _result
-		if self.props.AutomaticSize then
-			_result = UDim2.fromScale(0, 1)
-		else
-			local _value_2 = self.props.Icon
-			_result = if _value_2 ~= "" and _value_2 then UDim2.fromScale(0.8, 1) else UDim2.fromScale(1, 1)
-		end
-		_attributes_2.Size = _result
-		_attributes_2.AutomaticSize = if self.props.AutomaticSize then Enum.AutomaticSize.X else nil
-		_attributes_2.BackgroundTransparency = 1
-		_attributes_2.FontFace = GothamMedium
-		_attributes_2.TextColor3 = if self.props.Disabled then theme.Scheme.onBackground else color
-		_attributes_2.TextTransparency = if self.props.Disabled then 1 - 0.38 else 0
-		_attributes_2.Text = self.props.Text
-		_attributes_2.TextSize = 14
-		_children[_length + 1] = Roact.createElement("TextLabel", _attributes_2)
+		_children[_length + 1] = Roact.createElement("TextLabel", {
+			Size = if self.props.AutomaticSize then UDim2.fromScale(0, 1) elseif self.props.Icon then UDim2.fromScale(0.8, 1) else UDim2.fromScale(1, 1),
+			AutomaticSize = if self.props.AutomaticSize then Enum.AutomaticSize.X else nil,
+			BackgroundTransparency = 1,
+			FontFace = GothamMedium,
+			TextColor3 = if self.props.Disabled then theme.Scheme.onBackground else color,
+			TextTransparency = if self.props.Disabled then 1 - 0.38 else 0,
+			Text = self.props.Text,
+			TextSize = 14,
+		})
 		_children[_length + 2] = Roact.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = theme.Scheme.outline,

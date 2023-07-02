@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local ColorTile = TS.import(script, script.Parent.Parent, "ColorTile").default
-local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent, "Icons")
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
 local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
 return function(frame)
@@ -37,13 +37,13 @@ return function(frame)
 			Theme = DefaultTheme,
 			Title = "Color",
 			Description = "Description",
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			Color = DefaultTheme.Scheme.error,
 		}),
 		Roact.createElement(ColorTile, {
 			Theme = DefaultTheme,
 			Title = "Color",
-			Icon = Icons.Palette,
+			Icon = Icons.palette,
 			Color = DefaultTheme.Scheme.primaryContainer,
 		}),
 	}))

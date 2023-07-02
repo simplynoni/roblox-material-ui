@@ -2,7 +2,7 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local GothamBlack = TS.import(script, script.Parent.Parent, "Fonts").GothamBlack
-local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Icons = TS.import(script, script.Parent.Parent, "Icons")
 local SliderTile = TS.import(script, script.Parent.Parent, "SliderTile").default
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
 local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
@@ -51,7 +51,7 @@ return function(frame)
 			Roact.createElement(SliderTile, {
 				Theme = DefaultTheme,
 				Title = "Slider",
-				Icon = Icons.Palette,
+				Icon = Icons.palette,
 				Value = 0,
 			}),
 		}),

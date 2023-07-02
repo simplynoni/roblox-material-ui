@@ -1,8 +1,8 @@
 import Roact from '@rbxts/roact';
 import { GothamBold } from './Fonts';
 import IconButton from './IconButton';
-import { Icons } from './Icons';
-import { ThemeProps } from './types';
+import Icons from './Icons';
+import { IconData, ThemeProps } from './types';
 
 interface TopbarProps extends ThemeProps {
 	Title: string;
@@ -11,7 +11,7 @@ interface TopbarProps extends ThemeProps {
 	Height?: UDim;
 	CloseFunction?: () => void;
 	LeadingIcon?: {
-		Icon: Icons | string;
+		Icon: IconData;
 		Function: () => void;
 	};
 }
@@ -25,7 +25,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 				Theme={theme}
 				Size={UDim2.fromScale(0, 1)}
 				LayoutOrder={100}
-				Icon={Icons.Close}
+				Icon={Icons.close}
 				Pressed={this.props.CloseFunction}
 			/>
 		) : undefined;

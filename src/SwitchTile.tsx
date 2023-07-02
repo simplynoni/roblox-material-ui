@@ -3,14 +3,13 @@ import Roact from '@rbxts/roact';
 
 import { Gotham, GothamBold } from './Fonts';
 import Icon from './Icon';
-import { Icons } from './Icons';
 import Switch from './Switch';
-import { ThemeProps } from './types';
+import { IconData, ThemeProps } from './types';
 
 interface SwitchTileProps extends ThemeProps {
 	Enabled: boolean;
 	Title: string;
-	Icon?: Icons;
+	Icon?: IconData;
 	Description?: string;
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
@@ -23,7 +22,7 @@ interface SwitchTileProps extends ThemeProps {
 interface SwitchTileState {
 	Enabled: boolean;
 	Debounce: boolean;
-	Icon?: Icons;
+	Icon?: IconData;
 }
 
 export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, SwitchTileState> {
@@ -116,8 +115,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 					{this.state.Icon ? (
 						<Icon
 							Icon={this.state.Icon}
-							IconSize='24p'
-							MaxSize
+							MaxSize={24}
 							IconColor={theme.Scheme.onBackground}
 							Size={UDim2.fromScale(0.25, 1)}
 							LayoutOrder={1}

@@ -2,9 +2,8 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 
 import Icon from './Icon';
-import { Icons } from './Icons';
 import RoundedFrame from './RoundedFrame';
-import { ThemeProps } from './types';
+import { IconData, ThemeProps } from './types';
 
 interface IconButtonProps extends ThemeProps {
 	AnchorPoint?: Vector2;
@@ -12,7 +11,7 @@ interface IconButtonProps extends ThemeProps {
 	Size: UDim2;
 	ZIndex?: number;
 	LayoutOrder?: number;
-	Icon: Icons | string;
+	Icon: IconData;
 	IconColor?: Color3;
 	Pressed: () => void;
 }
@@ -94,7 +93,6 @@ export default class IconButton extends Roact.Component<IconButtonProps, IconBut
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(0.75, 0.75)}
 					Icon={this.props.Icon}
-					IconSize='24p'
 					IconColor={this.props.IconColor || theme.Scheme.onBackground}
 				/>
 				<RoundedFrame

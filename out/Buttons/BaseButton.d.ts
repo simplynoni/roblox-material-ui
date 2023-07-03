@@ -6,19 +6,19 @@
 import { SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
-import { ColorScheme, ContainerScheme, ThemeProps } from '../Types';
 import { CustomColorGroup } from '../material-color';
-export interface ButtonProps {
-	AnchorPoint?: Vector2;
-	Position?: UDim2;
-	Size?: UDim2;
-	AutomaticSize?: boolean;
-	Text: string;
-	Icon?: Icons | string;
-	Disabled?: boolean;
-	ColorScheme?: ColorScheme;
-	CustomColorGroup?: CustomColorGroup['Colors'];
-	Pressed: () => void;
+import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
+export interface ButtonProps extends ThemeProps {
+    AnchorPoint?: Vector2;
+    Position?: UDim2;
+    Size?: UDim2;
+    AutomaticSize?: boolean;
+    Text: string;
+    Icon?: Icons | string;
+    Disabled?: boolean;
+    ColorScheme?: ColorScheme;
+    CustomColorGroup?: CustomColorGroup['Colors'];
+    Pressed: () => void;
 }
 export declare type ContainerButtonProps = Omit<ButtonProps, 'ColorScheme'> & {
 	ColorScheme?: ContainerScheme;

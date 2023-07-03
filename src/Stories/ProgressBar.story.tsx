@@ -1,8 +1,9 @@
 import Roact from '@rbxts/roact';
 import ProgressBar from '../ProgressBar';
-import { ColorScheme } from '../Types';
+import { ColorScheme } from '../types';
+import DefaultTheme from './DefaultTheme';
 
-class StoryComponent extends Roact.Component<{}, { Value: number }> {
+class Component extends Roact.Component<{}, { Value: number }> {
 	protected state: Readonly<{ Value: number }> = { Value: 50 };
 
 	render() {
@@ -14,6 +15,7 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 					Padding={new UDim(0, 24)}
 				/>
 				<ProgressBar
+					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Primary}
@@ -21,6 +23,7 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 					ShowValue
 				/>
 				<ProgressBar
+					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Secondary}
@@ -28,6 +31,7 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 					ShowValue
 				/>
 				<ProgressBar
+					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Tertiary}
@@ -35,6 +39,7 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 					ShowValue
 				/>
 				<ProgressBar
+					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Error}
@@ -58,9 +63,9 @@ class StoryComponent extends Roact.Component<{}, { Value: number }> {
 }
 
 export = function (frame: GuiObject) {
-	const Tree = Roact.mount(<StoryComponent />, frame);
+	const tree = Roact.mount(<Component />, frame);
 
 	return () => {
-		Roact.unmount(Tree);
+		Roact.unmount(tree);
 	};
 };

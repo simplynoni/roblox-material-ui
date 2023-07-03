@@ -1,8 +1,10 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
 /// <reference types="roact" />
+import { GroupMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
-interface SwitchProps {
+import { ThemeProps } from './types';
+interface SwitchProps extends ThemeProps {
     Enabled: boolean;
     AnchorPoint?: Vector2;
     Position?: UDim2;
@@ -10,7 +12,22 @@ interface SwitchProps {
     OffEvent?: () => void;
     ChangedEvent?: (Enabled: boolean) => void;
 }
-export default class ThemedSwitch extends Roact.Component<SwitchProps> {
+interface SwitchState {
+    Enabled: boolean;
+    Debounce: boolean;
+}
+export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState> {
+    positionMotor: GroupMotor<{
+        Position: number;
+        AnchorPoint: number;
+    }>;
+    positionBinding: Roact.Binding<{
+        Position: number;
+        AnchorPoint: number;
+    }>;
+    constructor(props: SwitchProps);
     render(): Roact.Element;
+    private setEnabled;
+    protected didUpdate(previousProps: SwitchProps): void;
 }
 export {};

@@ -43,8 +43,8 @@ do
 		}
 		local _children_1 = {
 			Roact.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, 16),
-				PaddingRight = UDim.new(0, 16),
+				PaddingLeft = UDim.new(0, 12),
+				PaddingRight = UDim.new(0, 12),
 			}),
 		}
 		local _length_1 = #_children_1
@@ -76,6 +76,8 @@ do
 			FontFace = GothamBold,
 			Text = self.props.Title,
 			TextColor3 = theme.Scheme.onBackground,
+			TextXAlignment = self.props.TextAlignment,
+			RichText = self.props.RichText,
 			TextScaled = true,
 		}, {
 			Roact.createElement("UITextSizeConstraint", {

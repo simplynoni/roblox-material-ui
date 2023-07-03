@@ -1,13 +1,13 @@
 import Roact from '@rbxts/roact';
-import { connect, StoreProvider } from '@rbxts/roact-rodux';
 import { GothamBold } from './Fonts';
 import IconButton from './IconButton';
 import { Icons } from './Icons';
-import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
-interface TopbarProps {
+interface TopbarProps extends ThemeProps {
 	Title: string;
+	RichText?: boolean;
+	TextAlignment?: Enum.TextXAlignment;
 	Height?: UDim;
 	CloseFunction?: () => void;
 	LeadingIcon?: {
@@ -16,12 +16,13 @@ interface TopbarProps {
 	};
 }
 
-class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
+export default class Topbar extends Roact.PureComponent<TopbarProps> {
 	render() {
 		const theme = this.props.Theme;
 
 		const closeButton = this.props.CloseFunction ? (
 			<IconButton
+				Theme={theme}
 				Size={UDim2.fromScale(0, 1)}
 				LayoutOrder={100}
 				Icon={Icons.Close}
@@ -31,6 +32,7 @@ class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
 
 		const leadingButton = this.props.LeadingIcon ? (
 			<IconButton
+				Theme={theme}
 				Size={UDim2.fromScale(0, 1)}
 				LayoutOrder={0}
 				Icon={this.props.LeadingIcon.Icon}
@@ -53,7 +55,7 @@ class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
 					Size={UDim2.fromScale(1, 1)}
 					BackgroundTransparency={1}
 				>
-					<uipadding PaddingLeft={new UDim(0, 16)} PaddingRight={new UDim(0, 16)} />
+					<uipadding PaddingLeft={new UDim(0, 12)} PaddingRight={new UDim(0, 12)} />
 					<frame
 						Key='Leading'
 						AnchorPoint={new Vector2(0, 0.5)}
@@ -79,6 +81,8 @@ class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
 						FontFace={GothamBold}
 						Text={this.props.Title}
 						TextColor3={theme.Scheme.onBackground}
+						TextXAlignment={this.props.TextAlignment}
+						RichText={this.props.RichText}
 						TextScaled
 					>
 						<uitextsizeconstraint MaxTextSize={22} />
@@ -110,22 +114,6 @@ class Topbar extends Roact.PureComponent<TopbarProps & ThemeProps> {
 					BackgroundColor3={theme.Scheme.outline}
 				/>
 			</frame>
-		);
-	}
-}
-
-const Connected = connect<{ Theme: ThemeState }, {}, TopbarProps, ThemeState>((state) => {
-	return {
-		Theme: { ...state },
-	};
-})(Topbar);
-
-export default class ThemedTopbar extends Roact.Component<TopbarProps> {
-	render() {
-		return (
-			<StoreProvider store={ThemeStore}>
-				<Connected {...this.props} />
-			</StoreProvider>
 		);
 	}
 }

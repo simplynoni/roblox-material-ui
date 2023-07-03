@@ -1,14 +1,11 @@
 import { GroupMotor, Linear, SingleMotor } from '@rbxts/flipper';
 import Maid from '@rbxts/maid';
 import Roact from '@rbxts/roact';
-import { StoreProvider, connect } from '@rbxts/roact-rodux';
 
-import RoundedFrame from './RoundedFrame';
 import Shadow from './Shadow';
-import { ThemeState, ThemeStore } from './Theme/ThemeState';
-import { ThemeProps } from './Types';
+import { ThemeProps } from './types';
 
-interface UIBaseProps {
+interface UIBaseProps extends ThemeProps {
 	AnchorPoint: Vector2;
 	Position: UDim2;
 	Size: UDim2;
@@ -33,13 +30,13 @@ const defaults = {
 	fadeVelocity: 7,
 };
 
-class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
+export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 	positionMotor: GroupMotor<{ X: number; Y: number }>;
 	positionBinding: Roact.Binding<{ X: number; Y: number }>;
 	fadeMotor: SingleMotor;
 	fadeBinding: Roact.Binding<number>;
 
-	constructor(props: UIBaseProps & ThemeProps) {
+	constructor(props: UIBaseProps) {
 		super(props);
 
 		this.positionMotor = new GroupMotor(
@@ -112,21 +109,13 @@ class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(1, 1)}
-					BackgroundTransparency={1}
+					BackgroundColor3={theme.Scheme.background}
 					GroupTransparency={this.fadeBinding.map((opacity) => {
 						return 1 - opacity;
 					})}
 				>
-					<RoundedFrame
-						Key='Main'
-						AnchorPoint={new Vector2(0.5, 0.5)}
-						Position={UDim2.fromScale(0.5, 0.5)}
-						Size={UDim2.fromScale(1, 1)}
-						Color={theme.Scheme.background}
-						CornerRadius={16}
-					>
-						{this.props[Roact.Children]}
-					</RoundedFrame>
+					<uicorner CornerRadius={new UDim(0, 16)} />
+					{this.props[Roact.Children]}
 				</canvasgroup>
 				{aspectRatio}
 				{sizeConstraint}
@@ -166,7 +155,7 @@ class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 						? this.props.CustomClosePosition.X
 						: this.props.Position.X.Scale >= 0.5
 						? this.props.Position.X.Scale + 0.2
-						: this.props.Position.X.Scale - 0.2, // 💀
+						: this.props.Position.X.Scale - 0.2,
 					{ velocity: this.props.PositionVelocity || defaults.positionVelocity },
 				),
 				Y: new Linear(
@@ -178,7 +167,6 @@ class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 			this.fadeMotor.setGoal(new Linear(0, { velocity: this.props.FadeVelocity || defaults.fadeVelocity }));
 
 			const onComplete = this.positionMotor.onComplete(() => {
-				// UI could've opened again before the animation finished
 				if (this.state.Closed) {
 					this.setState({
 						Visible: false,
@@ -196,21 +184,5 @@ class UIBase extends Roact.Component<UIBaseProps & ThemeProps, UIBaseState> {
 		if (this.props.Closed !== undefined && previousProps.Closed !== this.props.Closed) {
 			this.setClosed(this.props.Closed);
 		}
-	}
-}
-
-const Connected = connect<{ Theme: ThemeState }, {}, UIBaseProps, ThemeState>((state) => {
-	return {
-		Theme: { ...state },
-	};
-})(UIBase);
-
-export default class ThemedUIBase extends Roact.Component<UIBaseProps> {
-	render() {
-		return (
-			<StoreProvider store={ThemeStore}>
-				<Connected {...this.props} />
-			</StoreProvider>
-		);
 	}
 }

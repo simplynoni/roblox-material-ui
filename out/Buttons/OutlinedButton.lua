@@ -1,12 +1,8 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local connect = _roact_rodux.connect
-local StoreProvider = _roact_rodux.StoreProvider
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
-local ThemeStore = TS.import(script, script.Parent.Parent, "Theme", "ThemeState").ThemeStore
 local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local OutlinedButtonBase
@@ -47,7 +43,7 @@ do
 			BackgroundColor3 = color,
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
-			Size = if self.props.AutomaticSize then UDim2.new(UDim.new(0, 0), UDim.new(0, 35)) else self.props.Size,
+			Size = self.props.Size,
 			Text = "",
 			AutomaticSize = if self.props.AutomaticSize then "X" else nil,
 			[Roact.Event.MouseButton1Click] = TS.async(function()
@@ -114,35 +110,6 @@ do
 		return Roact.createElement("TextButton", _attributes, _children)
 	end
 end
-local Connected = connect(function(state)
-	local _object = {}
-	local _left = "Theme"
-	local _object_1 = {}
-	for _k, _v in state do
-		_object_1[_k] = _v
-	end
-	_object[_left] = _object_1
-	return _object
-end)(OutlinedButtonBase)
-local OutlinedButton
-do
-	OutlinedButton = Roact.Component:extend("OutlinedButton")
-	function OutlinedButton:init()
-	end
-	function OutlinedButton:render()
-		local _attributes = {
-			store = ThemeStore,
-		}
-		local _children = {}
-		local _length = #_children
-		local _attributes_1 = {}
-		for _k, _v in self.props do
-			_attributes_1[_k] = _v
-		end
-		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
-		return Roact.createElement(StoreProvider, _attributes, _children)
-	end
-end
 return {
-	default = OutlinedButton,
+	default = OutlinedButtonBase,
 }

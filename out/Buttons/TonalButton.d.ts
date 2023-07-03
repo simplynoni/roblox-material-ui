@@ -1,6 +1,7 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
-import { ContainerButtonProps } from './BaseButton';
-export default class TonalButton extends Roact.Component<ContainerButtonProps> {
+import { ThemeProps } from '../types';
+import BaseButton, { ContainerButtonProps } from './BaseButton';
+export default class TonalButtonBase extends BaseButton<ContainerButtonProps & ThemeProps> {
     render(): Roact.Element;
 }

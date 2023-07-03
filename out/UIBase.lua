@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local GroupMotor = _flipper.GroupMotor
@@ -6,12 +6,7 @@ local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
 local Maid = TS.import(script, TS.getModule(script, "@rbxts", "maid").Maid)
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local connect = _roact_rodux.connect
-local StoreProvider = _roact_rodux.StoreProvider
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local Shadow = TS.import(script, script.Parent, "Shadow").default
-local ThemeStore = TS.import(script, script.Parent, "Theme", "ThemeState").ThemeStore
 local defaults = {
 	positionVelocity = 1,
 	fadeVelocity = 7,
@@ -90,33 +85,27 @@ do
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = 1,
+			BackgroundColor3 = theme.Scheme.background,
 			GroupTransparency = self.fadeBinding:map(function(opacity)
 				return 1 - opacity
 			end),
 		}
-		local _children_1 = {}
-		local _length_1 = #_children_1
-		local _attributes_2 = {
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromScale(1, 1),
-			Color = theme.Scheme.background,
-			CornerRadius = 16,
+		local _children_1 = {
+			Roact.createElement("UICorner", {
+				CornerRadius = UDim.new(0, 16),
+			}),
 		}
-		local _children_2 = {}
-		local _length_2 = #_children_2
+		local _length_1 = #_children_1
 		local _child = self.props[Roact.Children]
 		if _child then
 			for _k, _v in _child do
 				if type(_k) == "number" then
-					_children_2[_length_2 + _k] = _v
+					_children_1[_length_1 + _k] = _v
 				else
-					_children_2[_k] = _v
+					_children_1[_k] = _v
 				end
 			end
 		end
-		_children_1.Main = Roact.createElement(RoundedFrame, _attributes_2, _children_2)
 		_children.InnerContainer = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
 		if aspectRatio then
 			_children[_length + 1] = aspectRatio
@@ -208,7 +197,6 @@ do
 			_object_3[_left_4] = _condition_2
 			_fn_1:setGoal(Linear.new(0, _object_3))
 			local onComplete = self.positionMotor:onComplete(function()
-				-- UI could've opened again before the animation finished
 				if self.state.Closed then
 					self:setState({
 						Visible = false,
@@ -227,35 +215,6 @@ do
 		end
 	end
 end
-local Connected = connect(function(state)
-	local _object = {}
-	local _left = "Theme"
-	local _object_1 = {}
-	for _k, _v in state do
-		_object_1[_k] = _v
-	end
-	_object[_left] = _object_1
-	return _object
-end)(UIBase)
-local ThemedUIBase
-do
-	ThemedUIBase = Roact.Component:extend("ThemedUIBase")
-	function ThemedUIBase:init()
-	end
-	function ThemedUIBase:render()
-		local _attributes = {
-			store = ThemeStore,
-		}
-		local _children = {}
-		local _length = #_children
-		local _attributes_1 = {}
-		for _k, _v in self.props do
-			_attributes_1[_k] = _v
-		end
-		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
-		return Roact.createElement(StoreProvider, _attributes, _children)
-	end
-end
 return {
-	default = ThemedUIBase,
+	default = UIBase,
 }

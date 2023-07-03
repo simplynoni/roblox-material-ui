@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local exports = {}
 for _k, _v in TS.import(script, script, "Buttons") or {} do
@@ -17,15 +17,12 @@ exports.Slider = TS.import(script, script, "Slider").default
 exports.SliderTile = TS.import(script, script, "SliderTile").default
 exports.Switch = TS.import(script, script, "Switch").default
 exports.SwitchTile = TS.import(script, script, "SwitchTile").default
-for _k, _v in TS.import(script, script, "Theme", "ThemeState") or {} do
-	exports[_k] = _v
-end
 exports.Topbar = TS.import(script, script, "Topbar").default
-for _k, _v in TS.import(script, script, "types") or {} do
-	exports[_k] = _v
-end
 exports.UIBase = TS.import(script, script, "UIBase").default
 local _material_color = TS.import(script, script, "material-color")
 exports.CustomColorGroup = _material_color.CustomColorGroup
 exports.Scheme = _material_color.default
+for _k, _v in TS.import(script, script, "types") or {} do
+	exports[_k] = _v
+end
 return exports

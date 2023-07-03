@@ -6,7 +6,6 @@ local connect = _roact_rodux.connect
 local StoreProvider = _roact_rodux.StoreProvider
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
-local ThemeStore = TS.import(script, script.Parent.Parent, "Theme", "ThemeState").ThemeStore
 local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local FilledButtonBase
@@ -47,7 +46,7 @@ do
 			BorderSizePixel = 0,
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
-			Size = if self.props.AutomaticSize then UDim2.new(UDim.new(0, 0), UDim.new(0, 35)) else self.props.Size,
+			Size = self.props.Size,
 			Text = "",
 			AutomaticSize = if self.props.AutomaticSize then Enum.AutomaticSize.X else nil,
 			[Roact.Event.MouseButton1Click] = TS.async(function()

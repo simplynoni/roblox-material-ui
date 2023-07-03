@@ -1,18 +1,31 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
-import { ColorScheme } from './Types';
-interface ProgressBarProps {
-	AnchorPoint?: Vector2;
-	Position?: UDim2;
-	Size?: UDim2;
-	Label?: string;
-	Value: number;
-	ShowValue?: boolean;
-	ColorScheme?: ColorScheme;
+import { ColorScheme, ThemeProps } from './types';
+interface ProgressBarProps extends ThemeProps {
+    AnchorPoint?: Vector2;
+    Position?: UDim2;
+    Size?: UDim2;
+    Label?: string;
+    Value: number;
+    ShowValue?: boolean;
+    ColorScheme?: ColorScheme;
 }
-export default class ThemedProgressBar extends Roact.Component<ProgressBarProps> {
-	render(): Roact.Element;
+interface ProgressBarState {
+    Value: number;
+    HolderWidth: number;
+}
+export default class ProgressBar extends Roact.Component<ProgressBarProps, ProgressBarState> {
+    protected state: Readonly<ProgressBarState>;
+    private holderRef;
+    private valueMotor;
+    private valueBinding;
+    constructor(props: ProgressBarProps & ThemeProps);
+    render(): Roact.Element;
+    setValue(value: number): void;
+    protected didMount(): void;
+    protected didUpdate(previousProps: ProgressBarProps, previousState: ProgressBarState): void;
 }
 export {};

@@ -15,36 +15,36 @@ class Component extends Roact.Component<{}, { Value: number }> {
 					Padding={new UDim(0, 24)}
 				/>
 				<ProgressBar
-					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Primary}
 					Label='Progress Bar'
 					ShowValue
+					Theme={DefaultTheme}
 				/>
 				<ProgressBar
-					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Secondary}
 					Label='Progress Bar'
 					ShowValue
+					Theme={DefaultTheme}
 				/>
 				<ProgressBar
-					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Tertiary}
 					Label='Progress Bar'
 					ShowValue
+					Theme={DefaultTheme}
 				/>
 				<ProgressBar
-					Theme={DefaultTheme}
 					Size={new UDim2(0.5, 0, 0, 20)}
 					Value={this.state.Value}
 					ColorScheme={ColorScheme.Error}
 					Label='Progress Bar'
 					ShowValue
+					Theme={DefaultTheme}
 				/>
 			</>
 		);

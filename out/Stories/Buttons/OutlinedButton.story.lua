@@ -1,14 +1,16 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local OutlinedButton = TS.import(script, script.Parent.Parent.Parent, "Buttons").OutlinedButton
 local Icons = TS.import(script, script.Parent.Parent.Parent, "Icons").Icons
 local UIBase = TS.import(script, script.Parent.Parent.Parent, "UIBase").default
+local DefaultTheme = TS.import(script, script.Parent.Parent, "DefaultTheme").default
 return function(frame)
 	local Tree = Roact.mount(Roact.createElement(UIBase, {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(0.3, 0.55),
+		Theme = DefaultTheme,
 	}, {
 		Roact.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -24,6 +26,7 @@ return function(frame)
 			Pressed = function()
 				print("a")
 			end,
+			Theme = DefaultTheme,
 		}),
 		Roact.createElement(OutlinedButton, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -34,6 +37,7 @@ return function(frame)
 			Pressed = function()
 				print("a")
 			end,
+			Theme = DefaultTheme,
 		}),
 		Roact.createElement(OutlinedButton, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -43,6 +47,7 @@ return function(frame)
 			Pressed = function()
 				print("a")
 			end,
+			Theme = DefaultTheme,
 		}),
 		Roact.createElement(OutlinedButton, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -53,6 +58,7 @@ return function(frame)
 			Pressed = function()
 				print("a")
 			end,
+			Theme = DefaultTheme,
 		}),
 		Roact.createElement(OutlinedButton, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -64,6 +70,7 @@ return function(frame)
 			Pressed = function()
 				print("a")
 			end,
+			Theme = DefaultTheme,
 		}),
 	}), frame)
 	return function()

@@ -3,6 +3,7 @@ import { GothamBlack } from '../Fonts';
 import { Icons } from '../Icons';
 import SliderTile from '../SliderTile';
 import UIBase from '../UIBase';
+import DefaultTheme from './DefaultTheme';
 
 export = function (frame: GuiObject) {
 	const Tree = Roact.mount(
@@ -22,16 +23,17 @@ export = function (frame: GuiObject) {
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				Position={UDim2.fromScale(0.5, 0.5)}
 				Size={UDim2.fromScale(0.4, 0.6)}
+				Theme={DefaultTheme}
 			>
 				<uilistlayout
 					VerticalAlignment={Enum.VerticalAlignment.Top}
 					HorizontalAlignment={Enum.HorizontalAlignment.Center}
 					Padding={new UDim(0, 0)}
 				/>
-				<SliderTile Title='Slider' Value={1} />
-				<SliderTile Title='Stepped Slider' Steps={10} Value={0} ShowValue />
-				<SliderTile Title='Slider' Value={1} ShowValue />
-				<SliderTile Title='Slider' Icon={Icons.Palette} Value={0} />
+				<SliderTile Title='Slider' Value={1} Theme={DefaultTheme} />
+				<SliderTile Title='Stepped Slider' Steps={10} Value={0} ShowValue Theme={DefaultTheme} />
+				<SliderTile Title='Slider' Value={1} ShowValue Theme={DefaultTheme} />
+				<SliderTile Title='Slider' Icon={Icons.Palette} Value={0} Theme={DefaultTheme} />
 			</UIBase>
 		</>,
 		frame,

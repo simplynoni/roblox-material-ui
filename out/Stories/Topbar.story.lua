@@ -1,9 +1,10 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
 local Topbar = TS.import(script, script.Parent.Parent, "Topbar").default
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
+local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
 local StoryComponent
 do
 	StoryComponent = Roact.Component:extend("StoryComponent")
@@ -18,6 +19,7 @@ do
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(0.5, 0.6),
 			Closed = self.state.Closed,
+			Theme = DefaultTheme,
 		}, {
 			Roact.createElement(Topbar, {
 				Title = "Topbar",
@@ -34,6 +36,7 @@ do
 					Icon = Icons.NavigateBack,
 					Function = function() end,
 				},
+				Theme = DefaultTheme,
 			}),
 		})
 	end

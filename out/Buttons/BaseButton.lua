@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local Linear = _flipper.Linear
@@ -18,6 +18,13 @@ do
 	end
 	function BaseButton:render()
 		return nil
+	end
+	function BaseButton:didUpdate(previousProps, previousState)
+		if previousProps.Disabled ~= previousProps.Disabled and self.props.Disabled then
+			self.stateMotor:setGoal(Linear.new(0, {
+				velocity = 0.5,
+			}))
+		end
 	end
 	BaseButton.MouseClick = TS.async(function(self)
 		if self.props.Disabled then

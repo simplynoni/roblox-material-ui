@@ -1,10 +1,11 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local GothamBlack = TS.import(script, script.Parent.Parent, "Fonts").GothamBlack
 local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
 local SliderTile = TS.import(script, script.Parent.Parent, "SliderTile").default
 local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
+local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
 return function(frame)
 	local Tree = Roact.mount(Roact.createFragment({
 		Roact.createElement("TextLabel", {
@@ -22,6 +23,7 @@ return function(frame)
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(0.4, 0.6),
+			Theme = DefaultTheme,
 		}, {
 			Roact.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Top,
@@ -31,22 +33,26 @@ return function(frame)
 			Roact.createElement(SliderTile, {
 				Title = "Slider",
 				Value = 1,
+				Theme = DefaultTheme,
 			}),
 			Roact.createElement(SliderTile, {
 				Title = "Stepped Slider",
 				Steps = 10,
 				Value = 0,
 				ShowValue = true,
+				Theme = DefaultTheme,
 			}),
 			Roact.createElement(SliderTile, {
 				Title = "Slider",
 				Value = 1,
 				ShowValue = true,
+				Theme = DefaultTheme,
 			}),
 			Roact.createElement(SliderTile, {
 				Title = "Slider",
 				Icon = Icons.Palette,
 				Value = 0,
+				Theme = DefaultTheme,
 			}),
 		}),
 	}), frame)

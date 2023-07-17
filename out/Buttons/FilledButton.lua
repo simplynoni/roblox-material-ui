@@ -1,31 +1,28 @@
--- Compiled with roblox-ts v2.0.4
+-- Compiled with roblox-ts v2.1.0
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _roact_rodux = TS.import(script, TS.getModule(script, "@rbxts", "roact-rodux").src)
-local connect = _roact_rodux.connect
-local StoreProvider = _roact_rodux.StoreProvider
 local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
 local Icon = TS.import(script, script.Parent.Parent, "Icon").default
 local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
 local BaseButton = TS.import(script, script.Parent, "BaseButton").default
-local FilledButtonBase
+local FilledButton
 do
 	local super = BaseButton
-	FilledButtonBase = setmetatable({}, {
+	FilledButton = setmetatable({}, {
 		__tostring = function()
-			return "FilledButtonBase"
+			return "FilledButton"
 		end,
 		__index = super,
 	})
-	FilledButtonBase.__index = FilledButtonBase
-	function FilledButtonBase.new(...)
-		local self = setmetatable({}, FilledButtonBase)
+	FilledButton.__index = FilledButton
+	function FilledButton.new(...)
+		local self = setmetatable({}, FilledButton)
 		return self:constructor(...) or self
 	end
-	function FilledButtonBase:constructor(...)
+	function FilledButton:constructor(...)
 		super.constructor(self, ...)
 	end
-	function FilledButtonBase:render()
+	function FilledButton:render()
 		local theme = self.props.Theme
 		local colorScheme = self.props.ColorScheme or ColorScheme.Primary
 		local lowerCaseColorScheme = string.lower(colorScheme)
@@ -122,35 +119,6 @@ do
 		return Roact.createElement("TextButton", _attributes, _children)
 	end
 end
-local Connected = connect(function(state)
-	local _object = {}
-	local _left = "Theme"
-	local _object_1 = {}
-	for _k, _v in state do
-		_object_1[_k] = _v
-	end
-	_object[_left] = _object_1
-	return _object
-end)(FilledButtonBase)
-local ThemedFilledButton
-do
-	ThemedFilledButton = Roact.Component:extend("ThemedFilledButton")
-	function ThemedFilledButton:init()
-	end
-	function ThemedFilledButton:render()
-		local _attributes = {
-			store = ThemeStore,
-		}
-		local _children = {}
-		local _length = #_children
-		local _attributes_1 = {}
-		for _k, _v in self.props do
-			_attributes_1[_k] = _v
-		end
-		_children[_length + 1] = Roact.createElement(Connected, _attributes_1)
-		return Roact.createElement(StoreProvider, _attributes, _children)
-	end
-end
 return {
-	default = ThemedFilledButton,
+	default = FilledButton,
 }

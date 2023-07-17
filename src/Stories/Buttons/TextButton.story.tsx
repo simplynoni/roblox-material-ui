@@ -2,6 +2,7 @@ import Roact from '@rbxts/roact';
 import { TextButton } from '../../Buttons';
 import { Icons } from '../../Icons';
 import UIBase from '../../UIBase';
+import DefaultTheme from '../DefaultTheme';
 
 export = function (frame: GuiObject) {
 	const Tree = Roact.mount(
@@ -9,6 +10,7 @@ export = function (frame: GuiObject) {
 			AnchorPoint={new Vector2(0.5, 0.5)}
 			Position={UDim2.fromScale(0.5, 0.5)}
 			Size={UDim2.fromScale(0.3, 0.55)}
+			Theme={DefaultTheme}
 		>
 			<uilistlayout
 				SortOrder={Enum.SortOrder.LayoutOrder}
@@ -24,6 +26,7 @@ export = function (frame: GuiObject) {
 				Pressed={() => {
 					print('a');
 				}}
+				Theme={DefaultTheme}
 			/>
 			<TextButton
 				AnchorPoint={new Vector2(0.5, 0.5)}
@@ -34,6 +37,7 @@ export = function (frame: GuiObject) {
 				Pressed={() => {
 					print('a');
 				}}
+				Theme={DefaultTheme}
 			/>
 			<TextButton
 				AnchorPoint={new Vector2(0.5, 0.5)}
@@ -43,6 +47,7 @@ export = function (frame: GuiObject) {
 				Pressed={() => {
 					print('a');
 				}}
+				Theme={DefaultTheme}
 			/>
 			<TextButton
 				AnchorPoint={new Vector2(0.5, 0.5)}
@@ -53,6 +58,7 @@ export = function (frame: GuiObject) {
 				Pressed={() => {
 					print('a');
 				}}
+				Theme={DefaultTheme}
 			/>
 			<TextButton
 				AnchorPoint={new Vector2(0.5, 0.5)}
@@ -64,6 +70,7 @@ export = function (frame: GuiObject) {
 				Pressed={() => {
 					print('a');
 				}}
+				Theme={DefaultTheme}
 			/>
 		</UIBase>,
 		frame,

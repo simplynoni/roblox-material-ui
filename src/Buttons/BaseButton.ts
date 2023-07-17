@@ -48,6 +48,12 @@ export default abstract class BaseButton<
 		return undefined;
 	}
 
+	protected didUpdate(previousProps: Props, previousState: ButtonState): void {
+		if (previousProps.Disabled !== previousProps.Disabled && this.props.Disabled) {
+			this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
+		}
+	}
+
 	async MouseClick() {
 		if (this.props.Disabled) return;
 		if (this.state.Debounce === false) {

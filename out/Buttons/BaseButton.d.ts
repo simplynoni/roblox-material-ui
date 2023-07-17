@@ -8,7 +8,7 @@ import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
 import { CustomColorGroup } from '../material-color';
 import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
-export interface ButtonProps extends ThemeProps {
+export interface ButtonProps {
     AnchorPoint?: Vector2;
     Position?: UDim2;
     Size?: UDim2;
@@ -20,25 +20,24 @@ export interface ButtonProps extends ThemeProps {
     CustomColorGroup?: CustomColorGroup['Colors'];
     Pressed: () => void;
 }
-export declare type ContainerButtonProps = Omit<ButtonProps, 'ColorScheme'> & {
-	ColorScheme?: ContainerScheme;
+export type ContainerButtonProps = Omit<ButtonProps, 'ColorScheme'> & {
+    ColorScheme?: ContainerScheme;
 };
 export interface ButtonState {
-	Debounce: boolean;
+    Debounce: boolean;
 }
-export default abstract class BaseButton<
-	Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps,
-> extends Roact.Component<Props, ButtonState> {
-	stateMotor: SingleMotor;
-	stateBinding: Roact.Binding<number>;
-	state: {
-		Debounce: boolean;
-	};
-	constructor(props: Props);
-	render(): Roact.Element | undefined;
-	MouseClick(): Promise<void>;
-	MouseUp(): void;
-	MouseDown(): void;
-	MouseEnter(): void;
-	MouseLeave(): void;
+export default abstract class BaseButton<Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps> extends Roact.Component<Props, ButtonState> {
+    stateMotor: SingleMotor;
+    stateBinding: Roact.Binding<number>;
+    state: {
+        Debounce: boolean;
+    };
+    constructor(props: Props);
+    render(): Roact.Element | undefined;
+    protected didUpdate(previousProps: Props, previousState: ButtonState): void;
+    MouseClick(): Promise<void>;
+    MouseUp(): void;
+    MouseDown(): void;
+    MouseEnter(): void;
+    MouseLeave(): void;
 }

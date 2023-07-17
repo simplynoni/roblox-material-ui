@@ -1,6 +1,6 @@
 /// <reference types="roact" />
 import Roact from '@rbxts/roact';
-import { ButtonProps } from './BaseButton';
-export default class ThemedFilledButton extends Roact.Component<ButtonProps> {
+import BaseButton from './BaseButton';
+export default class FilledButton extends BaseButton {
     render(): Roact.Element;
 }

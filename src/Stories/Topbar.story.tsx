@@ -2,6 +2,7 @@ import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
 import Topbar from '../Topbar';
 import UIBase from '../UIBase';
+import DefaultTheme from './DefaultTheme';
 
 class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {
 	protected state: Readonly<{ Closed: boolean }> = { Closed: false };
@@ -13,6 +14,7 @@ class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {
 				Position={UDim2.fromScale(0.5, 0.5)}
 				Size={UDim2.fromScale(0.5, 0.6)}
 				Closed={this.state.Closed}
+				Theme={DefaultTheme}
 			>
 				<Topbar
 					Title='Topbar'
@@ -22,6 +24,7 @@ class StoryComponent extends Roact.Component<{}, { Closed: boolean }> {
 						this.setState({ Closed: false });
 					}}
 					LeadingIcon={{ Icon: Icons.NavigateBack, Function: () => {} }}
+					Theme={DefaultTheme}
 				/>
 			</UIBase>
 		);

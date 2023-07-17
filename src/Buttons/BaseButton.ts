@@ -49,7 +49,7 @@ export default abstract class BaseButton<
 	}
 
 	protected didUpdate(previousProps: Props, previousState: ButtonState): void {
-		if (previousProps.Disabled !== previousProps.Disabled && this.props.Disabled) {
+		if (previousProps.Disabled !== this.props.Disabled && this.props.Disabled) {
 			this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
 		}
 	}

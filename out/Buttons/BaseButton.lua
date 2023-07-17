@@ -20,7 +20,7 @@ do
 		return nil
 	end
 	function BaseButton:didUpdate(previousProps, previousState)
-		if previousProps.Disabled ~= previousProps.Disabled and self.props.Disabled then
+		if previousProps.Disabled ~= self.props.Disabled and self.props.Disabled then
 			self.stateMotor:setGoal(Linear.new(0, {
 				velocity = 0.5,
 			}))

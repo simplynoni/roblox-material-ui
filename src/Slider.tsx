@@ -1,4 +1,4 @@
-import Roact from '@rbxts/roact';
+import Roact, { RefObject, createRef } from '@rbxts/roact';
 import RoundedFrame from './RoundedFrame';
 
 import { SingleMotor, Spring } from '@rbxts/flipper';
@@ -20,7 +20,7 @@ interface SliderState {
 }
 
 export default class Slider extends Roact.PureComponent<SliderProps, SliderState> {
-	railRef: Roact.Ref<Frame>;
+	railRef: RefObject<Frame>
 
 	dragMotor: SingleMotor;
 	dragBinding: Roact.Binding<number>;
@@ -28,7 +28,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 	constructor(props: SliderProps & ThemeProps) {
 		super(props);
 
-		this.railRef = Roact.createRef<Frame>();
+		this.railRef = createRef()
 
 		this.setState({
 			Value: this.props.Value,
@@ -47,7 +47,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 
 		return (
 			<frame
-				Key='Slider'
+				key='Slider'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size ?? new UDim2(1, 0, 0, 15)}
@@ -55,7 +55,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 				LayoutOrder={this.props.LayoutOrder}
 			>
 				<textbutton
-					Key='Thumb'
+					key='Thumb'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={this.dragBinding.map((value) => {
 						return UDim2.fromScale(value, 0.5);
@@ -65,6 +65,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 					BackgroundColor3={theme.Scheme.primary}
 					AutoButtonColor={false}
 					Text=''
+					ZIndex={2}
 					Event={{
 						InputBegan: (_, input) => {
 							if (
@@ -73,7 +74,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 							)
 								return;
 
-							const slider = this.railRef.getValue();
+							const slider = this.railRef.current
 
 							if (!slider) return;
 
@@ -105,7 +106,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 					<uiaspectratioconstraint AspectRatio={1} />
 				</textbutton>
 				<textbutton
-					Key='Hitbox'
+					key='Hitbox'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(1, 1)}
@@ -119,7 +120,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 							)
 								return;
 
-							const slider = this.railRef.getValue();
+							const slider = this.railRef.current
 
 							if (!slider) return;
 
@@ -136,7 +137,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 					}}
 				/>
 				<RoundedFrame
-					Key='Rail'
+					key='Rail'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={new UDim2(1, 0, 0, 3)}
@@ -145,7 +146,7 @@ export default class Slider extends Roact.PureComponent<SliderProps, SliderState
 					Ref={this.railRef}
 				>
 					<RoundedFrame
-						Key='Filler'
+						key='Filler'
 						AnchorPoint={new Vector2(0, 0.5)}
 						Position={UDim2.fromScale(0, 0.5)}
 						Size={this.dragBinding.map((value) => {

@@ -24,7 +24,7 @@ export default Roact.forwardRef<RoundedFrameProps, Frame>((props, ref) => (
 		Ref={ref}
 	>
 		<uicorner
-			Key='Corner'
+			key='Corner'
 			CornerRadius={props.CornerRadius === 'Full' ? new UDim(0.5, 0) : new UDim(0, props.CornerRadius)}
 		/>
 		{props.Outline ? <uistroke ApplyStrokeMode={Enum.ApplyStrokeMode.Border} Color={props.OutlineColor} /> : <></>}

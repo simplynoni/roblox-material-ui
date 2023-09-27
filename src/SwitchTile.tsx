@@ -53,7 +53,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 
 		return (
 			<textbutton
-				Key='SwitchTile'
+				key='SwitchTile'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size ?? new UDim2(1, 0, 0, 72)}
@@ -100,7 +100,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 					PaddingTop={new UDim(0, 12)}
 				/>
 				<frame
-					Key='LeftAlign'
+					key='LeftAlign'
 					AnchorPoint={new Vector2(0, 0.5)}
 					Position={UDim2.fromScale(0, 0.5)}
 					Size={UDim2.fromScale(0.75, 1)}
@@ -124,7 +124,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 						/>
 					) : undefined}
 					<frame
-						Key='TextHolder'
+						key='TextHolder'
 						Size={UDim2.fromScale(this.state.Icon ? 0.8 : 1, 1)}
 						BackgroundTransparency={1}
 						LayoutOrder={2}
@@ -137,7 +137,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 							SortOrder={Enum.SortOrder.LayoutOrder}
 						/>
 						<textlabel
-							Key='Title'
+							key='Title'
 							LayoutOrder={1}
 							Size={UDim2.fromScale(1, 0.45)}
 							BackgroundTransparency={1}
@@ -151,7 +151,7 @@ export default class SwitchTile extends Roact.PureComponent<SwitchTileProps, Swi
 						</textlabel>
 						{this.props.Description ? (
 							<textlabel
-								Key='Description'
+								key='Description'
 								LayoutOrder={2}
 								Size={UDim2.fromScale(1, 0.35)}
 								BackgroundTransparency={1}

@@ -44,10 +44,6 @@ export default abstract class BaseButton<
 		this.stateMotor.onStep(setStateBinding);
 	}
 
-	render(): Roact.Element | undefined {
-		return undefined;
-	}
-
 	protected didUpdate(previousProps: Props, previousState: ButtonState): void {
 		if (previousProps.Disabled !== this.props.Disabled && this.props.Disabled) {
 			this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));

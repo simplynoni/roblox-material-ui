@@ -1,12 +1,14 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local SingleMotor = _flipper.SingleMotor
 local Spring = _flipper.Spring
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local ColorScheme = TS.import(script, script.Parent, "types").ColorScheme
+local _roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local Roact = _roact
+local createRef = _roact.createRef
+local GothamBold = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamBold
+local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
+local ColorScheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")
@@ -15,7 +17,7 @@ do
 			Value = self.props.Value,
 			HolderWidth = 0,
 		}
-		self.holderRef = Roact.createRef()
+		self.holderRef = createRef()
 		self.valueMotor = SingleMotor.new(self.props.Value / 100)
 		local valueBinding, setValueBinding = Roact.createBinding(self.valueMotor:getValue())
 		self.valueBinding = valueBinding
@@ -27,56 +29,55 @@ do
 		local lowerCaseColorScheme = string.lower(colorScheme)
 		local _value = self.props.Label
 		local _attributes = {
+			key = "ProgressBar",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = self.props.Size or UDim2.new(1, 0, 0, 20),
 			Color = theme.Scheme[lowerCaseColorScheme .. "Container"],
 			BorderSizePixel = 0,
 			CornerRadius = "Full",
-			[Roact.Ref] = self.holderRef,
+			ref = self.holderRef,
 		}
 		local _children = {}
 		local _length = #_children
-		local _child = if _value ~= "" and _value then (Roact.createFragment({
-			Label = Roact.createElement("TextLabel", {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.fromScale(0.75, 1),
-				BackgroundTransparency = 1,
-				FontFace = GothamBold,
-				Text = self.props.Label,
-				TextColor3 = theme.Scheme["on" .. (colorScheme .. "Container")],
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UIPadding", {
-					PaddingBottom = UDim.new(0, 1),
-					PaddingTop = UDim.new(0, 1),
-					PaddingLeft = UDim.new(0, 8),
-				}),
+		local _child = if _value ~= "" and _value then (Roact.createElement("TextLabel", {
+			key = "Label",
+			AnchorPoint = Vector2.new(0, 0.5),
+			Position = UDim2.fromScale(0, 0.5),
+			Size = UDim2.fromScale(0.75, 1),
+			BackgroundTransparency = 1,
+			FontFace = GothamBold,
+			Text = self.props.Label,
+			TextColor3 = theme.Scheme["on" .. (colorScheme .. "Container")],
+			TextXAlignment = Enum.TextXAlignment.Left,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, 1),
+				PaddingTop = UDim.new(0, 1),
+				PaddingLeft = UDim.new(0, 8),
 			}),
 		})) else nil
 		if _child then
 			_children[_length + 1] = _child
 		end
 		_length = #_children
-		local _child_1 = if self.props.ShowValue then (Roact.createFragment({
-			Value = Roact.createElement("TextLabel", {
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(1, 0.5),
-				Size = UDim2.fromScale(0.25, 1),
-				BackgroundTransparency = 1,
-				FontFace = GothamBold,
-				Text = tostring(self.state.Value),
-				TextColor3 = theme.Scheme["on" .. (colorScheme .. "Container")],
-				TextXAlignment = Enum.TextXAlignment.Right,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UIPadding", {
-					PaddingBottom = UDim.new(0, 1),
-					PaddingTop = UDim.new(0, 1),
-					PaddingRight = UDim.new(0, 8),
-				}),
+		local _child_1 = if self.props.ShowValue then (Roact.createElement("TextLabel", {
+			key = "Value",
+			AnchorPoint = Vector2.new(1, 0.5),
+			Position = UDim2.fromScale(1, 0.5),
+			Size = UDim2.fromScale(0.25, 1),
+			BackgroundTransparency = 1,
+			FontFace = GothamBold,
+			Text = tostring(self.state.Value),
+			TextColor3 = theme.Scheme["on" .. (colorScheme .. "Container")],
+			TextXAlignment = Enum.TextXAlignment.Right,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, 1),
+				PaddingTop = UDim.new(0, 1),
+				PaddingRight = UDim.new(0, 8),
 			}),
 		})) else nil
 		if _child_1 then
@@ -85,6 +86,7 @@ do
 		_length = #_children
 		local _value_1 = self.props.Label
 		local _attributes_1 = {
+			key = "Filler",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
 			Size = self.valueBinding:map(function(value)
@@ -99,55 +101,51 @@ do
 			}),
 		}
 		local _length_1 = #_children_1
-		local _child_2 = if _value_1 ~= "" and _value_1 then (Roact.createFragment({
-			Label = Roact.createElement("TextLabel", {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.new(0, self.state.HolderWidth * 0.75, 1, 0),
-				BackgroundTransparency = 1,
-				FontFace = GothamBold,
-				Text = self.props.Label,
-				TextColor3 = theme.Scheme["on" .. colorScheme],
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UIPadding", {
-					PaddingBottom = UDim.new(0, 1),
-					PaddingTop = UDim.new(0, 1),
-					PaddingLeft = UDim.new(0, 8),
-				}),
+		local _child_2 = if _value_1 ~= "" and _value_1 then (Roact.createElement("TextLabel", {
+			key = "Label",
+			AnchorPoint = Vector2.new(0, 0.5),
+			Position = UDim2.fromScale(0, 0.5),
+			Size = UDim2.new(0, self.state.HolderWidth * 0.75, 1, 0),
+			BackgroundTransparency = 1,
+			FontFace = GothamBold,
+			Text = self.props.Label,
+			TextColor3 = theme.Scheme["on" .. colorScheme],
+			TextXAlignment = Enum.TextXAlignment.Left,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, 1),
+				PaddingTop = UDim.new(0, 1),
+				PaddingLeft = UDim.new(0, 8),
 			}),
 		})) else nil
 		if _child_2 then
 			_children_1[_length_1 + 1] = _child_2
 		end
 		_length_1 = #_children_1
-		local _child_3 = if self.props.ShowValue then (Roact.createFragment({
-			Value = Roact.createElement("TextLabel", {
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.new(0, self.state.HolderWidth, 0.5, 0),
-				Size = UDim2.fromScale(0.25, 1),
-				BackgroundTransparency = 1,
-				FontFace = GothamBold,
-				Text = tostring(self.state.Value),
-				TextColor3 = theme.Scheme["on" .. colorScheme],
-				TextXAlignment = Enum.TextXAlignment.Right,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UIPadding", {
-					PaddingBottom = UDim.new(0, 1),
-					PaddingTop = UDim.new(0, 1),
-					PaddingRight = UDim.new(0, 8),
-				}),
+		local _child_3 = if self.props.ShowValue then (Roact.createElement("TextLabel", {
+			key = "Value",
+			AnchorPoint = Vector2.new(1, 0.5),
+			Position = UDim2.new(0, self.state.HolderWidth, 0.5, 0),
+			Size = UDim2.fromScale(0.25, 1),
+			BackgroundTransparency = 1,
+			FontFace = GothamBold,
+			Text = tostring(self.state.Value),
+			TextColor3 = theme.Scheme["on" .. colorScheme],
+			TextXAlignment = Enum.TextXAlignment.Right,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, 1),
+				PaddingTop = UDim.new(0, 1),
+				PaddingRight = UDim.new(0, 8),
 			}),
 		})) else nil
 		if _child_3 then
 			_children_1[_length_1 + 1] = _child_3
 		end
-		_children.Filler = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
-		return Roact.createFragment({
-			ProgressBar = Roact.createElement(RoundedFrame, _attributes, _children),
-		})
+		_children[_length + 1] = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
+		return Roact.createElement(RoundedFrame, _attributes, _children)
 	end
 	function ProgressBar:setValue(value)
 		self.valueMotor:setGoal(Spring.new(value / 100, {
@@ -161,7 +159,7 @@ do
 	function ProgressBar:didMount()
 		coroutine.wrap(function()
 			task.wait(0.01)
-			local holder = self.holderRef:getValue()
+			local holder = self.holderRef.current
 			if holder then
 				self:setState({
 					HolderWidth = holder.AbsoluteSize.X,
@@ -173,7 +171,7 @@ do
 		if self.props.Value ~= self.state.Value then
 			self:setValue(self.props.Value)
 		end
-		local holder = self.holderRef:getValue()
+		local holder = self.holderRef.current
 		if holder and holder.AbsoluteSize.X ~= self.state.HolderWidth then
 			self:setState({
 				HolderWidth = holder.AbsoluteSize.X,

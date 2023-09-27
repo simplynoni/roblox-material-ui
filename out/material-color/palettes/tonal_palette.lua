@@ -1,5 +1,5 @@
--- Compiled with roblox-ts v2.0.4
-local TS = _G[script]
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
 --[[
 	*
 	* Copyright 2021 Google LLC
@@ -16,8 +16,8 @@ local TS = _G[script]
 	* See the License for the specific language governing permissions and
 	* limitations under the License.
 ]]
-local Int = TS.import(script, TS.getModule(script, "@rbxts", "ColourUtils")).Int
-local Hct = TS.import(script, script.Parent.Parent, "hct", "hct").Hct
+local Int = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "ColourUtils").Int
+local Hct = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "hct", "hct").Hct
 --[[
 	*
 	*  A convenience class for retrieving colors that are constant in hue and

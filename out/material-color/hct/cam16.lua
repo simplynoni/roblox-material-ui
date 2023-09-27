@@ -1,5 +1,5 @@
--- Compiled with roblox-ts v2.0.4
-local TS = _G[script]
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
 --[[
 	*
 	* @license
@@ -17,9 +17,9 @@ local TS = _G[script]
 	* See the License for the specific language governing permissions and
 	* limitations under the License.
 ]]
-local utils = TS.import(script, script.Parent.Parent, "utils", "color_utils")
-local mathUtils = TS.import(script, script.Parent.Parent, "utils", "math_utils")
-local ViewingConditions = TS.import(script, script.Parent, "viewing_conditions").ViewingConditions
+local utils = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "utils", "color_utils")
+local mathUtils = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "utils", "math_utils")
+local ViewingConditions = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "hct", "viewing_conditions").ViewingConditions
 --[[
 	*
 	* CAM16, a color appearance model. Colors are not just defined by their hex

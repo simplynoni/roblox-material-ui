@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/types" />
 /// <reference types="@rbxts/types" />
-/// <reference types="@rbxts/types" />
 /// <reference types="roact" />
-import Roact from '@rbxts/roact';
+/// <reference types="@rbxts/types" />
+import Roact, { RefObject } from '@rbxts/roact';
 import { SingleMotor } from '@rbxts/flipper';
 import { ThemeProps } from './types';
 interface SliderProps extends ThemeProps {
@@ -18,7 +18,7 @@ interface SliderState {
     Value: number;
 }
 export default class Slider extends Roact.PureComponent<SliderProps, SliderState> {
-    railRef: Roact.Ref<Frame>;
+    railRef: RefObject<Frame>;
     dragMotor: SingleMotor;
     dragBinding: Roact.Binding<number>;
     constructor(props: SliderProps & ThemeProps);

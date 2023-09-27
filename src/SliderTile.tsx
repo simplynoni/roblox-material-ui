@@ -34,7 +34,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 
 		return (
 			<frame
-				Key='SliderTile'
+				key='SliderTile'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size ?? new UDim2(1, 0, 0, 72)}
@@ -48,7 +48,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 					PaddingTop={new UDim(0, 12)}
 				/>
 				<frame
-					Key='LeftAlign'
+					key='LeftAlign'
 					AnchorPoint={new Vector2(0, 0.5)}
 					Position={UDim2.fromScale(0, 0.5)}
 					Size={UDim2.fromScale(1, 1)}
@@ -72,7 +72,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 						/>
 					) : undefined}
 					<frame
-						Key='MainHolder'
+						key='MainHolder'
 						Size={new UDim2(1, this.state.Icon ? -40 : 0, 1, 0)}
 						BackgroundTransparency={1}
 						LayoutOrder={2}
@@ -85,7 +85,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 							SortOrder={Enum.SortOrder.LayoutOrder}
 						/>
 						<textlabel
-							Key='Title'
+							key='Title'
 							LayoutOrder={1}
 							Size={UDim2.fromScale(1, 0.45)}
 							BackgroundTransparency={1}
@@ -98,7 +98,7 @@ export default class SliderTile extends Roact.PureComponent<SliderTileProps, Sli
 							<uitextsizeconstraint MaxTextSize={18} />
 							{this.props.ShowValue ? (
 								<textlabel
-									Key='Value'
+									key='Value'
 									AnchorPoint={new Vector2(1, 0.5)}
 									Position={UDim2.fromScale(1, 0.5)}
 									Size={UDim2.fromScale(0.25, 1)}

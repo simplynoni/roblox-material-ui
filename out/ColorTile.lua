@@ -1,16 +1,16 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _Fonts = TS.import(script, script.Parent, "Fonts")
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local _Fonts = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
-local Icon = TS.import(script, script.Parent, "Icon").default
-local Icons = TS.import(script, script.Parent, "Icons").Icons
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
-local Theme = TS.import(script, script.Parent, "types").Theme
+local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
+local Icons = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icons").Icons
+local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
+local Theme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").Theme
 local ColorTile
 do
 	ColorTile = Roact.PureComponent:extend("ColorTile")
@@ -49,6 +49,7 @@ do
 			}),
 		})) else nil
 		local _attributes = {
+			key = "ColorTile",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = self.props.Size or UDim2.new(1, 0, 0, 72),
@@ -96,6 +97,7 @@ do
 		}
 		local _length = #_children
 		local _attributes_1 = {
+			key = "LeftAlign",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
 			Size = UDim2.fromScale(0.65, 1),
@@ -125,6 +127,7 @@ do
 		_length_1 = #_children_1
 		local _value = self.props.Description
 		local _attributes_2 = {
+			key = "TextHolder",
 			Size = UDim2.fromScale(if self.state.Icon then 0.9 else 1, 1),
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -137,7 +140,8 @@ do
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 			}),
-			Title = Roact.createElement("TextLabel", {
+			Roact.createElement("TextLabel", {
+				key = "Title",
 				LayoutOrder = 1,
 				Size = UDim2.fromScale(1, 0.45),
 				BackgroundTransparency = 1,
@@ -153,28 +157,28 @@ do
 			}),
 		}
 		local _length_2 = #_children_2
-		local _child_1 = if _value ~= "" and _value then (Roact.createFragment({
-			Description = Roact.createElement("TextLabel", {
-				LayoutOrder = 2,
-				Size = UDim2.fromScale(1, 0.35),
-				BackgroundTransparency = 1,
-				FontFace = Gotham,
-				Text = self.props.Description,
-				TextColor3 = theme.Scheme.onBackground,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UITextSizeConstraint", {
-					MaxTextSize = 14,
-				}),
+		local _child_1 = if _value ~= "" and _value then (Roact.createElement("TextLabel", {
+			key = "Description",
+			LayoutOrder = 2,
+			Size = UDim2.fromScale(1, 0.35),
+			BackgroundTransparency = 1,
+			FontFace = Gotham,
+			Text = self.props.Description,
+			TextColor3 = theme.Scheme.onBackground,
+			TextXAlignment = Enum.TextXAlignment.Left,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UITextSizeConstraint", {
+				MaxTextSize = 14,
 			}),
 		})) else nil
 		if _child_1 then
 			_children_2[_length_2 + 1] = _child_1
 		end
-		_children_1.TextHolder = Roact.createElement("Frame", _attributes_2, _children_2)
-		_children.LeftAlign = Roact.createElement("Frame", _attributes_1, _children_1)
+		_children_1[_length_1 + 1] = Roact.createElement("Frame", _attributes_2, _children_2)
+		_children[_length + 1] = Roact.createElement("Frame", _attributes_1, _children_1)
 		local _attributes_3 = {
+			key = "RightAlign",
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.fromScale(1, 0.5),
 			Size = UDim2.fromScale(0.3, 1),
@@ -191,6 +195,7 @@ do
 		}
 		local _length_3 = #_children_3
 		local _attributes_4 = {
+			key = "Color",
 			Size = UDim2.new(0, 40, 0.5, 0),
 			Color = self.state.Color,
 			CornerRadius = "Full",
@@ -210,14 +215,12 @@ do
 		if selectedIcon then
 			_children_4[_length_4 + 1] = selectedIcon
 		end
-		_children_3.Color = Roact.createElement(RoundedFrame, _attributes_4, _children_4)
+		_children_3[_length_3 + 1] = Roact.createElement(RoundedFrame, _attributes_4, _children_4)
 		if trailingIcon then
-			_children_3[_length_3 + 1] = trailingIcon
+			_children_3[_length_3 + 2] = trailingIcon
 		end
-		_children.RightAlign = Roact.createElement("Frame", _attributes_3, _children_3)
-		return Roact.createFragment({
-			ColorTile = Roact.createElement("TextButton", _attributes, _children),
-		})
+		_children[_length + 2] = Roact.createElement("Frame", _attributes_3, _children_3)
+		return Roact.createElement("TextButton", _attributes, _children)
 	end
 	function ColorTile:didUpdate(previousProps)
 		if self.props.Color ~= previousProps.Color then

@@ -29,7 +29,7 @@ export default class Icon extends Roact.Component<IconProps> {
 
 		return (
 			<imagelabel
-				Key='Icon'
+				key='Icon'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size}

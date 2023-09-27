@@ -1,10 +1,10 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local GroupMotor = _flipper.GroupMotor
 local Linear = _flipper.Linear
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
 local Switch
 do
 	Switch = Roact.PureComponent:extend("Switch")
@@ -24,6 +24,7 @@ do
 	function Switch:render()
 		local theme = self.props.Theme
 		local _attributes = {
+			key = "Track",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = UDim2.fromOffset(50, 28),
@@ -55,16 +56,19 @@ do
 			_children[_length + 1] = _child
 		end
 		_length = #_children
-		_children.Corner = Roact.createElement("UICorner", {
+		_children[_length + 1] = Roact.createElement("UICorner", {
+			key = "Corner",
 			CornerRadius = UDim.new(1, 0),
 		})
-		_children.Padding = Roact.createElement("UIPadding", {
+		_children[_length + 2] = Roact.createElement("UIPadding", {
+			key = "Padding",
 			PaddingBottom = UDim.new(0, 4),
 			PaddingLeft = UDim.new(0, 5),
 			PaddingRight = UDim.new(0, 4),
 			PaddingTop = UDim.new(0, 4),
 		})
-		_children.Thumb = Roact.createElement(RoundedFrame, {
+		_children[_length + 3] = Roact.createElement(RoundedFrame, {
+			key = "Thumb",
 			AnchorPoint = self.positionBinding:map(function(_param)
 				local AnchorPoint = _param.AnchorPoint
 				return Vector2.new(AnchorPoint, 0.5)
@@ -77,15 +81,14 @@ do
 			CornerRadius = "Full",
 			Color = if self.state.Enabled then theme.Scheme.onPrimary else theme.Scheme.outline,
 		}, {
-			AspectRatio = Roact.createElement("UIAspectRatioConstraint", {
+			Roact.createElement("UIAspectRatioConstraint", {
+				key = "AspectRatio",
 				AspectRatio = 1,
 				AspectType = Enum.AspectType.ScaleWithParentSize,
 				DominantAxis = Enum.DominantAxis.Height,
 			}),
 		})
-		return Roact.createFragment({
-			Track = Roact.createElement("TextButton", _attributes, _children),
-		})
+		return Roact.createElement("TextButton", _attributes, _children)
 	end
 	function Switch:setEnabled(enabled)
 		if self.state.Enabled ~= enabled then

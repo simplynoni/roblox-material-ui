@@ -1,5 +1,5 @@
 import { SingleMotor, Spring } from '@rbxts/flipper';
-import Roact from '@rbxts/roact';
+import Roact, { RefObject, createRef } from '@rbxts/roact';
 import { GothamBold } from './Fonts';
 import RoundedFrame from './RoundedFrame';
 import { ColorScheme, LowerCaseColorScheme, ThemeProps } from './types';
@@ -22,7 +22,7 @@ interface ProgressBarState {
 export default class ProgressBar extends Roact.Component<ProgressBarProps, ProgressBarState> {
 	protected state: Readonly<ProgressBarState> = { Value: this.props.Value, HolderWidth: 0 };
 
-	private holderRef: Roact.Ref<Frame>;
+	private holderRef: RefObject<Frame>
 
 	private valueMotor: SingleMotor;
 	private valueBinding: Roact.Binding<number>;
@@ -30,7 +30,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 	constructor(props: ProgressBarProps & ThemeProps) {
 		super(props);
 
-		this.holderRef = Roact.createRef<Frame>();
+		this.holderRef = createRef()
 
 		this.valueMotor = new SingleMotor(this.props.Value / 100);
 
@@ -47,18 +47,18 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 
 		return (
 			<RoundedFrame
-				Key={'ProgressBar'}
+				key={'ProgressBar'}
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size || new UDim2(1, 0, 0, 20)}
 				Color={theme.Scheme[`${lowerCaseColorScheme}Container`]}
 				BorderSizePixel={0}
 				CornerRadius={'Full'}
-				Ref={this.holderRef}
+				ref={this.holderRef}
 			>
 				{this.props.Label ? (
 					<textlabel
-						Key={'Label'}
+						key={'Label'}
 						AnchorPoint={new Vector2(0, 0.5)}
 						Position={UDim2.fromScale(0, 0.5)}
 						Size={UDim2.fromScale(0.75, 1)}
@@ -78,7 +78,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 				) : undefined}
 				{this.props.ShowValue ? (
 					<textlabel
-						Key={'Value'}
+						key={'Value'}
 						AnchorPoint={new Vector2(1, 0.5)}
 						Position={UDim2.fromScale(1, 0.5)}
 						Size={UDim2.fromScale(0.25, 1)}
@@ -98,7 +98,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 				) : undefined}
 				{/* need to make a RoundedCanvasGroup component at some point */}
 				<canvasgroup
-					Key={'Filler'}
+					key={'Filler'}
 					AnchorPoint={new Vector2(0, 0.5)}
 					Position={UDim2.fromScale(0, 0.5)}
 					Size={this.valueBinding.map((value) => {
@@ -110,7 +110,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 					<uicorner CornerRadius={new UDim(0.5, 0)} />
 					{this.props.Label ? (
 						<textlabel
-							Key={'Label'}
+							key={'Label'}
 							AnchorPoint={new Vector2(0, 0.5)}
 							Position={UDim2.fromScale(0, 0.5)}
 							Size={new UDim2(0, this.state.HolderWidth * 0.75, 1, 0)}
@@ -130,7 +130,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 					) : undefined}
 					{this.props.ShowValue ? (
 						<textlabel
-							Key={'Value'}
+							key={'Value'}
 							AnchorPoint={new Vector2(1, 0.5)}
 							Position={new UDim2(0, this.state.HolderWidth, 0.5, 0)}
 							Size={UDim2.fromScale(0.25, 1)}
@@ -162,7 +162,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 	protected didMount(): void {
 		coroutine.wrap(() => {
 			task.wait(0.01);
-			const holder = this.holderRef.getValue();
+			const holder = this.holderRef.current
 
 			if (holder) {
 				this.setState({
@@ -177,7 +177,7 @@ export default class ProgressBar extends Roact.Component<ProgressBarProps, Progr
 			this.setValue(this.props.Value);
 		}
 
-		const holder = this.holderRef.getValue();
+		const holder = this.holderRef.current
 
 		if (holder && holder.AbsoluteSize.X !== this.state.HolderWidth) {
 			this.setState({

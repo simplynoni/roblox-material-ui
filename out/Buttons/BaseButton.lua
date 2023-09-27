@@ -1,9 +1,9 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
 local BaseButton
 do
 	BaseButton = Roact.Component:extend("BaseButton")
@@ -15,9 +15,6 @@ do
 		local stateBinding, setStateBinding = Roact.createBinding(self.stateMotor:getValue())
 		self.stateBinding = stateBinding
 		self.stateMotor:onStep(setStateBinding)
-	end
-	function BaseButton:render()
-		return nil
 	end
 	function BaseButton:didUpdate(previousProps, previousState)
 		if previousProps.Disabled ~= self.props.Disabled and self.props.Disabled then

@@ -1,14 +1,14 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local _Fonts = TS.import(script, script.Parent, "Fonts")
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local _Fonts = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
-local Icon = TS.import(script, script.Parent, "Icon").default
-local Switch = TS.import(script, script.Parent, "Switch").default
+local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
+local Switch = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Switch").default
 local SwitchTile
 do
 	SwitchTile = Roact.PureComponent:extend("SwitchTile")
@@ -26,6 +26,7 @@ do
 	function SwitchTile:render()
 		local theme = self.props.Theme
 		local _attributes = {
+			key = "SwitchTile",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = self.props.Size or UDim2.new(1, 0, 0, 72),
@@ -79,6 +80,7 @@ do
 		}
 		local _length = #_children
 		local _attributes_1 = {
+			key = "LeftAlign",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
 			Size = UDim2.fromScale(0.75, 1),
@@ -108,6 +110,7 @@ do
 		_length_1 = #_children_1
 		local _value = self.props.Description
 		local _attributes_2 = {
+			key = "TextHolder",
 			Size = UDim2.fromScale(if self.state.Icon then 0.8 else 1, 1),
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -120,7 +123,8 @@ do
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 			}),
-			Title = Roact.createElement("TextLabel", {
+			Roact.createElement("TextLabel", {
+				key = "Title",
 				LayoutOrder = 1,
 				Size = UDim2.fromScale(1, 0.45),
 				BackgroundTransparency = 1,
@@ -136,28 +140,27 @@ do
 			}),
 		}
 		local _length_2 = #_children_2
-		local _child_1 = if _value ~= "" and _value then (Roact.createFragment({
-			Description = Roact.createElement("TextLabel", {
-				LayoutOrder = 2,
-				Size = UDim2.fromScale(1, 0.35),
-				BackgroundTransparency = 1,
-				FontFace = Gotham,
-				Text = self.props.Description,
-				TextColor3 = theme.Scheme.onBackground,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextScaled = true,
-			}, {
-				Roact.createElement("UITextSizeConstraint", {
-					MaxTextSize = 14,
-				}),
+		local _child_1 = if _value ~= "" and _value then (Roact.createElement("TextLabel", {
+			key = "Description",
+			LayoutOrder = 2,
+			Size = UDim2.fromScale(1, 0.35),
+			BackgroundTransparency = 1,
+			FontFace = Gotham,
+			Text = self.props.Description,
+			TextColor3 = theme.Scheme.onBackground,
+			TextXAlignment = Enum.TextXAlignment.Left,
+			TextScaled = true,
+		}, {
+			Roact.createElement("UITextSizeConstraint", {
+				MaxTextSize = 14,
 			}),
 		})) else nil
 		if _child_1 then
 			_children_2[_length_2 + 1] = _child_1
 		end
-		_children_1.TextHolder = Roact.createElement("Frame", _attributes_2, _children_2)
-		_children.LeftAlign = Roact.createElement("Frame", _attributes_1, _children_1)
-		_children[_length + 1] = Roact.createElement(Switch, {
+		_children_1[_length_1 + 1] = Roact.createElement("Frame", _attributes_2, _children_2)
+		_children[_length + 1] = Roact.createElement("Frame", _attributes_1, _children_1)
+		_children[_length + 2] = Roact.createElement(Switch, {
 			Theme = theme,
 			Enabled = self.state.Enabled,
 			AnchorPoint = Vector2.new(1, 0.5),
@@ -166,9 +169,7 @@ do
 				self:setEnabled(enabled)
 			end,
 		})
-		return Roact.createFragment({
-			SwitchTile = Roact.createElement("TextButton", _attributes, _children),
-		})
+		return Roact.createElement("TextButton", _attributes, _children)
 	end
 	function SwitchTile:setEnabled(enabled)
 		if self.state.Enabled ~= enabled then

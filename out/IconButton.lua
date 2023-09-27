@@ -1,11 +1,11 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local Icon = TS.import(script, script.Parent, "Icon").default
-local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
+local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
 local IconButton
 do
 	IconButton = Roact.Component:extend("IconButton")
@@ -78,7 +78,8 @@ do
 				IconSize = "24p",
 				IconColor = self.props.IconColor or theme.Scheme.onBackground,
 			}),
-			StateLayer = Roact.createElement(RoundedFrame, {
+			Roact.createElement(RoundedFrame, {
+				key = "StateLayer",
 				CornerRadius = "Full",
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),

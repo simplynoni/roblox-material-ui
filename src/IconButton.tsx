@@ -98,7 +98,7 @@ export default class IconButton extends Roact.Component<IconButtonProps, IconBut
 					IconColor={this.props.IconColor || theme.Scheme.onBackground}
 				/>
 				<RoundedFrame
-					Key='StateLayer'
+					key='StateLayer'
 					CornerRadius='Full'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}

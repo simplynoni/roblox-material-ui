@@ -1,6 +1,6 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
 local Icon
 do
 	Icon = Roact.Component:extend("Icon")
@@ -20,6 +20,7 @@ do
 			})
 		end
 		local _attributes = {
+			key = "Icon",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.props.Position,
 			Size = self.props.Size,
@@ -42,9 +43,7 @@ do
 		if corner then
 			_children[_length + 1] = corner
 		end
-		return Roact.createFragment({
-			Icon = Roact.createElement("ImageLabel", _attributes, _children),
-		})
+		return Roact.createElement("ImageLabel", _attributes, _children)
 	end
 end
 return {

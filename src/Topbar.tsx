@@ -42,14 +42,14 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 
 		return (
 			<frame
-				Key='Topbar'
+				key='Topbar'
 				AnchorPoint={new Vector2(0.5, 0)}
 				Position={UDim2.fromScale(0.5, 0)}
 				Size={new UDim2(new UDim(1), this.props.Height || new UDim(0.15))}
 				BackgroundTransparency={1}
 			>
 				<frame
-					Key='Content'
+					key='Content'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(1, 1)}
@@ -57,7 +57,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 				>
 					<uipadding PaddingLeft={new UDim(0, 12)} PaddingRight={new UDim(0, 12)} />
 					<frame
-						Key='Leading'
+						key='Leading'
 						AnchorPoint={new Vector2(0, 0.5)}
 						Position={UDim2.fromScale(0, 0.5)}
 						Size={UDim2.fromScale(0.35, 0.7)}
@@ -73,7 +73,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 						{leadingButton}
 					</frame>
 					<textlabel
-						Key='Title'
+						key='Title'
 						AnchorPoint={new Vector2(0.5, 0.5)}
 						Position={UDim2.fromScale(0.5, 0.5)}
 						Size={UDim2.fromScale(1, 0.5)}
@@ -88,7 +88,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 						<uitextsizeconstraint MaxTextSize={22} />
 					</textlabel>
 					<frame
-						Key='Trailing'
+						key='Trailing'
 						AnchorPoint={new Vector2(1, 0.5)}
 						Position={UDim2.fromScale(1, 0.5)}
 						Size={UDim2.fromScale(0.35, 0.7)}
@@ -106,7 +106,7 @@ export default class Topbar extends Roact.PureComponent<TopbarProps> {
 					</frame>
 				</frame>
 				<frame
-					Key='Divider'
+					key='Divider'
 					AnchorPoint={new Vector2(0.5, 1)}
 					Position={UDim2.fromScale(0.5, 1)}
 					Size={new UDim2(1, 0, 0, 1)}

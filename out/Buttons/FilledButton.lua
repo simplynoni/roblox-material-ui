@@ -1,10 +1,10 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
-local Icon = TS.import(script, script.Parent.Parent, "Icon").default
-local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
-local BaseButton = TS.import(script, script.Parent, "BaseButton").default
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local GothamMedium = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamMedium
+local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
+local ColorScheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").ColorScheme
+local BaseButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Buttons", "BaseButton").default
 local FilledButton
 do
 	local super = BaseButton
@@ -65,6 +65,7 @@ do
 		local _children = {}
 		local _length = #_children
 		local _attributes_1 = {
+			key = "StateLayer",
 			Size = UDim2.fromScale(if self.props.AutomaticSize then 0 else 1, 1),
 			AutomaticSize = if self.props.AutomaticSize then Enum.AutomaticSize.X else nil,
 			BackgroundColor3 = onColor,
@@ -112,8 +113,8 @@ do
 		_attributes_3.Text = self.props.Text
 		_attributes_3.TextSize = 14
 		_children_1[_length_1 + 1] = Roact.createElement("TextLabel", _attributes_3)
-		_children.StateLayer = Roact.createElement("Frame", _attributes_1, _children_1)
-		_children[_length + 1] = Roact.createElement("UICorner", {
+		_children[_length + 1] = Roact.createElement("Frame", _attributes_1, _children_1)
+		_children[_length + 2] = Roact.createElement("UICorner", {
 			CornerRadius = UDim.new(1, 0),
 		})
 		return Roact.createElement("TextButton", _attributes, _children)

@@ -1,5 +1,5 @@
--- Compiled with roblox-ts v2.0.4
-local TS = _G[script]
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
 --[[
 	*
 	* @license
@@ -33,9 +33,9 @@ local TS = _G[script]
 	* calculate. A difference of 40 in HCT tone guarantees a contrast ratio >= 3.0,
 	* and a difference of 50 guarantees a contrast ratio >= 4.5.
 ]]
-local utils = TS.import(script, script.Parent.Parent, "utils", "color_utils")
-local Cam16 = TS.import(script, script.Parent, "cam16").Cam16
-local HctSolver = TS.import(script, script.Parent, "hct_solver").HctSolver
+local utils = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "utils", "color_utils")
+local Cam16 = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "hct", "cam16").Cam16
+local HctSolver = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "hct", "hct_solver").HctSolver
 --[[
 	*
 	* HCT, hue, chroma, and tone. A color system that provides a perceptually

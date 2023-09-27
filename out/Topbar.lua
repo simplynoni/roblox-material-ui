@@ -1,9 +1,9 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
-local IconButton = TS.import(script, script.Parent, "IconButton").default
-local Icons = TS.import(script, script.Parent, "Icons").Icons
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local GothamBold = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamBold
+local IconButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "IconButton").default
+local Icons = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icons").Icons
 local Topbar
 do
 	Topbar = Roact.PureComponent:extend("Topbar")
@@ -26,6 +26,7 @@ do
 			Pressed = self.props.LeadingIcon.Function,
 		})) else nil
 		local _attributes = {
+			key = "Topbar",
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
 			Size = UDim2.new(UDim.new(1), self.props.Height or UDim.new(0.15)),
@@ -34,6 +35,7 @@ do
 		local _children = {}
 		local _length = #_children
 		local _attributes_1 = {
+			key = "Content",
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 1),
@@ -47,6 +49,7 @@ do
 		}
 		local _length_1 = #_children_1
 		local _attributes_2 = {
+			key = "Leading",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
 			Size = UDim2.fromScale(0.35, 0.7),
@@ -65,8 +68,9 @@ do
 		if leadingButton then
 			_children_2[_length_2 + 1] = leadingButton
 		end
-		_children_1.Leading = Roact.createElement("Frame", _attributes_2, _children_2)
-		_children_1.Title = Roact.createElement("TextLabel", {
+		_children_1[_length_1 + 1] = Roact.createElement("Frame", _attributes_2, _children_2)
+		_children_1[_length_1 + 2] = Roact.createElement("TextLabel", {
+			key = "Title",
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 0.5),
@@ -83,6 +87,7 @@ do
 			}),
 		})
 		local _attributes_3 = {
+			key = "Trailing",
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.fromScale(1, 0.5),
 			Size = UDim2.fromScale(0.35, 0.7),
@@ -112,18 +117,17 @@ do
 				end
 			end
 		end
-		_children_1.Trailing = Roact.createElement("Frame", _attributes_3, _children_3)
-		_children.Content = Roact.createElement("Frame", _attributes_1, _children_1)
-		_children.Divider = Roact.createElement("Frame", {
+		_children_1[_length_1 + 3] = Roact.createElement("Frame", _attributes_3, _children_3)
+		_children[_length + 1] = Roact.createElement("Frame", _attributes_1, _children_1)
+		_children[_length + 2] = Roact.createElement("Frame", {
+			key = "Divider",
 			AnchorPoint = Vector2.new(0.5, 1),
 			Position = UDim2.fromScale(0.5, 1),
 			Size = UDim2.new(1, 0, 0, 1),
 			BorderSizePixel = 0,
 			BackgroundColor3 = theme.Scheme.outline,
 		})
-		return Roact.createFragment({
-			Topbar = Roact.createElement("Frame", _attributes, _children),
-		})
+		return Roact.createElement("Frame", _attributes, _children)
 	end
 end
 return {

@@ -1,9 +1,9 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local GothamBlack = TS.import(script, script.Parent.Parent, "Fonts").GothamBlack
-local Slider = TS.import(script, script.Parent.Parent, "Slider").default
-local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local GothamBlack = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamBlack
+local Slider = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Slider").default
+local DefaultTheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Stories", "DefaultTheme").default
 return function(frame)
 	local Tree = Roact.mount(Roact.createFragment({
 		Roact.createElement("UIListLayout", {

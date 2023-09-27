@@ -13,7 +13,7 @@ export default class Shadow extends Roact.PureComponent<ShadowProps> {
 		const shadowElevation = ShadowElevations[this.props.Elevation];
 		return (
 			<imagelabel
-				Key='Shadow'
+				key='Shadow'
 				Image={shadowElevation.Id}
 				// @TODO: Theme
 				ImageColor3={new Color3(0, 0, 0)}

@@ -79,7 +79,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 
 		return (
 			<textbutton
-				Key='ColorTile'
+				key='ColorTile'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={this.props.Size ?? new UDim2(1, 0, 0, 72)}
@@ -118,7 +118,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 					PaddingTop={new UDim(0, 12)}
 				/>
 				<frame
-					Key='LeftAlign'
+					key='LeftAlign'
 					AnchorPoint={new Vector2(0, 0.5)}
 					Position={UDim2.fromScale(0, 0.5)}
 					Size={UDim2.fromScale(0.65, 1)}
@@ -142,7 +142,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 						/>
 					) : undefined}
 					<frame
-						Key='TextHolder'
+						key='TextHolder'
 						Size={UDim2.fromScale(this.state.Icon ? 0.9 : 1, 1)}
 						BackgroundTransparency={1}
 						LayoutOrder={2}
@@ -155,7 +155,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 							SortOrder={Enum.SortOrder.LayoutOrder}
 						/>
 						<textlabel
-							Key='Title'
+							key='Title'
 							LayoutOrder={1}
 							Size={UDim2.fromScale(1, 0.45)}
 							BackgroundTransparency={1}
@@ -169,7 +169,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 						</textlabel>
 						{this.props.Description ? (
 							<textlabel
-								Key='Description'
+								key='Description'
 								LayoutOrder={2}
 								Size={UDim2.fromScale(1, 0.35)}
 								BackgroundTransparency={1}
@@ -185,7 +185,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 					</frame>
 				</frame>
 				<frame
-					Key='RightAlign'
+					key='RightAlign'
 					AnchorPoint={new Vector2(1, 0.5)}
 					Position={UDim2.fromScale(1, 0.5)}
 					Size={UDim2.fromScale(0.3, 1)}
@@ -199,7 +199,7 @@ export default class ColorTile extends Roact.PureComponent<ColorTileProps, Color
 						SortOrder={Enum.SortOrder.LayoutOrder}
 					/>
 					<RoundedFrame
-						Key='Color'
+						key='Color'
 						Size={new UDim2(0, 40, 0.5, 0)}
 						Color={this.state.Color}
 						CornerRadius='Full'

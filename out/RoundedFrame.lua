@@ -1,6 +1,6 @@
--- Compiled with roblox-ts v2.0.4
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
 local default = Roact.forwardRef(function(props, ref)
 	local _attributes = {
 		Size = props.Size,
@@ -14,7 +14,8 @@ local default = Roact.forwardRef(function(props, ref)
 		[Roact.Ref] = ref,
 	}
 	local _children = {
-		Corner = Roact.createElement("UICorner", {
+		Roact.createElement("UICorner", {
+			key = "Corner",
 			CornerRadius = if props.CornerRadius == "Full" then UDim.new(0.5, 0) else UDim.new(0, props.CornerRadius),
 		}),
 		if props.Outline then Roact.createElement("UIStroke", {

@@ -47,7 +47,7 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 
 		return (
 			<textbutton
-				Key='Track'
+				key='Track'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.props.Position}
 				Size={UDim2.fromOffset(50, 28)}
@@ -79,16 +79,16 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 						Thickness={2}
 					/>
 				) : undefined}
-				<uicorner Key='Corner' CornerRadius={new UDim(1, 0)} />
+				<uicorner key='Corner' CornerRadius={new UDim(1, 0)} />
 				<uipadding
-					Key='Padding'
+					key='Padding'
 					PaddingBottom={new UDim(0, 4)}
 					PaddingLeft={new UDim(0, 5)}
 					PaddingRight={new UDim(0, 4)}
 					PaddingTop={new UDim(0, 4)}
 				/>
 				<RoundedFrame
-					Key='Thumb'
+					key='Thumb'
 					AnchorPoint={this.positionBinding.map(({ AnchorPoint }) => {
 						return new Vector2(AnchorPoint, 0.5);
 					})}
@@ -100,7 +100,7 @@ export default class Switch extends Roact.PureComponent<SwitchProps, SwitchState
 					Color={this.state.Enabled ? theme.Scheme.onPrimary : theme.Scheme.outline}
 				>
 					<uiaspectratioconstraint
-						Key='AspectRatio'
+						key='AspectRatio'
 						AspectRatio={1}
 						AspectType={Enum.AspectType.ScaleWithParentSize}
 						DominantAxis={Enum.DominantAxis.Height}

@@ -1,7 +1,7 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local ShadowElevations = TS.import(script, script, "Elevations").default
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local ShadowElevations = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Shadow", "Elevations").default
 -- @TODO: Theme
 local Shadow
 do
@@ -10,19 +10,18 @@ do
 	end
 	function Shadow:render()
 		local shadowElevation = ShadowElevations[self.props.Elevation]
-		return Roact.createFragment({
-			Shadow = Roact.createElement("ImageLabel", {
-				Image = shadowElevation.Id,
-				ImageColor3 = Color3.new(0, 0, 0),
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = shadowElevation.Position,
-				Size = shadowElevation.Size,
-				ImageTransparency = self.props.Transparency,
-				ZIndex = self.props.ZIndex,
-				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = shadowElevation.SliceCenter,
-			}),
+		return Roact.createElement("ImageLabel", {
+			key = "Shadow",
+			Image = shadowElevation.Id,
+			ImageColor3 = Color3.new(0, 0, 0),
+			BackgroundTransparency = 1,
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = shadowElevation.Position,
+			Size = shadowElevation.Size,
+			ImageTransparency = self.props.Transparency,
+			ZIndex = self.props.ZIndex,
+			ScaleType = Enum.ScaleType.Slice,
+			SliceCenter = shadowElevation.SliceCenter,
 		})
 	end
 end

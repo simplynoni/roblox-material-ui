@@ -33,7 +33,6 @@ export default abstract class BaseButton<Props extends (ButtonProps & ThemeProps
         Debounce: boolean;
     };
     constructor(props: Props);
-    render(): Roact.Element | undefined;
     protected didUpdate(previousProps: Props, previousState: ButtonState): void;
     MouseClick(): Promise<void>;
     MouseUp(): void;

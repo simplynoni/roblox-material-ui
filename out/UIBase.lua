@@ -1,12 +1,12 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
 local GroupMotor = _flipper.GroupMotor
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Maid = TS.import(script, TS.getModule(script, "@rbxts", "maid").Maid)
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local Shadow = TS.import(script, script.Parent, "Shadow").default
+local Maid = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "maid", "Maid")
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local Shadow = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Shadow").default
 local defaults = {
 	positionVelocity = 1,
 	fadeVelocity = 7,
@@ -48,20 +48,19 @@ do
 	function UIBase:render()
 		local theme = self.props.Theme
 		local _value = self.props.AspectRatio
-		local aspectRatio = if _value ~= 0 and (_value == _value and _value) then (Roact.createFragment({
-			AspectRatio = Roact.createElement("UIAspectRatioConstraint", {
-				AspectRatio = self.props.AspectRatio,
-				AspectType = self.props.AspectType or Enum.AspectType.ScaleWithParentSize,
-				DominantAxis = self.props.DominantAxis or Enum.DominantAxis.Width,
-			}),
+		local aspectRatio = if _value ~= 0 and (_value == _value and _value) then (Roact.createElement("UIAspectRatioConstraint", {
+			key = "AspectRatio",
+			AspectRatio = self.props.AspectRatio,
+			AspectType = self.props.AspectType or Enum.AspectType.ScaleWithParentSize,
+			DominantAxis = self.props.DominantAxis or Enum.DominantAxis.Width,
 		})) else nil
-		local sizeConstraint = if self.props.MaxSize or self.props.MinSize then (Roact.createFragment({
-			SizeConstraint = Roact.createElement("UISizeConstraint", {
-				MaxSize = self.props.MaxSize,
-				MinSize = self.props.MinSize,
-			}),
+		local sizeConstraint = if self.props.MaxSize or self.props.MinSize then (Roact.createElement("UISizeConstraint", {
+			key = "SizeConstraint",
+			MaxSize = self.props.MaxSize,
+			MinSize = self.props.MinSize,
 		})) else nil
 		local _attributes = {
+			key = "OuterContainer",
 			AnchorPoint = self.props.AnchorPoint,
 			Position = self.positionBinding:map(function(_param)
 				local X = _param.X
@@ -82,6 +81,7 @@ do
 		}
 		local _length = #_children
 		local _attributes_1 = {
+			key = "InnerContainer",
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(1, 1),
@@ -106,17 +106,15 @@ do
 				end
 			end
 		end
-		_children.InnerContainer = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
+		_children[_length + 1] = Roact.createElement("CanvasGroup", _attributes_1, _children_1)
 		if aspectRatio then
-			_children[_length + 1] = aspectRatio
+			_children[_length + 2] = aspectRatio
 		end
 		_length = #_children
 		if sizeConstraint then
 			_children[_length + 1] = sizeConstraint
 		end
-		return Roact.createFragment({
-			OuterContainer = Roact.createElement("Frame", _attributes, _children),
-		})
+		return Roact.createElement("Frame", _attributes, _children)
 	end
 	function UIBase:setClosed(closed)
 		if self.state.Closed == closed then

@@ -48,7 +48,7 @@ export default class TonalButtonBase extends BaseButton<ContainerButtonProps & T
 				}}
 			>
 				<frame
-					Key={'StateLayer'}
+					key={'StateLayer'}
 					Size={UDim2.fromScale(this.props.AutomaticSize ? 0 : 1, 1)}
 					AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
 					BackgroundColor3={onColor}

@@ -75,7 +75,7 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 
 		const aspectRatio = this.props.AspectRatio ? (
 			<uiaspectratioconstraint
-				Key='AspectRatio'
+				key='AspectRatio'
 				AspectRatio={this.props.AspectRatio}
 				AspectType={this.props.AspectType || Enum.AspectType.ScaleWithParentSize}
 				DominantAxis={this.props.DominantAxis || Enum.DominantAxis.Width}
@@ -84,12 +84,12 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 
 		const sizeConstraint =
 			this.props.MaxSize || this.props.MinSize ? (
-				<uisizeconstraint Key='SizeConstraint' MaxSize={this.props.MaxSize} MinSize={this.props.MinSize} />
+				<uisizeconstraint key='SizeConstraint' MaxSize={this.props.MaxSize} MinSize={this.props.MinSize} />
 			) : undefined;
 
 		return (
 			<frame
-				Key='OuterContainer'
+				key='OuterContainer'
 				AnchorPoint={this.props.AnchorPoint}
 				Position={this.positionBinding.map(({ X, Y }) => {
 					return new UDim2(X, this.props.Position.X.Offset, Y, this.props.Position.Y.Offset);
@@ -105,7 +105,7 @@ export default class UIBase extends Roact.Component<UIBaseProps, UIBaseState> {
 					})}
 				/>
 				<canvasgroup
-					Key='InnerContainer'
+					key='InnerContainer'
 					AnchorPoint={new Vector2(0.5, 0.5)}
 					Position={UDim2.fromScale(0.5, 0.5)}
 					Size={UDim2.fromScale(1, 1)}

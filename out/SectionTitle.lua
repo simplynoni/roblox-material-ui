@@ -1,7 +1,7 @@
--- Compiled with roblox-ts v2.1.0
-local TS = _G[script]
-local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
-local GothamMedium = TS.import(script, script.Parent, "Fonts").GothamMedium
+-- Compiled with roblox-ts v2.1.1
+local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local GothamMedium = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamMedium
 local SectionTitle
 do
 	SectionTitle = Roact.PureComponent:extend("SectionTitle")

@@ -1,6 +1,6 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
 local Icon
 do
 	Icon = Roact.Component:extend("Icon")

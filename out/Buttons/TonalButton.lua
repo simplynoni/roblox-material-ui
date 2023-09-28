@@ -1,11 +1,11 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local GothamMedium = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamMedium
-local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
-local LowerCaseFirstLetter = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Utils").LowerCaseFirstLetter
-local ContainerScheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").ContainerScheme
-local BaseButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Buttons", "BaseButton").default
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
+local Icon = TS.import(script, script.Parent.Parent, "Icon").default
+local LowerCaseFirstLetter = TS.import(script, script.Parent.Parent, "Utils").LowerCaseFirstLetter
+local ContainerScheme = TS.import(script, script.Parent.Parent, "types").ContainerScheme
+local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local TonalButtonBase
 do
 	local super = BaseButton

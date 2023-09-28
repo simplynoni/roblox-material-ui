@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local GothamMedium = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamMedium
-local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
-local ColorScheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").ColorScheme
-local BaseButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Buttons", "BaseButton").default
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local GothamMedium = TS.import(script, script.Parent.Parent, "Fonts").GothamMedium
+local Icon = TS.import(script, script.Parent.Parent, "Icon").default
+local ColorScheme = TS.import(script, script.Parent.Parent, "types").ColorScheme
+local BaseButton = TS.import(script, script.Parent, "BaseButton").default
 local FilledButton
 do
 	local super = BaseButton

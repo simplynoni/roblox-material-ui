@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
+local TS = _G[script]
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local GroupMotor = _flipper.GroupMotor
 local Linear = _flipper.Linear
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
 local Switch
 do
 	Switch = Roact.PureComponent:extend("Switch")

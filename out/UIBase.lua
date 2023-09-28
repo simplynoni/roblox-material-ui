@@ -1,12 +1,12 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
+local TS = _G[script]
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local GroupMotor = _flipper.GroupMotor
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Maid = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "maid", "Maid")
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local Shadow = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Shadow").default
+local Maid = TS.import(script, TS.getModule(script, "@rbxts", "maid").Maid)
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local Shadow = TS.import(script, script.Parent, "Shadow").default
 local defaults = {
 	positionVelocity = 1,
 	fadeVelocity = 7,

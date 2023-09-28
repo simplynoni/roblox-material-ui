@@ -1,5 +1,5 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local TS = _G[script]
 --[[
 	*
 	* Copyright 2021 Google LLC
@@ -16,9 +16,9 @@ local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_incl
 	* See the License for the specific language governing permissions and
 	* limitations under the License.
 ]]
-local Int = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "ColourUtils").Int
-local Hct = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "hct", "hct").Hct
-local TonalPalette = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "palettes", "tonal_palette").TonalPalette
+local Int = TS.import(script, TS.getModule(script, "@rbxts", "ColourUtils")).Int
+local Hct = TS.import(script, script.Parent.Parent, "hct", "hct").Hct
+local TonalPalette = TS.import(script, script.Parent, "tonal_palette").TonalPalette
 --[[
 	*
 	* An intermediate concept between the key color for a UI theme, and a full

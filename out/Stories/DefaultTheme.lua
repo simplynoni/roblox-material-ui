@@ -1,7 +1,7 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Scheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color").default
-local Theme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").Theme
+local TS = _G[script]
+local Scheme = TS.import(script, script.Parent.Parent, "material-color").default
+local Theme = TS.import(script, script.Parent.Parent, "types").Theme
 local DefaultColor = Color3.fromRGB(255, 89, 0)
 local DefaultTheme = {
 	Color = DefaultColor,

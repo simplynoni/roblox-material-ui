@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local _roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local TS = _G[script]
+local _roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
 local Roact = _roact
 local createRef = _roact.createRef
-local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
-local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
+local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local SingleMotor = _flipper.SingleMotor
 local Spring = _flipper.Spring
 local UserInputService = game:GetService("UserInputService")

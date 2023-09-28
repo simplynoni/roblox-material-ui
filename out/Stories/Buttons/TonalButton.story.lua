@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local TonalButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Buttons").TonalButton
-local Icons = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icons").Icons
-local UIBase = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "UIBase").default
-local DefaultTheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Stories", "DefaultTheme").default
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local TonalButton = TS.import(script, script.Parent.Parent.Parent, "Buttons").TonalButton
+local Icons = TS.import(script, script.Parent.Parent.Parent, "Icons").Icons
+local UIBase = TS.import(script, script.Parent.Parent.Parent, "UIBase").default
+local DefaultTheme = TS.import(script, script.Parent.Parent, "DefaultTheme").default
 return function(frame)
 	local Tree = Roact.mount(Roact.createElement(UIBase, {
 		AnchorPoint = Vector2.new(0.5, 0.5),

@@ -1,14 +1,14 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
+local TS = _G[script]
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local SingleMotor = _flipper.SingleMotor
 local Spring = _flipper.Spring
-local _roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
+local _roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
 local Roact = _roact
 local createRef = _roact.createRef
-local GothamBold = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamBold
-local RoundedFrame = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "RoundedFrame").default
-local ColorScheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "types").ColorScheme
+local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
+local RoundedFrame = TS.import(script, script.Parent, "RoundedFrame").default
+local ColorScheme = TS.import(script, script.Parent, "types").ColorScheme
 local ProgressBar
 do
 	ProgressBar = Roact.Component:extend("ProgressBar")

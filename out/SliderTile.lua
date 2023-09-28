@@ -1,11 +1,11 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local _Fonts = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts")
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
-local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
-local Slider = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Slider").default
+local Icon = TS.import(script, script.Parent, "Icon").default
+local Slider = TS.import(script, script.Parent, "Slider").default
 local SliderTile
 do
 	SliderTile = Roact.PureComponent:extend("SliderTile")

@@ -1,9 +1,9 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local GothamBold = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts").GothamBold
-local IconButton = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "IconButton").default
-local Icons = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icons").Icons
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local GothamBold = TS.import(script, script.Parent, "Fonts").GothamBold
+local IconButton = TS.import(script, script.Parent, "IconButton").default
+local Icons = TS.import(script, script.Parent, "Icons").Icons
 local Topbar
 do
 	Topbar = Roact.PureComponent:extend("Topbar")

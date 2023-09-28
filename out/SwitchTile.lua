@@ -1,14 +1,14 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local _flipper = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "flipper", "src")
+local TS = _G[script]
+local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src)
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local _Fonts = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Fonts")
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local _Fonts = TS.import(script, script.Parent, "Fonts")
 local Gotham = _Fonts.Gotham
 local GothamBold = _Fonts.GothamBold
-local Icon = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icon").default
-local Switch = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Switch").default
+local Icon = TS.import(script, script.Parent, "Icon").default
+local Switch = TS.import(script, script.Parent, "Switch").default
 local SwitchTile
 do
 	SwitchTile = Roact.PureComponent:extend("SwitchTile")

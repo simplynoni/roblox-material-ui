@@ -1,5 +1,5 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local TS = _G[script]
 --[[
 	*
 	* @license
@@ -17,8 +17,8 @@ local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_incl
 	* See the License for the specific language governing permissions and
 	* limitations under the License.
 ]]
-local utils = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "utils", "color_utils")
-local mathUtils = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "utils", "math_utils")
+local utils = TS.import(script, script.Parent.Parent, "utils", "color_utils")
+local mathUtils = TS.import(script, script.Parent.Parent, "utils", "math_utils")
 --[[
 	*
 	* In traditional color spaces, a color can be identified solely by the

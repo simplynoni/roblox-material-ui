@@ -1,5 +1,5 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
+local TS = _G[script]
 --[[
 	*
 	* Copyright 2021 Google LLC
@@ -16,7 +16,7 @@ local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_incl
 	* See the License for the specific language governing permissions and
 	* limitations under the License.
 ]]
-local CorePalette = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "material-color", "palettes", "core_palette").CorePalette
+local CorePalette = TS.import(script, script, "palettes", "core_palette").CorePalette
 --[[
 	*
 	* Represents a Material color scheme, a mapping of color roles to colors.

@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v2.1.1
-local TS = require(game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("RuntimeLib"))
-local Roact = TS.import(script, game:GetService("ReplicatedStorage"), "rbxts_include", "node_modules", "@rbxts", "RoactTS")
-local Icons = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Icons").Icons
-local Topbar = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Topbar").default
-local UIBase = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "UIBase").default
-local DefaultTheme = TS.import(script, game:GetService("ReplicatedStorage"), "Material-UI", "Stories", "DefaultTheme").default
+local TS = _G[script]
+local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
+local Icons = TS.import(script, script.Parent.Parent, "Icons").Icons
+local Topbar = TS.import(script, script.Parent.Parent, "Topbar").default
+local UIBase = TS.import(script, script.Parent.Parent, "UIBase").default
+local DefaultTheme = TS.import(script, script.Parent, "DefaultTheme").default
 local StoryComponent
 do
 	StoryComponent = Roact.Component:extend("StoryComponent")

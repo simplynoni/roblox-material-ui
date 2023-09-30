@@ -2,39 +2,49 @@ import { Linear, SingleMotor } from '@rbxts/flipper';
 import Roact from '@rbxts/roact';
 import { Icons } from '../Icons';
 import { CustomColorGroup } from '../material-color';
-import { ColorScheme, ContainerScheme, ThemeProps } from '../types';
+import { ColorScheme, ContainerScheme } from '../types';
 
-export interface ButtonProps {
+export interface ButtonRenderProps {
+	StateMotor: SingleMotor;
+	StateBinding: Roact.Binding<number>;
+	MouseClick: () => Promise<void>;
+	MouseUp: () => void;
+	MouseDown: () => void;
+	MouseEnter: () => void;
+	MouseLeave: () => void;
+}
+
+export interface ButtonBaseProps {
+	Disabled?: boolean;
+	Pressed: () => void;
+	Render: (props: ButtonRenderProps) => Roact.Element;
+}
+
+export interface ButtonProps extends Omit<ButtonBaseProps, 'Render'> {
 	AnchorPoint?: Vector2;
 	Position?: UDim2;
 	Size?: UDim2;
 	AutomaticSize?: boolean;
 	Text: string;
 	Icon?: Icons | string;
-	Disabled?: boolean;
 	ColorScheme?: ColorScheme;
 	CustomColorGroup?: CustomColorGroup['Colors'];
-	Pressed: () => void;
 }
 
-export type ContainerButtonProps = Omit<ButtonProps, 'ColorScheme'> & { ColorScheme?: ContainerScheme };
+export type ContainerButtonProps = ButtonProps & { ColorScheme?: ContainerScheme };
 
-export interface ButtonState {
+interface ButtonBaseState {
 	Debounce: boolean;
 }
 
-export default abstract class BaseButton<
-	Props extends (ButtonProps & ThemeProps) | (ContainerButtonProps & ThemeProps) = ButtonProps & ThemeProps,
-> extends Roact.Component<Props, ButtonState> {
+export default class ButtonBase extends Roact.Component<ButtonBaseProps, ButtonBaseState> {
 	stateMotor: SingleMotor;
 	stateBinding: Roact.Binding<number>;
 
-	state = {
-		Debounce: false,
-	};
-
-	constructor(props: Props) {
+	constructor(props: ButtonBaseProps) {
 		super(props);
+
+		this.setState({ Debounce: false });
 
 		this.stateMotor = new SingleMotor(0);
 
@@ -44,10 +54,16 @@ export default abstract class BaseButton<
 		this.stateMotor.onStep(setStateBinding);
 	}
 
-	protected didUpdate(previousProps: Props, previousState: ButtonState): void {
-		if (previousProps.Disabled !== this.props.Disabled && this.props.Disabled) {
-			this.stateMotor.setGoal(new Linear(0, { velocity: 0.5 }));
-		}
+	public render(): Roact.Element | undefined {
+		return this.props.Render({
+			StateMotor: this.stateMotor,
+			StateBinding: this.stateBinding,
+			MouseClick: () => this.MouseClick(),
+			MouseUp: () => this.MouseUp(),
+			MouseDown: () => this.MouseDown(),
+			MouseEnter: () => this.MouseEnter(),
+			MouseLeave: () => this.MouseLeave(),
+		});
 	}
 
 	async MouseClick() {
@@ -59,7 +75,7 @@ export default abstract class BaseButton<
 
 			task.spawn(this.props.Pressed);
 
-			await Promise.delay(0.25);
+			task.wait(0.25);
 			this.setState({
 				Debounce: false,
 			});

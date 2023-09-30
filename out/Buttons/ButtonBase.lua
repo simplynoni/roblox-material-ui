@@ -4,26 +4,40 @@ local _flipper = TS.import(script, TS.getModule(script, "@rbxts", "flipper").src
 local Linear = _flipper.Linear
 local SingleMotor = _flipper.SingleMotor
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "RoactTS"))
-local BaseButton
+local ButtonBase
 do
-	BaseButton = Roact.Component:extend("BaseButton")
-	function BaseButton:init(props)
-		self.state = {
+	ButtonBase = Roact.Component:extend("ButtonBase")
+	function ButtonBase:init(props)
+		self:setState({
 			Debounce = false,
-		}
+		})
 		self.stateMotor = SingleMotor.new(0)
 		local stateBinding, setStateBinding = Roact.createBinding(self.stateMotor:getValue())
 		self.stateBinding = stateBinding
 		self.stateMotor:onStep(setStateBinding)
 	end
-	function BaseButton:didUpdate(previousProps, previousState)
-		if previousProps.Disabled ~= self.props.Disabled and self.props.Disabled then
-			self.stateMotor:setGoal(Linear.new(0, {
-				velocity = 0.5,
-			}))
-		end
+	function ButtonBase:render()
+		return self.props.Render({
+			StateMotor = self.stateMotor,
+			StateBinding = self.stateBinding,
+			MouseClick = function()
+				return self:MouseClick()
+			end,
+			MouseUp = function()
+				return self:MouseUp()
+			end,
+			MouseDown = function()
+				return self:MouseDown()
+			end,
+			MouseEnter = function()
+				return self:MouseEnter()
+			end,
+			MouseLeave = function()
+				return self:MouseLeave()
+			end,
+		})
 	end
-	BaseButton.MouseClick = TS.async(function(self)
+	ButtonBase.MouseClick = TS.async(function(self)
 		if self.props.Disabled then
 			return nil
 		end
@@ -32,13 +46,13 @@ do
 				Debounce = true,
 			})
 			task.spawn(self.props.Pressed)
-			TS.await(TS.Promise.delay(0.25))
+			task.wait(0.25)
 			self:setState({
 				Debounce = false,
 			})
 		end
 	end)
-	function BaseButton:MouseUp()
+	function ButtonBase:MouseUp()
 		if self.props.Disabled then
 			return nil
 		end
@@ -46,7 +60,7 @@ do
 			velocity = 0.5,
 		}))
 	end
-	function BaseButton:MouseDown()
+	function ButtonBase:MouseDown()
 		if self.props.Disabled then
 			return nil
 		end
@@ -54,7 +68,7 @@ do
 			velocity = 0.5,
 		}))
 	end
-	function BaseButton:MouseEnter()
+	function ButtonBase:MouseEnter()
 		if self.props.Disabled then
 			return nil
 		end
@@ -62,7 +76,7 @@ do
 			velocity = 0.5,
 		}))
 	end
-	function BaseButton:MouseLeave()
+	function ButtonBase:MouseLeave()
 		if self.props.Disabled then
 			return nil
 		end
@@ -72,5 +86,5 @@ do
 	end
 end
 return {
-	default = BaseButton,
+	default = ButtonBase,
 }

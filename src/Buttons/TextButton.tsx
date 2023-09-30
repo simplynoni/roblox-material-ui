@@ -1,10 +1,10 @@
 import Roact from '@rbxts/roact';
 import { GothamMedium } from '../Fonts';
 import Icon from '../Icon';
-import { ColorScheme, LowerCaseColorScheme } from '../types';
-import BaseButton from './BaseButton';
+import { ColorScheme, LowerCaseColorScheme, ThemeProps } from '../types';
+import ButtonBase, { ButtonProps } from './ButtonBase';
 
-export default class TextButtonBase extends BaseButton {
+export default class TextButton extends Roact.Component<ButtonProps & ThemeProps> {
 	render() {
 		const theme = this.props.Theme;
 		const colorScheme = this.props.ColorScheme || ColorScheme.Primary;
@@ -25,57 +25,66 @@ export default class TextButtonBase extends BaseButton {
 		) : undefined;
 
 		return (
-			<textbutton
-				AutoButtonColor={false}
-				BackgroundTransparency={this.stateBinding.map((opacity) => {
-					return 1 - opacity;
-				})}
-				BackgroundColor3={color}
-				AnchorPoint={this.props.AnchorPoint}
-				Position={this.props.Position}
-				Size={this.props.Size}
-				Text={''}
-				AutomaticSize={this.props.AutomaticSize ? 'X' : undefined}
-				Event={{
-					MouseButton1Click: async () => this.MouseClick(),
-					MouseButton1Up: () => this.MouseUp(),
-					MouseEnter: () => this.MouseEnter(),
-					MouseButton1Down: () => this.MouseDown(),
-					MouseLeave: () => this.MouseLeave(),
+			<ButtonBase
+				Disabled={this.props.Disabled}
+				Pressed={this.props.Pressed}
+				Render={(renderProps) => {
+					return (
+						<textbutton
+							AutoButtonColor={false}
+							BackgroundTransparency={renderProps.StateBinding.map((opacity) => {
+								return 1 - opacity;
+							})}
+							BackgroundColor3={color}
+							AnchorPoint={this.props.AnchorPoint}
+							Position={this.props.Position}
+							Size={this.props.Size ?? UDim2.fromOffset(0, 35)}
+							Text={''}
+							AutomaticSize={this.props.AutomaticSize ? 'X' : undefined}
+							Interactable={!this.props.Disabled}
+							Event={{
+								MouseButton1Click: async () => renderProps.MouseClick(),
+								MouseButton1Up: () => renderProps.MouseUp(),
+								MouseEnter: () => renderProps.MouseEnter(),
+								MouseButton1Down: () => renderProps.MouseDown(),
+								MouseLeave: () => renderProps.MouseLeave(),
+							}}
+						>
+							<uipadding
+								PaddingLeft={new UDim(0, this.props.Icon ? 16 : 24)}
+								PaddingRight={new UDim(0, 24)}
+								PaddingBottom={new UDim(0, 6)}
+								PaddingTop={new UDim(0, 6)}
+							/>
+							<uicorner CornerRadius={new UDim(1, 0)} />
+							<uilistlayout
+								FillDirection={Enum.FillDirection.Horizontal}
+								HorizontalAlignment={Enum.HorizontalAlignment.Center}
+								VerticalAlignment={Enum.VerticalAlignment.Center}
+								SortOrder={Enum.SortOrder.LayoutOrder}
+								Padding={new UDim(0, 8)}
+							/>
+							{icon}
+							<textlabel
+								Size={
+									this.props.AutomaticSize
+										? UDim2.fromScale(0, 1)
+										: this.props.Icon
+										? UDim2.fromScale(0.8, 1)
+										: UDim2.fromScale(1, 1)
+								}
+								AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
+								BackgroundTransparency={1}
+								FontFace={GothamMedium}
+								TextColor3={this.props.Disabled ? theme.Scheme.onBackground : color}
+								TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
+								Text={this.props.Text}
+								TextSize={14}
+							/>
+						</textbutton>
+					);
 				}}
-			>
-				<uipadding
-					PaddingLeft={new UDim(0, this.props.Icon ? 16 : 24)}
-					PaddingRight={new UDim(0, 24)}
-					PaddingBottom={new UDim(0, 6)}
-					PaddingTop={new UDim(0, 6)}
-				/>
-				<uicorner CornerRadius={new UDim(1, 0)} />
-				<uilistlayout
-					FillDirection={Enum.FillDirection.Horizontal}
-					HorizontalAlignment={Enum.HorizontalAlignment.Center}
-					VerticalAlignment={Enum.VerticalAlignment.Center}
-					SortOrder={Enum.SortOrder.LayoutOrder}
-					Padding={new UDim(0, 8)}
-				/>
-				{icon}
-				<textlabel
-					Size={
-						this.props.AutomaticSize
-							? UDim2.fromScale(0, 1)
-							: this.props.Icon
-							? UDim2.fromScale(0.8, 1)
-							: UDim2.fromScale(1, 1)
-					}
-					AutomaticSize={this.props.AutomaticSize ? Enum.AutomaticSize.X : undefined}
-					BackgroundTransparency={1}
-					FontFace={GothamMedium}
-					TextColor3={this.props.Disabled ? theme.Scheme.onBackground : color}
-					TextTransparency={this.props.Disabled ? 1 - 0.38 : 0}
-					Text={this.props.Text}
-					TextSize={14}
-				/>
-			</textbutton>
+			/>
 		);
 	}
 }

@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^2.1.0-types.1",
-		"@rbxts/types": "^1.0.707",
+		"@rbxts/types": "^1.0.724",
 		"prettier": "^3.0.0",
 		"rbxts-transformer-services": "^1.0.1",
 		"roblox-ts": "^2.1.0",
